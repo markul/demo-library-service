@@ -1,0 +1,1 @@
+DELETE /api/clients/{id}

@@ -1,0 +1,17 @@
+@startuml
+skin rose
+start
+:Receive GET /api/ebooks/search?name={name} request;
+if (name provided?) then (yes)
+:Request books from ebook-service /odata/Books with title filter;
+if (External call successful?) then (yes)
+:Map payload to DTO list;
+:Return 200 OK;
+else (no)
+:Return 502 Bad Gateway;
+endif
+else (no)
+:Return 400 Bad Request;
+endif
+stop
+@enduml

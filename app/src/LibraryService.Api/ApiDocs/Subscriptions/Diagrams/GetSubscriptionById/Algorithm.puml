@@ -1,0 +1,11 @@
+@startuml
+skin rose
+start
+:Fetch record from DB <b>appdb</b> by <b>id</b>;
+if (Record found?) then (yes)
+:Return 200 OK with record;
+else (no)
+:Return 404 NotFound;
+endif
+stop
+@enduml

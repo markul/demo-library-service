@@ -1,0 +1,24 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="4.0" xmlns:edmx="http://docs.oasis-open.org/odata/ns/edmx">
+  <edmx:DataServices>
+    <Schema Namespace="EbookService.Models" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+      <EntityType Name="Book">
+        <Key>
+          <PropertyRef Name="Id" />
+        </Key>
+        <Property Name="Id" Type="Edm.Int32" Nullable="false" />
+        <Property Name="Title" Type="Edm.String" Nullable="false" />
+        <Property Name="Author" Type="Edm.String" Nullable="false" />
+        <Property Name="Genre" Type="Edm.String" Nullable="false" />
+        <Property Name="Price" Type="Edm.Decimal" Nullable="false" Scale="Variable" />
+        <Property Name="PublishYear" Type="Edm.Int32" Nullable="false" />
+        <Property Name="Language" Type="Edm.String" Nullable="false" />
+      </EntityType>
+      <EntityContainer Name="Container">
+        <EntitySet Name="Books" EntityType="EbookService.Models.Book" />
+      </EntityContainer>
+    </Schema>
+  </edmx:DataServices>
+</edmx:Edmx>
+
+

@@ -1,0 +1,10 @@
+@startuml
+actor Client
+participant API
+participant Application
+
+Client -> API: PUT /api/clients/{id}
+API -> Application: Send command/query
+Application --> API: Result
+API --> Client: 204 No Content
+@enduml

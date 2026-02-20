@@ -1,0 +1,13 @@
+﻿<Project>
+  <PropertyGroup>
+    <WarningsAsErrors>$(WarningsAsErrors);LSUTF8BOM001</WarningsAsErrors>
+  </PropertyGroup>
+
+  <ItemGroup Condition="'$(MSBuildProjectName)' != 'LibraryService.Utf8BomAnalyzer'">
+    <ProjectReference
+      Include="$(MSBuildThisFileDirectory)tools\LibraryService.Utf8BomAnalyzer\LibraryService.Utf8BomAnalyzer.csproj"
+      OutputItemType="Analyzer"
+      ReferenceOutputAssembly="false" />
+  </ItemGroup>
+</Project>
+

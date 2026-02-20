@@ -1,0 +1,119 @@
+services:
+  app-db:
+    image: postgres:16-alpine
+    container_name: app-db
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: appdb
+      POSTGRES_USER: app
+      POSTGRES_PASSWORD: app
+    ports:
+      - '5432:5432'
+    volumes:
+      - app-db-data:/var/lib/postgresql/data
+      - ./postgres-init:/docker-entrypoint-initdb.d
+    healthcheck:
+      test: ['CMD-SHELL', 'pg_isready -U app -d appdb']
+      interval: 10s
+      timeout: 5s
+      retries: 10
+
+  jira-db:
+    image: postgres:16-alpine
+    container_name: jira-db
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: jiradb
+      POSTGRES_USER: jira
+      POSTGRES_PASSWORD: jira
+    volumes:
+      - jira-db-data:/var/lib/postgresql/data
+    healthcheck:
+      test: ['CMD-SHELL', 'pg_isready -U jira -d jiradb']
+      interval: 10s
+      timeout: 5s
+      retries: 10
+
+  confluence-db:
+    image: postgres:16-alpine
+    container_name: confluence-db
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: confluencedb
+      POSTGRES_USER: confluence
+      POSTGRES_PASSWORD: confluence
+    volumes:
+      - confluence-db-data:/var/lib/postgresql/data
+    healthcheck:
+      test: ['CMD-SHELL', 'pg_isready -U confluence -d confluencedb']
+      interval: 10s
+      timeout: 5s
+      retries: 10
+
+  jira:
+    image: atlassian/jira-software
+    container_name: jira
+    restart: unless-stopped
+    depends_on:
+      jira-db:
+        condition: service_healthy
+    ports:
+      - '8080:8080'
+    environment:
+      ATL_DB_TYPE: postgresql
+      ATL_JDBC_URL: jdbc:postgresql://jira-db:5432/jiradb
+      ATL_JDBC_USER: jira
+      ATL_JDBC_PASSWORD: jira
+    volumes:
+      - jira-data:/var/atlassian/application-data/jira
+
+  confluence:
+    image: atlassian/confluence
+    container_name: confluence
+    restart: unless-stopped
+    depends_on:
+      confluence-db:
+        condition: service_healthy
+    ports:
+      - '8090:8090'
+      - '8091:8091'
+    environment:
+      ATL_DB_TYPE: postgresql
+      ATL_JDBC_URL: jdbc:postgresql://confluence-db:5432/confluencedb
+      ATL_JDBC_USER: confluence
+      ATL_JDBC_PASSWORD: confluence
+    volumes:
+      - confluence-data:/var/atlassian/application-data/confluence
+
+  payment-service:
+    build:
+      context: ../external-services/payment-service
+      dockerfile: Dockerfile
+    container_name: payment-service
+    restart: unless-stopped
+    depends_on:
+      app-db:
+        condition: service_healthy
+    environment:
+      ASPNETCORE_ENVIRONMENT: Production
+      ConnectionStrings__PaymentDb: Host=app-db;Port=5432;Database=paymentdb;Username=app;Password=app
+    ports:
+      - '8082:8080'
+
+  ebook-service:
+    build:
+      context: ../external-services/ebook-service
+      dockerfile: Dockerfile
+    container_name: ebook-service
+    restart: unless-stopped
+    environment:
+      ASPNETCORE_ENVIRONMENT: Production
+    ports:
+      - '8083:8080'
+
+volumes:
+  app-db-data:
+  jira-db-data:
+  confluence-db-data:
+  jira-data:
+  confluence-data:

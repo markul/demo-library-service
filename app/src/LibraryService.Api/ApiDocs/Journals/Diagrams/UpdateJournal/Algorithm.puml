@@ -1,0 +1,13 @@
+@startuml
+skin rose
+start
+:Fetch record from DB <b>appdb</b> by <b>id</b>;
+if (Record found?) then (yes)
+:Update record in DB <b>appdb</b>;
+:Return 204 NoContent;
+else (no)
+:Return 404 NotFound;
+endif
+stop
+@enduml
+

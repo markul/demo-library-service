@@ -1,0 +1,31 @@
+@EbookService_HostAddress = http://localhost:5088
+
+GET {{EbookService_HostAddress}}/odata/Books
+Accept: application/json
+
+###
+
+GET {{EbookService_HostAddress}}/odata/Books?$filter=contains(Title,'The')
+Accept: application/json
+
+###
+
+GET {{EbookService_HostAddress}}/odata/Books?$filter=Price lt 40 and PublishYear ge 2010
+Accept: application/json
+
+###
+
+GET {{EbookService_HostAddress}}/odata/Books?$filter=Genre eq 'Fantasy'&$orderby=Price desc
+Accept: application/json
+
+###
+
+GET {{EbookService_HostAddress}}/odata/Books?$top=3&$skip=1&$count=true
+Accept: application/json
+
+###
+
+GET {{EbookService_HostAddress}}/odata/Books(2)
+Accept: application/json
+
+###

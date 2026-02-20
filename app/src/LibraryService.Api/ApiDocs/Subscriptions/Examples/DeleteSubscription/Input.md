@@ -1,0 +1,1 @@
+DELETE /api/subscriptions/{id}

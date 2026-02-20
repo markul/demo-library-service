@@ -1,0 +1,39 @@
+# Build artifacts
+**/bin/
+**/obj/
+**/out/
+**/publish/
+
+# Test and coverage artifacts
+**/TestResults/
+**/coverage/
+**/*.coverage
+**/*.coveragexml
+**/coverlet/
+
+# User and IDE files
+*.user
+*.suo
+*.userosscache
+*.sln.docstates
+.vs/
+.vscode/
+.idea/
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+
+# Local environment files
+.env
+.env.*
+
+# Local app settings overrides
+appsettings.Local.json
+appsettings.*.local.json
+
+# Tool caches
+.cache/

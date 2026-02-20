@@ -1,0 +1,81 @@
+@LibraryService.Api_HostAddress = http://localhost:5149
+
+GET {{LibraryService.Api_HostAddress}}/api/books
+Accept: application/json
+
+###
+
+GET {{LibraryService.Api_HostAddress}}/api/ebooks
+Accept: application/json
+
+###
+
+GET {{LibraryService.Api_HostAddress}}/api/ebooks/search?name=Hobbit
+Accept: application/json
+
+###
+
+POST {{LibraryService.Api_HostAddress}}/api/books
+Content-Type: application/json
+
+{
+  "title": "Domain-Driven Design",
+  "author": "Eric Evans",
+  "publishedYear": 2003,
+  "isbn": "978-0321125217"
+}
+
+###
+
+GET {{LibraryService.Api_HostAddress}}/api/subscriptions/types
+Accept: application/json
+
+###
+
+POST {{LibraryService.Api_HostAddress}}/api/subscriptions/types
+Content-Type: application/json
+
+{
+  "name": "Premium Plan",
+  "period": 30,
+  "price": 9.99
+}
+
+###
+
+GET {{LibraryService.Api_HostAddress}}/api/subscriptions
+Accept: application/json
+
+###
+
+POST {{LibraryService.Api_HostAddress}}/api/subscriptions
+Content-Type: application/json
+
+{
+  "name": "Client Monthly Subscription",
+  "subscriptionTypeId": "00000000-0000-0000-0000-000000000000",
+  "isActive": true,
+  "startDateUtc": "2026-02-13T00:00:00Z",
+  "clientIds": []
+}
+
+###
+
+GET {{LibraryService.Api_HostAddress}}/api/payments
+Accept: application/json
+
+###
+
+POST {{LibraryService.Api_HostAddress}}/api/payments
+Content-Type: application/json
+
+{
+  "uniqueId": "PAY-10001",
+  "amount": 9.99,
+  "subscriptionId": "00000000-0000-0000-0000-000000000000",
+  "clientId": "00000000-0000-0000-0000-000000000000",
+  "externalId": null,
+  "status": 1
+}
+
+###

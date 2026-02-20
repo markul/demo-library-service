@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Library Service UI - Subscription Types</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="./styles.css">
+</head>
+<body>
+    <main class="app-shell">
+        <header class="topbar">
+            <div>
+                <p class="eyebrow">Library Service</p>
+                <h1>Subscription Types</h1>
+            </div>
+            <div class="controls">
+                <label for="apiBaseUrl">API URL</label>
+                <input id="apiBaseUrl" type="url" value="http://localhost:5149" />
+            </div>
+        </header>
+
+        <nav class="menu" aria-label="Main navigation">
+            <a class="menu-link" href="./index.html">Home</a>
+            <a class="menu-link" href="./books.html">Books</a>
+            <a class="menu-link" href="./ebooks.html">Ebooks</a>
+            <a class="menu-link active" href="./subscription-types.html">Subscription Types</a>
+            <a class="menu-link" href="./subscriptions.html">Subscriptions</a>
+            <a class="menu-link" href="./payments.html">Payments</a>
+        </nav>
+
+        <section class="stack">
+            <article class="panel">
+                <div class="panel-title-row">
+                    <h2>Subscription Types</h2>
+                    <button type="button" data-refresh="subscriptionTypes">Refresh</button>
+                </div>
+                <p id="subscriptionTypesStatus" class="status">Idle</p>
+                <div id="subscriptionTypesResults" class="result-list"></div>
+            </article>
+        </section>
+    </main>
+
+    <script src="./app.js"></script>
+</body>
+</html>

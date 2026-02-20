@@ -1,0 +1,9 @@
+﻿<svg xmlns="http://www.w3.org/2000/svg" width="860" height="220" viewBox="0 0 860 220">
+  <rect x="10" y="10" width="840" height="200" rx="10" fill="#ffffff" stroke="#333333" stroke-width="2"/>
+  <text x="30" y="45" font-family="Arial" font-size="18" font-weight="bold">GetAllEbooks Flow</text>
+  <text x="30" y="80" font-family="Arial" font-size="14">1. Receive GET request on /api/ebooks</text>
+  <text x="30" y="105" font-family="Arial" font-size="14">2. Request ebook-service /odata/Books</text>
+  <text x="30" y="130" font-family="Arial" font-size="14">3. On success: map response to DTO list and return 200 OK</text>
+  <text x="30" y="155" font-family="Arial" font-size="14">4. On failure/invalid payload: return 502 Bad Gateway</text>
+</svg>
+

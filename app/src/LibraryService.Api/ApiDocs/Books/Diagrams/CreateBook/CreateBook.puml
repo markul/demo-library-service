@@ -1,0 +1,10 @@
+@startuml
+actor Client
+participant API
+participant Application
+
+Client -> API: POST /api/books
+API -> Application: Send command/query
+Application --> API: Result
+API --> Client: 201 Created
+@enduml

@@ -1,0 +1,10 @@
+@startuml
+actor Client
+participant API
+participant Application
+
+Client -> API: GET /api/journals/{id}
+API -> Application: Send command/query
+Application --> API: Result
+API --> Client: 200 OK
+@enduml

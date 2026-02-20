@@ -1,0 +1,13 @@
+﻿{
+  "ProviderId": "Microsoft.OData.ConnectedService",
+  "Version": "0.12.0",
+  "ExtendedData": {
+    "ServiceName": "EbookOData",
+    "FileName": "Reference.cs",
+    "MetadataFileName": "EbookODataCsdl.xml",
+    "Endpoint": "http://ebook-service:8080/odata",
+    "UseNameSpacePrefix": false
+  }
+}
+
+

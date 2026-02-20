@@ -1,0 +1,13 @@
+@startuml
+skin rose
+start
+:Validate request payload;
+if (Payload valid?) then (yes)
+:Create record in DB <b>appdb</b>;
+:Return 201 Created with created record;
+else (no)
+:Return 400 BadRequest;
+endif
+stop
+@enduml
+

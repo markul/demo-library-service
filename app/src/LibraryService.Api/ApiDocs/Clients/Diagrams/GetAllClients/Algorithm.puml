@@ -1,0 +1,12 @@
+@startuml
+skin rose
+start
+:Fetch records list from DB <b>appdb</b>;
+if (List empty?) then (yes)
+:Return 200 OK with empty array;
+else (no)
+:Return 200 OK with records list;
+endif
+stop
+@enduml
+
