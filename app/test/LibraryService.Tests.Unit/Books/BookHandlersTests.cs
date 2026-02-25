@@ -12,6 +12,7 @@ public class BookHandlersTests
     [Fact]
     public async Task CreateBookCommand_ShouldCreateBookAndReturnDto_WhenRequestIsValid()
     {
+        // Arrange
         var repository = new Mock<IBookRepository>();
         repository
             .Setup(x => x.AddAsync(It.IsAny<Book>(), It.IsAny<CancellationToken>()))
@@ -20,8 +21,10 @@ public class BookHandlersTests
         var handler = new CreateBookCommandHandler(repository.Object);
         var command = new CreateBookCommand("Clean Code", "Robert C. Martin", 2008, "978-0132350884");
 
+        // Act
         var result = await handler.Handle(command, CancellationToken.None);
 
+        // Assert
         result.Id.Should().NotBe(Guid.Empty);
         result.Title.Should().Be("Clean Code");
         result.Author.Should().Be("Robert C. Martin");
@@ -33,6 +36,7 @@ public class BookHandlersTests
     [Fact]
     public async Task UpdateBookCommand_ShouldReturnFalse_WhenBookDoesNotExist()
     {
+        // Arrange
         var repository = new Mock<IBookRepository>();
         repository
             .Setup(x => x.GetByIdAsync(It.IsAny<Guid>(), It.IsAny<CancellationToken>()))
@@ -41,8 +45,10 @@ public class BookHandlersTests
         var handler = new UpdateBookCommandHandler(repository.Object);
         var command = new UpdateBookCommand(Guid.NewGuid(), "Refactoring", "Martin Fowler", 1999, "978-0201485677");
 
+        // Act
         var updated = await handler.Handle(command, CancellationToken.None);
 
+        // Assert
         updated.Should().BeFalse();
         repository.Verify(x => x.UpdateAsync(It.IsAny<Book>(), It.IsAny<CancellationToken>()), Times.Never);
     }
@@ -50,6 +56,7 @@ public class BookHandlersTests
     [Fact]
     public async Task GetBooksQuery_ShouldMapEntitiesToDtos()
     {
+        // Arrange
         var books = new List<Book>
         {
             new() { Id = Guid.NewGuid(), Title = "DDD", Author = "Eric Evans", PublishedYear = 2003, Isbn = "978-0321125217" },
@@ -63,8 +70,10 @@ public class BookHandlersTests
 
         var handler = new GetBooksQueryHandler(repository.Object);
 
+        // Act
         var result = await handler.Handle(new GetBooksQuery(), CancellationToken.None);
 
+        // Assert
         result.Should().HaveCount(2);
         result.Select(x => x.Title).Should().Contain(new[] { "DDD", "Patterns" });
     }
@@ -72,6 +81,7 @@ public class BookHandlersTests
     [Fact]
     public async Task DeleteBookCommand_ShouldDelegateDeleteToRepository()
     {
+        // Arrange
         var id = Guid.NewGuid();
         var repository = new Mock<IBookRepository>();
         repository
@@ -80,8 +90,10 @@ public class BookHandlersTests
 
         var handler = new DeleteBookCommandHandler(repository.Object);
 
+        // Act
         var deleted = await handler.Handle(new DeleteBookCommand(id), CancellationToken.None);
 
+        // Assert
         deleted.Should().BeTrue();
         repository.Verify(x => x.DeleteAsync(id, It.IsAny<CancellationToken>()), Times.Once);
     }
