@@ -46,6 +46,8 @@
 - Keep namespaces aligned with folder structure.
 - Prefer clear entity naming (`Book`, `Journal`, `Client`) and explicit DTOs for API contracts.
 - Use UTF-8 BOM encoding in .cs files 
+- After code changes, verify that solution builds and all tests pass 
+
 
 ## Testing Guidelines
 - Add unit/integration tests under `app/test` when expanding behavior.
