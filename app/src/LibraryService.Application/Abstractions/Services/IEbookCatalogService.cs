@@ -6,7 +6,8 @@ public interface IEbookCatalogService
 {
     Task<IReadOnlyCollection<EbookCatalogItemDto>> GetBooksAsync(CancellationToken cancellationToken = default);
 
-    Task<IReadOnlyCollection<EbookCatalogItemDto>> FindBooksByNameAsync(
+    Task<IReadOnlyCollection<EbookCatalogItemDto>> FindBooksAsync(
         string name,
         CancellationToken cancellationToken = default);
 }
+

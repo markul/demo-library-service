@@ -112,7 +112,7 @@ public class LibraryApiFactory : WebApplicationFactory<Program>
         public Task<IReadOnlyCollection<EbookCatalogItemDto>> GetBooksAsync(CancellationToken cancellationToken = default) =>
             Task.FromResult(Books);
 
-        public Task<IReadOnlyCollection<EbookCatalogItemDto>> FindBooksByNameAsync(
+        public Task<IReadOnlyCollection<EbookCatalogItemDto>> FindBooksAsync(
             string name,
             CancellationToken cancellationToken = default)
         {
@@ -124,3 +124,4 @@ public class LibraryApiFactory : WebApplicationFactory<Program>
         }
     }
 }
+
