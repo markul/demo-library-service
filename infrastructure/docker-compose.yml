@@ -54,6 +54,8 @@ services:
     image: atlassian/jira-software
     container_name: jira
     restart: unless-stopped
+    cpu_period: 100000
+    cpu_quota: 40000
     depends_on:
       jira-db:
         condition: service_healthy
@@ -71,6 +73,8 @@ services:
     image: atlassian/confluence
     container_name: confluence
     restart: unless-stopped
+    cpu_period: 100000
+    cpu_quota: 40000
     depends_on:
       confluence-db:
         condition: service_healthy
