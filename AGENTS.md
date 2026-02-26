@@ -87,3 +87,10 @@
 - Do not commit secrets; use environment variables for sensitive values.
 - Treat `appsettings*.json` as non-secret defaults only.
 - Replace default local credentials (`app/app`) for non-local environments.
+
+## Skills
+A skill is a set of local instructions to follow that is stored in a `SKILL.md` file.
+
+### Available skills
+- atlassian-rest-direct: Direct Jira, Confluence, and Bitbucket REST API access using environment-based authentication and reusable PowerShell tooling. Use when tasks require querying or updating Jira issues, searching Jira, reading or writing Confluence content, or reading and updating Bitbucket repositories and pull requests over REST with JIRA_*, CONFLUENCE_*, and BITBUCKET_* environment variables. (file: `skills/atllasian/SKILL.md`)
+- utf8-bom-converter: Convert text files to UTF-8 with BOM using a reusable PowerShell script. Use when a task requires normalizing file encoding to UTF-8 BOM for one file or many files, including recursive folder conversion and safe handling of existing BOMs. (file: `skills/utf8-bom-converter/SKILL.md`)

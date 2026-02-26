@@ -1,0 +1,3 @@
+﻿interface:
+  display_name: "UTF-8 BOM Converter"
+  short_description: "Convert files to UTF-8 with BOM."

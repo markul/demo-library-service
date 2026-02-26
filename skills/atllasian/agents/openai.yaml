@@ -1,0 +1,3 @@
+interface:
+  display_name: "Atlassian REST Direct"
+  short_description: "Direct Jira, Confluence, and Bitbucket REST API access."
