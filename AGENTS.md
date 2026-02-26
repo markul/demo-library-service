@@ -43,6 +43,7 @@
 ## Coding Style & Naming Conventions
 - Target framework: `net8.0`, nullable enabled, implicit usings enabled.
 - Keep layered boundaries: `Api -> Application -> Domain`, with Infrastructure implementing Application abstractions.
+- Business logic must live in `Application` layer (commands/queries/handlers/services); `Api` controllers should only orchestrate HTTP concerns and delegate to `Application`.
 - Keep namespaces aligned with folder structure.
 - Prefer clear entity naming (`Book`, `Journal`, `Client`) and explicit DTOs for API contracts.
 - Use UTF-8 BOM encoding in .cs files 
@@ -61,6 +62,7 @@
 
 ## API Guidelines
 - REST endpoints live under `app/src/LibraryService.Api/Controllers`.
+- Keep controllers thin: no business decision-making or domain rules in controller actions.
 - Keep endpoint routes consistent under `/api/books`, `/api/journals`, `/api/clients`, `/api/subscriptions`, `/api/subscriptions/types`, `/api/payments`.
 - Update `app/src/LibraryService.Api/LibraryService.Api.http` when adding or changing endpoints.
 - If an endpoint is added, updated, or removed, update API docs and tests in the same change set.
