@@ -1,0 +1,7 @@
+# Output
+
+```json
+{
+  "isActtive": true
+}
+```

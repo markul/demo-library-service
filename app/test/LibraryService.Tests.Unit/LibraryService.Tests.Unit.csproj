@@ -23,6 +23,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\src\LibraryService.Api\LibraryService.Api.csproj" />
     <ProjectReference Include="..\..\src\LibraryService.Application\LibraryService.Application.csproj" />
     <ProjectReference Include="..\..\src\LibraryService.Domain\LibraryService.Domain.csproj" />
     <ProjectReference Include="..\..\src\LibraryService.Infrastructure\LibraryService.Infrastructure.csproj" />
