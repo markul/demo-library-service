@@ -1,0 +1,12 @@
+@startuml
+skin rose
+start
+:Validate request payload;
+if (Client exists?) then (yes)
+:Create client address in DB <b>appdb</b>;
+:Return 201 Created with created address;
+else (no)
+:Return 400 BadRequest;
+endif
+stop
+@enduml

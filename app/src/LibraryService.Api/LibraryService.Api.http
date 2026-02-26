@@ -79,3 +79,16 @@ Content-Type: application/json
 }
 
 ###
+
+POST {{LibraryService.Api_HostAddress}}/api/clients/addresses
+Content-Type: application/json
+
+{
+  "clientId": "00000000-0000-0000-0000-000000000000",
+  "city": "Seattle",
+  "country": "USA",
+  "address": "1st Ave 100",
+  "postalCode": "98101"
+}
+
+###

@@ -12,6 +12,8 @@ public class Client
 
     public DateTime RegisteredAtUtc { get; set; }
 
+    public ICollection<ClientAddress> ClientAddresses { get; set; } = new List<ClientAddress>();
+
     public ICollection<ClientSubscription> ClientSubscriptions { get; set; } = new List<ClientSubscription>();
 
     public ICollection<Payment> Payments { get; set; } = new List<Payment>();

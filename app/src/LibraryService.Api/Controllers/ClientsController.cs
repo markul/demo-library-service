@@ -39,6 +39,27 @@ public class ClientsController : ControllerBase
         return CreatedAtAction(nameof(GetById), new { id = created.Id }, created);
     }
 
+    [HttpPost("addresses")]
+    public async Task<ActionResult<ClientAddressDto>> CreateAddress(
+        CreateClientAddressRequest request,
+        CancellationToken cancellationToken)
+    {
+        var command = new CreateClientAddressCommand(
+            request.ClientId,
+            request.City,
+            request.Country,
+            request.Address,
+            request.PostalCode);
+
+        var created = await _mediator.Send(command, cancellationToken);
+        if (created is null)
+        {
+            return BadRequest("Invalid client reference.");
+        }
+
+        return Created($"/api/clients/addresses/{created.Id}", created);
+    }
+
     [HttpPut("{id:guid}")]
     public async Task<IActionResult> Update(Guid id, UpdateClientRequest request, CancellationToken cancellationToken)
     {

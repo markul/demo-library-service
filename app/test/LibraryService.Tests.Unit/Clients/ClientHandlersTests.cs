@@ -1,5 +1,6 @@
 ﻿using FluentAssertions;
 using LibraryService.Application.Abstractions.Repositories;
+using LibraryService.Application.Clients;
 using LibraryService.Application.Clients.Commands;
 using LibraryService.Application.Clients.Queries;
 using LibraryService.Domain.Entities;
@@ -67,5 +68,58 @@ public class ClientHandlersTests
 
         deleted.Should().BeTrue();
         repository.Verify(x => x.DeleteAsync(id, It.IsAny<CancellationToken>()), Times.Once);
+    }
+
+    [Fact]
+    public async Task CreateClientAddressCommand_ShouldCreateAddressAndReturnDto_WhenClientExists()
+    {
+        var clientId = Guid.NewGuid();
+        var repository = new Mock<IClientAddressRepository>();
+        repository
+            .Setup(x => x.ClientExistsAsync(clientId, It.IsAny<CancellationToken>()))
+            .ReturnsAsync(true);
+        repository
+            .Setup(x => x.AddAsync(It.IsAny<ClientAddress>(), It.IsAny<CancellationToken>()))
+            .ReturnsAsync((ClientAddress entity, CancellationToken _) => entity);
+
+        var handler = new CreateClientAddressCommandHandler(repository.Object);
+        var command = new CreateClientAddressCommand(
+            clientId,
+            "Seattle",
+            "USA",
+            "1st Ave 100",
+            "98101");
+
+        var result = await handler.Handle(command, CancellationToken.None);
+
+        result.Should().NotBeNull();
+        result!.Id.Should().NotBe(Guid.Empty);
+        result.ClientId.Should().Be(clientId);
+        result.City.Should().Be("Seattle");
+        result.Country.Should().Be("USA");
+        result.Address.Should().Be("1st Ave 100");
+        result.PostalCode.Should().Be("98101");
+    }
+
+    [Fact]
+    public async Task CreateClientAddressCommand_ShouldReturnNull_WhenClientDoesNotExist()
+    {
+        var repository = new Mock<IClientAddressRepository>();
+        repository
+            .Setup(x => x.ClientExistsAsync(It.IsAny<Guid>(), It.IsAny<CancellationToken>()))
+            .ReturnsAsync(false);
+
+        var handler = new CreateClientAddressCommandHandler(repository.Object);
+        var command = new CreateClientAddressCommand(
+            Guid.NewGuid(),
+            "Seattle",
+            "USA",
+            "1st Ave 100",
+            "98101");
+
+        var result = await handler.Handle(command, CancellationToken.None);
+
+        result.Should().BeNull();
+        repository.Verify(x => x.AddAsync(It.IsAny<ClientAddress>(), It.IsAny<CancellationToken>()), Times.Never);
     }
 }

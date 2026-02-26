@@ -158,4 +158,46 @@ public class LibraryControllersIntegrationTests : IClassFixture<LibraryApiFactor
         fetched.Should().NotBeNull();
         fetched!.Id.Should().Be(created.Id);
     }
+
+    [Fact]
+    public async Task PostClientAddress_ShouldCreateAndReturnAddress()
+    {
+        var clientsResponse = await _client.GetAsync("/api/clients");
+        var clients = await clientsResponse.Content.ReadFromJsonAsync<IReadOnlyCollection<ClientDto>>();
+        var clientId = clients!.First().Id;
+
+        var request = new CreateClientAddressRequest(
+            clientId,
+            "Seattle",
+            "USA",
+            "1st Ave 100",
+            "98101");
+
+        var postResponse = await _client.PostAsJsonAsync("/api/clients/addresses", request);
+        var created = await postResponse.Content.ReadFromJsonAsync<ClientAddressDto>();
+
+        postResponse.StatusCode.Should().Be(HttpStatusCode.Created);
+        created.Should().NotBeNull();
+        created!.Id.Should().NotBe(Guid.Empty);
+        created.ClientId.Should().Be(clientId);
+        created.City.Should().Be("Seattle");
+        created.Country.Should().Be("USA");
+        created.Address.Should().Be("1st Ave 100");
+        created.PostalCode.Should().Be("98101");
+    }
+
+    [Fact]
+    public async Task PostClientAddress_ShouldReturnBadRequest_WhenClientDoesNotExist()
+    {
+        var request = new CreateClientAddressRequest(
+            Guid.NewGuid(),
+            "Seattle",
+            "USA",
+            "1st Ave 100",
+            "98101");
+
+        var response = await _client.PostAsJsonAsync("/api/clients/addresses", request);
+
+        response.StatusCode.Should().Be(HttpStatusCode.BadRequest);
+    }
 }
