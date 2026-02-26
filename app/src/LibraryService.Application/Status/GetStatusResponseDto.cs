@@ -2,5 +2,5 @@
 
 public sealed class GetStatusResponseDto
 {
-    public bool IsActtive { get; init; }
+    public bool IsActive { get; init; }
 }

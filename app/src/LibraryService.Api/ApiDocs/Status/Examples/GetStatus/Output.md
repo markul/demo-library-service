@@ -2,6 +2,7 @@
 
 ```json
 {
-  "isActtive": true
+  "isActive": true
 }
 ```
+

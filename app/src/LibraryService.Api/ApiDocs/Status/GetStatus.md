@@ -15,7 +15,7 @@ None.
 
 ```json
 {
-  "isActtive": true
+  "isActive": true
 }
 ```
 
@@ -25,3 +25,4 @@ None.
 ## Examples
 - Input: `./Examples/GetStatus/Input.md`
 - Output: `./Examples/GetStatus/Output.md`
+

@@ -2,7 +2,8 @@
 start
 :Receive GET /api/status;
 :Create GetStatusResponseDto;
-:Set IsActtive = true;
+:Set IsActive = true;
 :Return 200 OK;
 stop
 @enduml
+

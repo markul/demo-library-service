@@ -1,27 +1,17 @@
-Implemented `GET /api/status` returning `GetStatusResponseDto` with `IsActtive`.
+Updated so status now reflects active subscriptions.
 
-### What I changed
-- Added DTO: [GetStatusResponseDto.cs](c:/Users/vagrant/dev/git-markul/demo-library-service/app/src/LibraryService.Application/Status/GetStatusResponseDto.cs)
-- Added controller endpoint: [StatusController.cs](c:/Users/vagrant/dev/git-markul/demo-library-service/app/src/LibraryService.Api/Controllers/StatusController.cs)
-- Added request sample: [LibraryService.Api.http](c:/Users/vagrant/dev/git-markul/demo-library-service/app/src/LibraryService.Api/LibraryService.Api.http)
-- Added unit test: [StatusControllerTests.cs](c:/Users/vagrant/dev/git-markul/demo-library-service/app/test/LibraryService.Tests.Unit/Status/StatusControllerTests.cs)
-- Added API project reference for test project: [LibraryService.Tests.Unit.csproj](c:/Users/vagrant/dev/git-markul/demo-library-service/app/test/LibraryService.Tests.Unit/LibraryService.Tests.Unit.csproj)
-- Added API docs + examples + diagram:
-  - [GetStatus.md](c:/Users/vagrant/dev/git-markul/demo-library-service/app/src/LibraryService.Api/ApiDocs/Status/GetStatus.md)
-  - [Input.md](c:/Users/vagrant/dev/git-markul/demo-library-service/app/src/LibraryService.Api/ApiDocs/Status/Examples/GetStatus/Input.md)
-  - [Output.md](c:/Users/vagrant/dev/git-markul/demo-library-service/app/src/LibraryService.Api/ApiDocs/Status/Examples/GetStatus/Output.md)
-  - [Algorithm.puml](c:/Users/vagrant/dev/git-markul/demo-library-service/app/src/LibraryService.Api/ApiDocs/Status/Diagrams/GetStatus/Algorithm.puml)
-  - [Algorithm.svg](c:/Users/vagrant/dev/git-markul/demo-library-service/app/src/LibraryService.Api/ApiDocs/Status/Diagrams/GetStatus/Algorithm.svg)
+### What changed
+- Status response property renamed to `IsActive`:
+  - [GetStatusResponseDto.cs](C:\Users\vagrant\dev\git-markul\demo-library-service\app\src\LibraryService.Application\Status\GetStatusResponseDto.cs:5)
+- `/api/status` now checks subscriptions and returns `IsActive = true` only if at least one subscription is active:
+  - [StatusController.cs](C:\Users\vagrant\dev\git-markul\demo-library-service\app\src\LibraryService.Api\Controllers\StatusController.cs:19)
+- Unit tests updated/expanded for both active and inactive cases:
+  - [StatusControllerTests.cs](C:\Users\vagrant\dev\git-markul\demo-library-service\app\test\LibraryService.Tests.Unit\Status\StatusControllerTests.cs:14)
+- Status API docs/examples/diagram updated from `isActtive` to `isActive`:
+  - [GetStatus.md](C:\Users\vagrant\dev\git-markul\demo-library-service\app\src\LibraryService.Api\ApiDocs\Status\GetStatus.md:18)
+  - [Output.md](C:\Users\vagrant\dev\git-markul\demo-library-service\app\src\LibraryService.Api\ApiDocs\Status\Examples\GetStatus\Output.md:5)
 
-### Endpoint behavior
-`GET /api/status` returns:
-```json
-{
-  "isActtive": true
-}
-```
-
-### Validation
+### Verification
 - `dotnet build app/LibraryService.sln` passed.
-- `dotnet test app/LibraryService.sln` passed (`19` unit + `9` integration).
-- Existing NU1903 package vulnerability warnings are present in test projects (not introduced by this change).
+- `dotnet test app/LibraryService.sln` passed (`29` total tests).
+- Existing NuGet vulnerability warnings (`NU1903`) are still present in test projects (pre-existing).

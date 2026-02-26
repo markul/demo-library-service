@@ -13,5 +13,6 @@
   <text class="txt" x="36" y="95">GET /api/status</text>
   <line class="arrow" x1="240" y1="90" x2="355" y2="90"/>
   <rect class="box" x="360" y="60" width="340" height="60"/>
-  <text class="txt" x="376" y="95">200 OK { "isActtive": true }</text>
+  <text class="txt" x="376" y="95">200 OK { "isActive": true }</text>
 </svg>
+
