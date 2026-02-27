@@ -71,6 +71,12 @@ public class EbookCatalogServiceTests
 
         decodedQuery.Should().Contain("Books?$filter=");
         decodedQuery.Should().Contain("contains(tolower(Title),'dune')");
+        decodedQuery.Should().Contain("$select=Id,Title");
+        decodedQuery.Should().NotContain("Author");
+        decodedQuery.Should().NotContain("Genre");
+        decodedQuery.Should().NotContain("Price");
+        decodedQuery.Should().NotContain("PublishYear");
+        decodedQuery.Should().NotContain("Language");
     }
 
     [Fact]

@@ -6,6 +6,7 @@ using LibraryService.Application.Journals;
 using LibraryService.Tests.Integration.Infrastructure;
 using System.Net;
 using System.Net.Http.Json;
+using System.Text.Json;
 
 namespace LibraryService.Tests.Integration.Controllers;
 
@@ -46,12 +47,21 @@ public class LibraryControllersIntegrationTests : IClassFixture<LibraryApiFactor
     public async Task SearchEbooksByName_ShouldReturnMatchingItems()
     {
         var response = await _client.GetAsync("/api/ebooks/search?name=Hobbit");
-        var body = await response.Content.ReadFromJsonAsync<IReadOnlyCollection<EbookCatalogItemDto>>();
+        var json = await response.Content.ReadAsStringAsync();
+        var body = JsonSerializer.Deserialize<IReadOnlyCollection<EbookCatalogSearchItemDto>>(
+            json,
+            new JsonSerializerOptions { PropertyNameCaseInsensitive = true });
+        using var jsonDocument = JsonDocument.Parse(json);
 
         response.StatusCode.Should().Be(HttpStatusCode.OK);
         body.Should().NotBeNull();
         body.Should().HaveCount(1);
         body!.Single().Title.Should().Be("The Hobbit");
+        jsonDocument.RootElement[0].TryGetProperty("author", out _).Should().BeFalse();
+        jsonDocument.RootElement[0].TryGetProperty("genre", out _).Should().BeFalse();
+        jsonDocument.RootElement[0].TryGetProperty("price", out _).Should().BeFalse();
+        jsonDocument.RootElement[0].TryGetProperty("publishYear", out _).Should().BeFalse();
+        jsonDocument.RootElement[0].TryGetProperty("language", out _).Should().BeFalse();
     }
 
     [Fact]

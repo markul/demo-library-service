@@ -4,7 +4,7 @@ using MediatR;
 namespace LibraryService.Application.Ebooks.Queries;
 
 public sealed record GetEbookCatalogQuery : IRequest<IReadOnlyCollection<EbookCatalogItemDto>>;
-public sealed record GetEbookCatalogByNameQuery(string Name) : IRequest<IReadOnlyCollection<EbookCatalogItemDto>>;
+public sealed record GetEbookCatalogByNameQuery(string Name) : IRequest<IReadOnlyCollection<EbookCatalogSearchItemDto>>;
 
 public sealed class GetEbookCatalogQueryHandler(IEbookCatalogService ebookCatalogService)
     : IRequestHandler<GetEbookCatalogQuery, IReadOnlyCollection<EbookCatalogItemDto>>
@@ -18,9 +18,9 @@ public sealed class GetEbookCatalogQueryHandler(IEbookCatalogService ebookCatalo
 }
 
 public sealed class GetEbookCatalogByNameQueryHandler(IEbookCatalogService ebookCatalogService)
-    : IRequestHandler<GetEbookCatalogByNameQuery, IReadOnlyCollection<EbookCatalogItemDto>>
+    : IRequestHandler<GetEbookCatalogByNameQuery, IReadOnlyCollection<EbookCatalogSearchItemDto>>
 {
-    public Task<IReadOnlyCollection<EbookCatalogItemDto>> Handle(
+    public Task<IReadOnlyCollection<EbookCatalogSearchItemDto>> Handle(
         GetEbookCatalogByNameQuery request,
         CancellationToken cancellationToken)
     {

@@ -51,7 +51,7 @@ public class EbookCatalogService : IEbookCatalogService
         return books.Select(Map).ToArray();
     }
 
-    public async Task<IReadOnlyCollection<EbookCatalogItemDto>> FindBooksByNameAsync(
+    public async Task<IReadOnlyCollection<EbookCatalogSearchItemDto>> FindBooksByNameAsync(
         string name,
         CancellationToken cancellationToken = default)
     {
@@ -59,7 +59,7 @@ public class EbookCatalogService : IEbookCatalogService
         var normalizedName = NormalizeNameForFilter(name);
         if (normalizedName.Length == 0)
         {
-            return Array.Empty<EbookCatalogItemDto>();
+            return Array.Empty<EbookCatalogSearchItemDto>();
         }
         var normalizedNameLower = normalizedName.ToLowerInvariant();
 
@@ -67,11 +67,11 @@ public class EbookCatalogService : IEbookCatalogService
             .For<Book>(_ => _.Books)
             .ByList()
             .Filter((book, functions) => functions.Contains(functions.ToLower(book.Title), normalizedNameLower))
-            .Select(book => new{book.Id, book.Author, book.Genre, book.Language, book.Price, book.Title, book.PublishYear})
+            .Select(book => new { book.Id, book.Title })
             .ToUri();
         var books = await ExecuteQueryAsync(query, cancellationToken);
 
-        return books.Select(Map).ToArray();
+        return books.Select(MapSearch).ToArray();
     }
 
     protected virtual async Task<IEnumerable<Book>> ExecuteQueryAsync(
@@ -137,6 +137,13 @@ public class EbookCatalogService : IEbookCatalogService
             book.Price,
             book.PublishYear,
             book.Language);
+    }
+
+    private static EbookCatalogSearchItemDto MapSearch(Book book)
+    {
+        return new EbookCatalogSearchItemDto(
+            book.Id,
+            book.Title);
     }
 
     private static string NormalizeNameForFilter(string name)

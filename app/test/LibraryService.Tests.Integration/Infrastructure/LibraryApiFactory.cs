@@ -112,15 +112,16 @@ public class LibraryApiFactory : WebApplicationFactory<Program>
         public Task<IReadOnlyCollection<EbookCatalogItemDto>> GetBooksAsync(CancellationToken cancellationToken = default) =>
             Task.FromResult(Books);
 
-        public Task<IReadOnlyCollection<EbookCatalogItemDto>> FindBooksByNameAsync(
+        public Task<IReadOnlyCollection<EbookCatalogSearchItemDto>> FindBooksByNameAsync(
             string name,
             CancellationToken cancellationToken = default)
         {
             var books = Books
                 .Where(x => x.Title.Contains(name, StringComparison.OrdinalIgnoreCase))
+                .Select(x => new EbookCatalogSearchItemDto(x.Id, x.Title))
                 .ToArray();
 
-            return Task.FromResult<IReadOnlyCollection<EbookCatalogItemDto>>(books);
+            return Task.FromResult<IReadOnlyCollection<EbookCatalogSearchItemDto>>(books);
         }
     }
 }

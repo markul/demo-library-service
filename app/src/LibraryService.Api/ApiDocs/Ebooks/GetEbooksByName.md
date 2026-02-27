@@ -9,6 +9,9 @@ GET /api/ebooks/search?name={name}
 ## Parameters
 - `name` (query, required): Book title or part of the title.
 
+## Response Contract
+- Returns an array of e-books containing only `id` and `title`.
+
 ## Examples
 - Input: Examples/GetEbooksByName/Input.md
 - Output: Examples/GetEbooksByName/Output.md
