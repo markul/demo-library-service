@@ -40,6 +40,10 @@ pwsh -File 'invoke-atlassian-rest.ps1' -Product <jira|confluence|bitbucket> -Pat
 
 Use `-BodyJson` for `POST`, `PUT`, or `PATCH`.
 
+`-Path` is appended to the product base URL from the environment.
+Do not duplicate a context path that is already part of the base URL.
+For Confluence, prefer `rest/api/...` and rely on `CONFLUENCE_URL` to supply any required base path.
+
 ## Common Examples
 
 Jira issue lookup:
@@ -51,7 +55,7 @@ pwsh -File 'invoke-atlassian-rest.ps1' -Product jira -Path 'rest/api/2/issue/UTK
 Confluence page lookup by ID:
 
 ```powershell
-pwsh -File 'invoke-atlassian-rest.ps1' -Product confluence -Path 'wiki/rest/api/content/123456?expand=body.storage,version,space' -OutputJson
+pwsh -File 'invoke-atlassian-rest.ps1' -Product confluence -Path 'rest/api/content/123456?expand=body.storage,version,space' -OutputJson
 ```
 
 Bitbucket Cloud repository lookup:
