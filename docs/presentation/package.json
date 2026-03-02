@@ -1,0 +1,15 @@
+{
+  "name": "library-service-presentation",
+  "private": true,
+  "scripts": {
+    "dev": "slidev slides.md",
+    "build": "slidev build slides.md",
+    "export": "slidev export slides.md --format pdf"
+  },
+  "devDependencies": {
+    "@slidev/cli": "^52.13.0"
+  },
+  "dependencies": {
+    "@slidev/theme-seriph": "^0.25.0"
+  }
+}

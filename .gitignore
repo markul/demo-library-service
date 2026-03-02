@@ -7,9 +7,9 @@
 # Test and coverage artifacts
 **/TestResults/
 **/coverage/
+**/coverlet/
 **/*.coverage
 **/*.coveragexml
-**/coverlet/
 
 # User and IDE files
 *.user
@@ -26,6 +26,9 @@ Thumbs.db
 
 # Logs
 *.log
+npm-debug.log*
+pnpm-debug.log*
+yarn-error.log*
 
 # Local environment files
 .env
@@ -37,3 +40,11 @@ appsettings.*.local.json
 
 # Tool caches
 .cache/
+
+# Node.js dependencies
+**/node_modules/
+
+# Slidev presentation artifacts
+docs/presentation/dist/
+docs/presentation/.slidev/
+docs/presentation/.vite/
