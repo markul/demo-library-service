@@ -8,10 +8,18 @@ namespace LibraryService.Api.Controllers;
 [Route("api/[controller]")]
 public class StatusController : ControllerBase
 {
-    [HttpGet]
-    public ActionResult<GetStatusResponseDto> Get()
+    private readonly IMediator _mediator;
+
+    public StatusController(IMediator mediator)
     {
-        var response = new GetStatusResponseDto(true);
+        _mediator = mediator;
+    }
+
+    [HttpGet]
+    public async Task<ActionResult<GetStatusResponseDto>> Get(CancellationToken cancellationToken)
+    {
+        var response = await _mediator.Send(new GetStatusQuery(), cancellationToken);
         return Ok(response);
     }
 }
+

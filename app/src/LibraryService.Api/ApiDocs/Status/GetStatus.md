@@ -1,13 +1,16 @@
-"# GetStatus
+# GetStatus
 
 ## Purpose
-Returns the current status of the service.
+Returns the current status of the service based on active subscriptions.
 
 ## Endpoint
 GET /api/status
 
 ## Parameters
 No route or query parameters.
+
+## Logic
+The `isActive` field is `true` when there are active subscriptions in the system, and `false` when there are no active subscriptions.
 
 ## Examples
 - Input: Examples/GetStatus/Input.md
@@ -19,4 +22,3 @@ No route or query parameters.
 
 ## Algorithm
 ![Algorithm](./Diagrams/GetStatus/Algorithm.svg)
-"
