@@ -1,9 +1,9 @@
 ---
 theme: seriph
-title: AI Agent Comparison
+title: Сравнение ИИ-агентов
 info: |
-  Codex (ChatGPT) vs Alfagen (Qwen3 Coder 30B)
-  branch-based comparison on demo-library-service.
+  Сравнение Codex (ChatGPT) и Alfagen (Qwen3 Coder 30B)
+  на основе истории веток demo-library-service.
 class: text-left
 drawings:
   persist: false
@@ -16,272 +16,558 @@ colorSchema: light
 layout: cover
 ---
 
-# AI Agent Comparison
+# Сравнение ИИ-агентов
 
-Codex from ChatGPT vs Alfagen based on Qwen3 Coder 30B
-
-- Source of truth: git branches + commit prompts + response files
-- Snapshot date: 2026-02-27
-
----
-layout: section
----
-
-# Evaluation Rules
+- ChatGPT Codex
+- Alfaget Copilot Qwen3 Coder 30b
+- Alfaget Copilot Qwen3 Coder Next
+- QA automation agent
 
 ---
 
-## Context Schema
+## Абстрактная типовая среда
+<br>
 
 ```mermaid
 flowchart TB;
-  JIRA["Jira"] -->|Requirements| LS["Library Service (LS)"];
-  CONF["Confluence"] -->|Requirements| LS;
+  JIRA["Jira"] -->|Требования| LS["Library Service"];
+  CONF["Confluence"] -->|Требования| LS;
   LS <--> DB["PostgreSQL DB"];
   LS <--> PAY["Payment Service"];
   LS <--> EBOOK["E-book Service (OData)"];
 ```
+---
+
+## Структура проекта
+
+<div class="project-tree">
+  <div class="tree-line tree-root">⌄ app</div>
+  <div class="tree-line tree-level-1">⌄ src</div>
+  <div class="tree-line tree-level-2">⌄ LibraryService.Api</div>
+  <div class="tree-line tree-level-3">› ApiDocs</div>
+  <div class="tree-line tree-level-3">› Controllers</div>
+  <div class="tree-line tree-level-3">› Properties</div>
+  <div class="tree-line tree-level-2">› LibraryService.Application</div>
+  <div class="tree-line tree-level-2">› LibraryService.Domain</div>
+  <div class="tree-line tree-level-2">⌄ LibraryService.Infrastructure</div>
+  <div class="tree-line tree-level-3">› Connected Services</div>
+  <div class="tree-line tree-level-3">⌄ Database</div>
+  <div class="tree-line tree-level-4">› Configurations</div>
+  <div class="tree-line tree-level-4">› ManualScripts</div>
+  <div class="tree-line tree-level-4">› Migrations</div>
+  <div class="tree-line tree-level-3">› Repositories</div>
+  <div class="tree-line tree-level-3">› Services</div>
+  <div class="tree-line tree-level-1">› test</div>
+</div>
 
 ---
 
-## YES / NO Logic
+<h2 class="slide-title-center">Сборка проекта</h2>
 
-Each action result is evaluated with these rules:
+<div class="case-info">
+  <div><strong>Команда:</strong> <code>Run the build and report the result</code></div>
+  <div><strong>Ветка:</strong> <code>{agent}/build</code></div>
+</div>
+<br>
 
-1. `YES` only if the response summary indicates the action was completed.
-1. If `/app` has code changes in that branch, `dotnet build app/LibraryService.sln` must pass with `0` errors.
-1. If build fails for code-changing branches, result is `NO`.
-1. Missing branch for an action is `NO` for that action.
 
----
-layout: section
----
-
-# Action Slides
-
----
-layout: two-cols
----
-
-## Action: `project-structure`
-
-### Codex
-- Branch: `codex-gpt5.3-medium/project-structure`
-- Summary: Clear layered module walkthrough (`Api`, `Application`, `Domain`, `Infrastructure`, tests, compose).
-- `/app` code changes: `no`
-- Result: `YES`
-
-::right::
-
-### Qwen
-- Branch: `qwen3-coder-30b/project-structure`
-- Summary: Correct project and module overview with API and DB notes.
-- `/app` code changes: `no`
-- Result: `YES`
-
----
-layout: two-cols
----
-
-## Action: `build`
-
-### Codex
-- Branch: `codex-gpt5.3-medium/build`
-- Summary: Reported build success, `0` errors, `8` warnings.
-- `/app` code changes: `no`
-- Result: `YES`
-
-::right::
-
-### Qwen
-- Branch: `qwen3-coder-30b/build`
-- Summary: Reported successful build with vulnerability warnings in test dependencies.
-- `/app` code changes: `no`
-- Result: `YES`
-
----
-layout: two-cols
----
-
-## Action: `rename-method`
-
-### Codex
-- Branch: `codex-gpt5.3-medium/rename-method`
-- Summary: Renamed `FindBooksByNameAsync` to `FindBooksAsync` across interface, implementation, handlers, and tests.
-- Build check: `YES` (`Build succeeded`, `0` errors)
-- Result: `YES`
-
-::right::
-
-### Qwen
-- Branch: `qwen3-coder-30b/rename-method`
-- Summary: Same rename implemented across interface, service, handlers, unit/integration tests.
-- Build check: `YES` (`Build succeeded`, `0` errors)
-- Result: `YES`
-
----
-layout: two-cols
----
-
-## Action: `implement-aaa-in-tests`
-
-### Codex
-- Branch: `codex-gpt5.3-medium/implement-aaa-in-tests`
-- Summary: Converted tests to explicit Arrange/Act/Assert structure and reported passing tests.
-- Build check: `YES` (`Build succeeded`, `0` errors)
-- Result: `YES`
-
-::right::
-
-### Qwen
-- Branch: `qwen3-coder-30b/implement-aaa-in-tests`
-- Summary: Fixed test compile issue (`It.IsAny<CancellationToken>()`) and reported passing tests.
-- Build check: `YES` (`Build succeeded`, `0` errors)
-- Result: `YES`
-
----
-layout: two-cols
----
-
-## Action: `add-status-endpoint`
-
-### Codex
-- Branch: `codex-gpt5.3-medium/add-status-endpoint`
-- Summary: Added `GET /api/status`, DTO, docs, tests.
-- Build check: `YES` (`Build succeeded`, `0` errors)
-- Result: `YES`
-
-::right::
-
-### Qwen
-- Branch: `qwen3-coder-30b/add-status-endpoint`
-- Summary: Response is exploration transcript and does not show completed status endpoint delivery.
-- Build check: `NO` (`Build FAILED`, `6` errors)
-- Key failures: missing repository methods (`CS1061`) + UTF-8 BOM rule (`LSUTF8BOM001`)
-- Result: `NO`
-
----
-layout: two-cols
----
-
-## Action: `add-status-endpoint-base/add-business-logic`
-
-### Codex
-- Branch: `codex-gpt5.3-medium/add-status-endpoint-base/add-business-logic`
-- Summary: Updated status behavior and tests/docs with business logic in application flow.
-- Build check: `YES` (`Build succeeded`, `0` errors)
-- Result: `YES`
-
-::right::
-
-### Qwen
-- Branch: `qwen3-coder-30b/add-status-endpoint-base/add-business-logic`
-- Summary: Response is exploratory transcript and does not show completed implementation.
-- Build check: `NO` (`Build FAILED`, `6` errors)
-- Key failures: missing repo methods (`CS1061`) + BOM encoding rule (`LSUTF8BOM001`)
-- Result: `NO`
-
----
-layout: two-cols
----
-
-## Action: `add-client-address-entity`
-
-### Codex
-- Branch: `codex-gpt5.3-medium/add-client-address-entity`
-- Summary: Implemented `ClientAddress` entity, endpoint, migration scripts, docs, tests.
-- Build check: `YES` (`Build succeeded`, `0` errors)
-- Result: `YES`
-
-::right::
-
-### Qwen
-- Branch: `qwen3-coder-30b/add-client-address-entity`
-- Summary: Response is mostly step-by-step work log; completion quality is not reliable.
-- Build check: `NO` (`Build FAILED`, `1` error)
-- Key failure: `ClientAddress.cs` encoding rule (`LSUTF8BOM001`)
-- Result: `NO`
-
----
-layout: two-cols
----
-
-## Action: `add-client-address-entity-try-2`
-
-### Codex
-- Branch: `N/A`
-- Summary: No matching Codex retry branch for this action.
-- Result: `NO` (no branch)
-
-::right::
-
-### Qwen
-- Branch: `qwen3-coder-30b/add-client-address-entity-try-2`
-- Summary: Second attempt logged, but delivery remains incomplete.
-- Build check: `NO` (`Build FAILED`, `2` errors)
-- Key failures: missing `Client` type references (`CS0246`)
-- Result: `NO`
-
----
-layout: two-cols
----
-
-## Action: `vulnerabilities`
-
-### Codex
-- Branch: `codex-gpt5.3-medium/vulnerabilities`
-- Summary: Structured findings by severity with concrete fixes (auth, CORS, secrets, HTTP usage, dependency risks).
-- `/app` code changes: `no`
-- Result: `YES`
-
-::right::
-
-### Qwen
-- Branch: `qwen3-coder-30b/vulnerabilities`
-- Summary: Vulnerability assessment with proposed fixes (CORS, input validation and other hardening items).
-- `/app` code changes: `no`
-- Result: `YES`
-
----
-layout: section
----
-
-# Agent Summaries
+<table class="test-case">
+  <thead>
+    <tr>
+      <th>Агент</th>
+      <th>Результат</th>
+      <th>Комментарии</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Codex</td>
+      <td class="status-success">Успешно</td>
+      <td>Есть ветка и response с успешной сборкой.</td>
+    </tr>
+    <tr>
+      <td>Qwen3-Coder-30b</td>
+      <td class="status-success">Успешно</td>
+      <td>Есть ветка и response с успешной сборкой.</td>
+    </tr>
+    <tr>
+      <td>Qwen3-Coder-Next</td>
+      <td class="status-negative">Отрицательно</td>
+      <td>Нет ветки в истории сравнения.</td>
+    </tr>
+    <tr>
+      <td>Qa Automation Agent</td>
+      <td class="status-negative">Отрицательно</td>
+      <td>Ветка для этого кейса отсутствует.</td>
+    </tr>
+  </tbody>
+</table>
 
 ---
 
-## Codex Summary
+<h2 class="slide-title-center">Структура проекта</h2>
 
-- Evaluated branches: `8`
-- `YES`: `8`
-- `NO`: `0`
-- Code-changing branches: `5`
-- Build pass on code-changing branches: `5 / 5`
+<div class="case-info">
+  <div><strong>Команда:</strong> <code>Project Structure Overview</code></div>
+  <div><strong>Ветка:</strong> <code>{agent}/project-structure</code></div>
+</div>
+<br>
 
-Outcome: consistent completion with build-clean outputs on all implementation tasks.
+<table class="test-case">
+  <thead>
+    <tr>
+      <th>Агент</th>
+      <th>Результат</th>
+      <th>Комментарии</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Codex</td>
+      <td class="status-success">Успешно</td>
+      <td>Есть ветка и обзор слоистой структуры проекта.</td>
+    </tr>
+    <tr>
+      <td>Qwen3-Coder-30b</td>
+      <td class="status-success">Успешно</td>
+      <td>Есть ветка и корректное описание модулей.</td>
+    </tr>
+    <tr>
+      <td>Qwen3-Coder-Next</td>
+      <td class="status-negative">Отрицательно</td>
+      <td>Нет ветки в истории сравнения.</td>
+    </tr>
+    <tr>
+      <td>Qa Automation Agent</td>
+      <td class="status-success">Успешно</td>
+      <td>Есть ветка и ответ с обзором структуры репозитория.</td>
+    </tr>
+  </tbody>
+</table>
 
 ---
 
-## Alfagen (Qwen3 Coder 30B) Summary
+<h2 class="slide-title-center">Переименование метода</h2>
 
-- Evaluated branches: `9`
-- `YES`: `5`
-- `NO`: `4`
-- Code-changing branches: `6`
-- Build pass on code-changing branches: `2 / 6`
+<div class="case-info">
+  <div><strong>Команда:</strong> <code>Rename FindBooksByNameAsync to FindBooksAsync</code></div>
+  <div><strong>Ветка:</strong> <code>{agent}/rename-method</code></div>
+</div>
+<br>
 
-Main blockers on failed branches:
-- Compile errors (`CS1061`, `CS0246`)
-- Encoding policy violations (`LSUTF8BOM001`)
-- Incomplete action responses for endpoint/business-logic tasks
+<table class="test-case">
+  <thead>
+    <tr>
+      <th>Агент</th>
+      <th>Результат</th>
+      <th>Комментарии</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Codex</td>
+      <td class="status-success">Успешно</td>
+      <td>Есть ветка, переименование выполнено по всему коду.</td>
+    </tr>
+    <tr>
+      <td>Qwen3-Coder-30b</td>
+      <td class="status-success">Успешно</td>
+      <td>Есть ветка, переименование выполнено в коде и тестах.</td>
+    </tr>
+    <tr>
+      <td>Qwen3-Coder-Next</td>
+      <td class="status-negative">Отрицательно</td>
+      <td>Нет ветки в истории сравнения.</td>
+    </tr>
+    <tr>
+      <td>Qa Automation Agent</td>
+      <td class="status-partial">Частично</td>
+      <td>Нашел все места использования, но запросил подтверждение и не завершил изменения.</td>
+    </tr>
+  </tbody>
+</table>
 
 ---
-layout: end
+
+<h2 class="slide-title-center">AAA в тестах</h2>
+
+<div class="case-info">
+  <div><strong>Команда:</strong> <code>Implement Arrange Act Assert pattern in tests</code></div>
+  <div><strong>Ветка:</strong> <code>{agent}/implement-aaa-in-tests</code></div>
+</div>
+<br>
+
+<table class="test-case">
+  <thead>
+    <tr>
+      <th>Агент</th>
+      <th>Результат</th>
+      <th>Комментарии</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Codex</td>
+      <td class="status-success">Успешно</td>
+      <td>Есть ветка, AAA-паттерн внедрен и отражен в response.</td>
+    </tr>
+    <tr>
+      <td>Qwen3-Coder-30b</td>
+      <td class="status-partial">Частично</td>
+      <td>Есть ветка, но prompt смещен в сторону проверки build/tests, а не только AAA.</td>
+    </tr>
+    <tr>
+      <td>Qwen3-Coder-Next</td>
+      <td class="status-negative">Отрицательно</td>
+      <td>Нет ветки в истории сравнения.</td>
+    </tr>
+    <tr>
+      <td>Qa Automation Agent</td>
+      <td class="status-partial">Частично</td>
+      <td>Есть ветка и заявление о рефакторинге, но без полной верификации результата.</td>
+    </tr>
+  </tbody>
+</table>
+
 ---
 
-# Final Comparison
+<h2 class="slide-title-center">Status endpoint</h2>
 
-- Codex had higher action completion and stronger build reliability in this snapshot.
-- Alfagen had useful analysis-style responses, but several implementation branches did not build.
+<div class="case-info">
+  <div><strong>Команда:</strong> <code>add status endpoint that returns GetStatusResponseDto object with fields { IsActtive }</code></div>
+  <div><strong>Ветка:</strong> <code>{agent}/add-status-endpoint</code></div>
+</div>
+<br>
 
-Next step: automate this scoring with a script that parses branch metadata + build results.
+<table class="test-case">
+  <thead>
+    <tr>
+      <th>Агент</th>
+      <th>Результат</th>
+      <th>Комментарии</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Codex</td>
+      <td class="status-success">Успешно</td>
+      <td>Есть ветка, endpoint добавлен и описан в response.</td>
+    </tr>
+    <tr>
+      <td>Qwen3-Coder-30b</td>
+      <td class="status-negative">Отрицательно</td>
+      <td>Ветка есть, но prompt не соответствует кейсу и реализация не доведена.</td>
+    </tr>
+    <tr>
+      <td>Qwen3-Coder-Next</td>
+      <td class="status-negative">Отрицательно</td>
+      <td>Нет ветки в истории сравнения.</td>
+    </tr>
+    <tr>
+      <td>Qa Automation Agent</td>
+      <td class="status-partial">Частично</td>
+      <td>Есть ветка, но агент остановился на уточняющих вопросах.</td>
+    </tr>
+  </tbody>
+</table>
+
+---
+
+<h2 class="slide-title-center">Бизнес-логика в Application</h2>
+
+<div class="case-info">
+  <div><strong>Команда:</strong> <code>business logic should be in Application layer</code></div>
+  <div><strong>Ветка:</strong> <code>{agent}/add-status-endpoint-base/add-business-logic</code></div>
+</div>
+<br>
+
+<table class="test-case">
+  <thead>
+    <tr>
+      <th>Агент</th>
+      <th>Результат</th>
+      <th>Комментарии</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Codex</td>
+      <td class="status-success">Успешно</td>
+      <td>Есть ветка, логика вынесена в Application и кейс продолжен отдельным шагом.</td>
+    </tr>
+    <tr>
+      <td>Qwen3-Coder-30b</td>
+      <td class="status-negative">Отрицательно</td>
+      <td>Есть ветка, но response показывает незавершенную реализацию.</td>
+    </tr>
+    <tr>
+      <td>Qwen3-Coder-Next</td>
+      <td class="status-negative">Отрицательно</td>
+      <td>Нет ветки в истории сравнения.</td>
+    </tr>
+    <tr>
+      <td>Qa Automation Agent</td>
+      <td class="status-negative">Отрицательно</td>
+      <td>Ветка для этого кейса отсутствует.</td>
+    </tr>
+  </tbody>
+</table>
+
+---
+
+<h2 class="slide-title-center">Новая сущность ClientAddress</h2>
+
+<div class="case-info">
+  <div><strong>Команда:</strong> <code>add a new entity ClientAddress {Id, ClientId, City, Country, Address, PostalCode} and a new endpoint to add it</code></div>
+  <div><strong>Ветка:</strong> <code>{agent}/add-client-address-entity</code></div>
+</div>
+<br>
+
+<table class="test-case">
+  <thead>
+    <tr>
+      <th>Агент</th>
+      <th>Результат</th>
+      <th>Комментарии</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Codex</td>
+      <td class="status-success">Успешно</td>
+      <td>Есть ветка, добавлены сущность, endpoint и сопутствующие изменения.</td>
+    </tr>
+    <tr>
+      <td>Qwen3-Coder-30b</td>
+      <td class="status-negative">Отрицательно</td>
+      <td>Есть ветка, но результат выглядит незавершенным и нестабильным.</td>
+    </tr>
+    <tr>
+      <td>Qwen3-Coder-Next</td>
+      <td class="status-negative">Отрицательно</td>
+      <td>Нет ветки в истории сравнения.</td>
+    </tr>
+    <tr>
+      <td>Qa Automation Agent</td>
+      <td class="status-negative">Отрицательно</td>
+      <td>Ветка для этого кейса отсутствует.</td>
+    </tr>
+  </tbody>
+</table>
+
+---
+
+<h2 class="slide-title-center">Повторная попытка ClientAddress</h2>
+
+<div class="case-info">
+  <div><strong>Команда:</strong> <code>add a new entity ClientAddress {Id, ClientId, City, Country, Address, PostalCode} and a new endpoint to add it</code></div>
+  <div><strong>Ветка:</strong> <code>{agent}/add-client-address-entity-try-2</code></div>
+</div>
+<br>
+
+<table class="test-case">
+  <thead>
+    <tr>
+      <th>Агент</th>
+      <th>Результат</th>
+      <th>Комментарии</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Codex</td>
+      <td class="status-negative">Отрицательно</td>
+      <td>У Codex нет retry-ветки для этого кейса.</td>
+    </tr>
+    <tr>
+      <td>Qwen3-Coder-30b</td>
+      <td class="status-partial">Частично</td>
+      <td>Есть повторная попытка, но отдельная retry-ветка не закрывает кейс полностью.</td>
+    </tr>
+    <tr>
+      <td>Qwen3-Coder-Next</td>
+      <td class="status-negative">Отрицательно</td>
+      <td>Нет ветки в истории сравнения.</td>
+    </tr>
+    <tr>
+      <td>Qa Automation Agent</td>
+      <td class="status-negative">Отрицательно</td>
+      <td>Ветка для этого кейса отсутствует.</td>
+    </tr>
+  </tbody>
+</table>
+
+---
+
+<h2 class="slide-title-center">Анализ уязвимостей</h2>
+
+<div class="case-info">
+  <div><strong>Команда:</strong> <code>analyze vulnerabilities, propose a fix</code></div>
+  <div><strong>Ветка:</strong> <code>{agent}/vulnerabilities</code></div>
+</div>
+<br>
+
+<table class="test-case">
+  <thead>
+    <tr>
+      <th>Агент</th>
+      <th>Результат</th>
+      <th>Комментарии</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Codex</td>
+      <td class="status-success">Успешно</td>
+      <td>Есть ветка и структурированный список рисков с предложенными исправлениями.</td>
+    </tr>
+    <tr>
+      <td>Qwen3-Coder-30b</td>
+      <td class="status-success">Успешно</td>
+      <td>Есть ветка и анализ уязвимостей с рекомендациями.</td>
+    </tr>
+    <tr>
+      <td>Qwen3-Coder-Next</td>
+      <td class="status-negative">Отрицательно</td>
+      <td>Нет ветки в истории сравнения.</td>
+    </tr>
+    <tr>
+      <td>Qa Automation Agent</td>
+      <td class="status-success">Успешно</td>
+      <td>Есть ветка и перечисление проблем безопасности в каталоге /app.</td>
+    </tr>
+  </tbody>
+</table>
+
+---
+
+<h2 class="slide-title-center">Реализация Jira issue</h2>
+
+<div class="case-info">
+  <div><strong>Команда:</strong> <code>get jira ISSUE DEMO-18 and create implementation plan -&gt; Implement, on step 3 just replace the method</code></div>
+  <div><strong>Ветка:</strong> <code>{agent}/implement-jira-issue</code></div>
+</div>
+<br>
+
+<table class="test-case">
+  <thead>
+    <tr>
+      <th>Агент</th>
+      <th>Результат</th>
+      <th>Комментарии</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Codex</td>
+      <td class="status-partial">Частично</td>
+      <td>Есть ветка, issue получен из Jira и составлен план, но завершение реализации не зафиксировано.</td>
+    </tr>
+    <tr>
+      <td>Qwen3-Coder-30b</td>
+      <td class="status-negative">Отрицательно</td>
+      <td>Нет ветки в истории сравнения.</td>
+    </tr>
+    <tr>
+      <td>Qwen3-Coder-Next</td>
+      <td class="status-negative">Отрицательно</td>
+      <td>Нет ветки в истории сравнения.</td>
+    </tr>
+    <tr>
+      <td>Qa Automation Agent</td>
+      <td class="status-negative">Отрицательно</td>
+      <td>Ветка для этого кейса отсутствует.</td>
+    </tr>
+  </tbody>
+</table>
+
+---
+
+<h2 class="slide-title-center">Сводная матрица</h2>
+
+<table class="test-case summary-matrix">
+  <thead>
+    <tr>
+      <th>Кейс</th>
+      <th>ChatGPT Codex</th>
+      <th>Qwen3 Coder 30b</th>
+      <th>Qwen3 Coder Next</th>
+      <th>QA Automation Agent</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Сборка</td>
+      <td class="status-success">Успешно</td>
+      <td class="status-success">Успешно</td>
+      <td class="status-negative">Отрицательно</td>
+      <td class="status-negative">Отрицательно</td>
+    </tr>
+    <tr>
+      <td>Структура проекта</td>
+      <td class="status-success">Успешно</td>
+      <td class="status-success">Успешно</td>
+      <td class="status-negative">Отрицательно</td>
+      <td class="status-success">Успешно</td>
+    </tr>
+    <tr>
+      <td>Переименование метода</td>
+      <td class="status-success">Успешно</td>
+      <td class="status-success">Успешно</td>
+      <td class="status-negative">Отрицательно</td>
+      <td class="status-partial">Частично</td>
+    </tr>
+    <tr>
+      <td>AAA в тестах</td>
+      <td class="status-success">Успешно</td>
+      <td class="status-partial">Частично</td>
+      <td class="status-negative">Отрицательно</td>
+      <td class="status-partial">Частично</td>
+    </tr>
+    <tr>
+      <td>Status endpoint</td>
+      <td class="status-success">Успешно</td>
+      <td class="status-negative">Отрицательно</td>
+      <td class="status-negative">Отрицательно</td>
+      <td class="status-partial">Частично</td>
+    </tr>
+    <tr>
+      <td>Логика в Application</td>
+      <td class="status-success">Успешно</td>
+      <td class="status-negative">Отрицательно</td>
+      <td class="status-negative">Отрицательно</td>
+      <td class="status-negative">Отрицательно</td>
+    </tr>
+    <tr>
+      <td>ClientAddress</td>
+      <td class="status-success">Успешно</td>
+      <td class="status-negative">Отрицательно</td>
+      <td class="status-negative">Отрицательно</td>
+      <td class="status-negative">Отрицательно</td>
+    </tr>
+    <tr>
+      <td>ClientAddress retry</td>
+      <td class="status-negative">Отрицательно</td>
+      <td class="status-partial">Частично</td>
+      <td class="status-negative">Отрицательно</td>
+      <td class="status-negative">Отрицательно</td>
+    </tr>
+    <tr>
+      <td>Анализ уязвимостей</td>
+      <td class="status-success">Успешно</td>
+      <td class="status-success">Успешно</td>
+      <td class="status-negative">Отрицательно</td>
+      <td class="status-success">Успешно</td>
+    </tr>
+    <tr>
+      <td>Реализация Jira issue</td>
+      <td class="status-partial">Частично</td>
+      <td class="status-negative">Отрицательно</td>
+      <td class="status-negative">Отрицательно</td>
+      <td class="status-negative">Отрицательно</td>
+    </tr>
+  </tbody>
+</table>
+
+
+
