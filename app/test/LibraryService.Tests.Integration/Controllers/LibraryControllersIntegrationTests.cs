@@ -1,15 +1,4 @@
-﻿using FluentAssertions;
-using LibraryService.Application.Books;
-using LibraryService.Application.Clients;
-using LibraryService.Application.Ebooks;
-using LibraryService.Application.Journals;
-using LibraryService.Tests.Integration.Infrastructure;
-using System.Net;
-using System.Net.Http.Json;
-
-namespace LibraryService.Tests.Integration.Controllers;
-
-public class LibraryControllersIntegrationTests : IClassFixture<LibraryApiFactory>
+﻿public class LibraryControllersIntegrationTests : IClassFixture<LibraryApiFactory>
 {
     private readonly HttpClient _client;
 
@@ -22,9 +11,14 @@ public class LibraryControllersIntegrationTests : IClassFixture<LibraryApiFactor
     [Fact]
     public async Task GetBooks_ShouldReturnSeededData()
     {
+        // Arrange
+        // Test data is seeded by LibraryApiFactory in constructor
+
+        // Act
         var response = await _client.GetAsync("/api/books");
         var body = await response.Content.ReadFromJsonAsync<IReadOnlyCollection<BookDto>>();
 
+        // Assert
         response.StatusCode.Should().Be(HttpStatusCode.OK);
         body.Should().NotBeNull();
         body.Should().HaveCount(2);
@@ -159,3 +153,4 @@ public class LibraryControllersIntegrationTests : IClassFixture<LibraryApiFactor
         fetched!.Id.Should().Be(created.Id);
     }
 }
+
