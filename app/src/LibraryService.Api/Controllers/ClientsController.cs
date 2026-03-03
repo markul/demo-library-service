@@ -53,4 +53,29 @@ public class ClientsController : ControllerBase
         var deleted = await _mediator.Send(new DeleteClientCommand(id), cancellationToken);
         return deleted ? NoContent() : NotFound();
     }
+
+    [HttpPost("{clientId:guid}/addresses")]
+    public async Task<ActionResult<ClientAddressDto>> CreateAddress(Guid clientId, CreateClientAddressRequest request, CancellationToken cancellationToken)
+    {
+        var command = new CreateClientAddressCommand(new CreateClientAddressRequest(clientId, request.City, request.Country, request.Address, request.PostalCode));
+        var created = await _mediator.Send(command, cancellationToken);
+        return CreatedAtAction(nameof(GetAddressById), new { clientId = clientId, id = created.Id }, created);
+    }
+
+    [HttpGet("{clientId:guid}/addresses/{id:guid}")]
+    public async Task<ActionResult<ClientAddressDto>> GetAddressById(Guid clientId, Guid id, CancellationToken cancellationToken)
+    {
+        var query = new GetClientAddressByIdQuery(clientId, id);
+        var item = await _mediator.Send(query, cancellationToken);
+        return item is null ? NotFound() : Ok(item);
+    }
+
+    [HttpGet("{clientId:guid}/addresses")]
+    public async Task<ActionResult<IReadOnlyCollection<ClientAddressDto>>> GetAddressesByClientId(Guid clientId, CancellationToken cancellationToken)
+    {
+        var query = new GetClientAddressesByClientIdQuery(clientId);
+        var items = await _mediator.Send(query, cancellationToken);
+        return Ok(items);
+    }
 }
+

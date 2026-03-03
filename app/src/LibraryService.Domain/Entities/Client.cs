@@ -15,4 +15,6 @@ public class Client
     public ICollection<ClientSubscription> ClientSubscriptions { get; set; } = new List<ClientSubscription>();
 
     public ICollection<Payment> Payments { get; set; } = new List<Payment>();
+
+    public ICollection<ClientAddress> ClientAddresses { get; set; } = new List<ClientAddress>();
 }
