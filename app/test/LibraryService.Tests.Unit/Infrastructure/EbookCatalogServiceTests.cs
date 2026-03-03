@@ -54,8 +54,8 @@ public class EbookCatalogServiceTests
         capturedRequestUri!.ToString().Should().Be("Books");
     }
 
-    [Fact]
-    public async Task FindBooksByNameAsync_ShouldApplyTitleFilter_WhenNameIsProvided()
+        [Fact]
+    public async Task FindBooksAsync_ShouldApplyTitleFilter_WhenNameIsProvided()
     {
         Uri? capturedRequestUri = null;
         var service = CreateService((requestUri, _) =>
@@ -64,7 +64,7 @@ public class EbookCatalogServiceTests
             return Task.FromResult<IEnumerable<Book>>([]);
         });
 
-        await service.FindBooksByNameAsync("Dune", CancellationToken.None);
+        await service.FindBooksAsync("Dune", CancellationToken.None);
 
         capturedRequestUri.Should().NotBeNull();
         var decodedQuery = Uri.UnescapeDataString(capturedRequestUri!.ToString());
@@ -73,18 +73,18 @@ public class EbookCatalogServiceTests
         decodedQuery.Should().Contain("contains(tolower(Title),'dune')");
     }
 
-    [Fact]
-    public async Task FindBooksByNameAsync_ShouldThrowArgumentException_WhenNameIsEmpty()
+        [Fact]
+    public async Task FindBooksAsync_ShouldThrowArgumentException_WhenNameIsEmpty()
     {
         var service = CreateService((_, _) => Task.FromResult<IEnumerable<Book>>([]));
 
-        var action = async () => await service.FindBooksByNameAsync("   ", CancellationToken.None);
+        var action = async () => await service.FindBooksAsync("   ", CancellationToken.None);
 
         await action.Should().ThrowAsync<ArgumentException>();
     }
 
-    [Fact]
-    public async Task FindBooksByNameAsync_ShouldRemoveApostropheAndTrailingSubstring_WhenNameContainsApostrophe()
+        [Fact]
+    public async Task FindBooksAsync_ShouldRemoveApostropheAndTrailingSubstring_WhenNameContainsApostrophe()
     {
         Uri? capturedRequestUri = null;
         var service = CreateService((requestUri, _) =>
@@ -93,7 +93,7 @@ public class EbookCatalogServiceTests
             return Task.FromResult<IEnumerable<Book>>([]);
         });
 
-        await service.FindBooksByNameAsync("Sorcerer's", CancellationToken.None);
+        await service.FindBooksAsync("Sorcerer's", CancellationToken.None);
 
         capturedRequestUri.Should().NotBeNull();
         var decodedQuery = Uri.UnescapeDataString(capturedRequestUri!.ToString());
