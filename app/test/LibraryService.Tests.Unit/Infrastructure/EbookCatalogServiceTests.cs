@@ -1,6 +1,10 @@
 ﻿using FluentAssertions;
 using LibraryService.Infrastructure.ConnectedServices.EbookOData;
 using LibraryService.Infrastructure.Services;
+using System;
+using System.Collections.Generic;
+using System.Threading;
+using System.Threading.Tasks;
 
 namespace LibraryService.Tests.Unit.Infrastructure;
 
@@ -9,6 +13,7 @@ public class EbookCatalogServiceTests
     [Fact]
     public async Task GetBooksAsync_ShouldReturnMappedBooks_WhenODataBooksAreReturned()
     {
+        // Arrange
         Uri? capturedRequestUri = null;
         var service = CreateService((requestUri, _) =>
         {
@@ -29,8 +34,10 @@ public class EbookCatalogServiceTests
             return Task.FromResult(books);
         });
 
+        // Act
         var result = await service.GetBooksAsync(CancellationToken.None);
 
+        // Assert
         result.Should().HaveCount(1);
         result.Single().Title.Should().Be("Dune");
         capturedRequestUri.Should().NotBeNull();
@@ -40,6 +47,7 @@ public class EbookCatalogServiceTests
     [Fact]
     public async Task GetBooksAsync_ShouldCallBooksEntitySet()
     {
+        // Arrange
         Uri? capturedRequestUri = null;
         var service = CreateService((requestUri, _) =>
         {
@@ -47,8 +55,10 @@ public class EbookCatalogServiceTests
             return Task.FromResult<IEnumerable<Book>>([]);
         });
 
+        // Act
         var result = await service.GetBooksAsync(CancellationToken.None);
 
+        // Assert
         result.Should().BeEmpty();
         capturedRequestUri.Should().NotBeNull();
         capturedRequestUri!.ToString().Should().Be("Books");
@@ -57,6 +67,7 @@ public class EbookCatalogServiceTests
     [Fact]
     public async Task FindBooksByNameAsync_ShouldApplyTitleFilter_WhenNameIsProvided()
     {
+        // Arrange
         Uri? capturedRequestUri = null;
         var service = CreateService((requestUri, _) =>
         {
@@ -64,8 +75,10 @@ public class EbookCatalogServiceTests
             return Task.FromResult<IEnumerable<Book>>([]);
         });
 
+        // Act
         await service.FindBooksByNameAsync("Dune", CancellationToken.None);
 
+        // Assert
         capturedRequestUri.Should().NotBeNull();
         var decodedQuery = Uri.UnescapeDataString(capturedRequestUri!.ToString());
 
@@ -76,16 +89,20 @@ public class EbookCatalogServiceTests
     [Fact]
     public async Task FindBooksByNameAsync_ShouldThrowArgumentException_WhenNameIsEmpty()
     {
+        // Arrange
         var service = CreateService((_, _) => Task.FromResult<IEnumerable<Book>>([]));
 
+        // Act
         var action = async () => await service.FindBooksByNameAsync("   ", CancellationToken.None);
 
+        // Assert
         await action.Should().ThrowAsync<ArgumentException>();
     }
 
     [Fact]
     public async Task FindBooksByNameAsync_ShouldRemoveApostropheAndTrailingSubstring_WhenNameContainsApostrophe()
     {
+        // Arrange
         Uri? capturedRequestUri = null;
         var service = CreateService((requestUri, _) =>
         {
@@ -93,8 +110,10 @@ public class EbookCatalogServiceTests
             return Task.FromResult<IEnumerable<Book>>([]);
         });
 
+        // Act
         await service.FindBooksByNameAsync("Sorcerer's", CancellationToken.None);
 
+        // Assert
         capturedRequestUri.Should().NotBeNull();
         var decodedQuery = Uri.UnescapeDataString(capturedRequestUri!.ToString());
 
@@ -120,4 +139,3 @@ public class EbookCatalogServiceTests
         }
     }
 }
-

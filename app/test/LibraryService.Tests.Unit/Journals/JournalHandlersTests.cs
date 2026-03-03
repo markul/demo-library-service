@@ -12,6 +12,7 @@ public class JournalHandlersTests
     [Fact]
     public async Task CreateJournalCommand_ShouldCreateJournalAndReturnDto()
     {
+        // Arrange
         var repository = new Mock<IJournalRepository>();
         repository
             .Setup(x => x.AddAsync(It.IsAny<Journal>(), It.IsAny<CancellationToken>()))
@@ -20,8 +21,10 @@ public class JournalHandlersTests
         var handler = new CreateJournalCommandHandler(repository.Object);
         var command = new CreateJournalCommand("ACM Journal", 12, 2026, "ACM");
 
+        // Act
         var result = await handler.Handle(command, CancellationToken.None);
 
+        // Assert
         result.Id.Should().NotBe(Guid.Empty);
         result.Title.Should().Be("ACM Journal");
         result.IssueNumber.Should().Be(12);
@@ -32,6 +35,7 @@ public class JournalHandlersTests
     [Fact]
     public async Task GetJournalByIdQuery_ShouldReturnNull_WhenJournalNotFound()
     {
+        // Arrange
         var repository = new Mock<IJournalRepository>();
         repository
             .Setup(x => x.GetByIdAsync(It.IsAny<Guid>(), It.IsAny<CancellationToken>()))
@@ -39,14 +43,17 @@ public class JournalHandlersTests
 
         var handler = new GetJournalByIdQueryHandler(repository.Object);
 
+        // Act
         var result = await handler.Handle(new GetJournalByIdQuery(Guid.NewGuid()), CancellationToken.None);
 
+        // Assert
         result.Should().BeNull();
     }
 
     [Fact]
     public async Task UpdateJournalCommand_ShouldUpdateAndReturnTrue_WhenJournalExists()
     {
+        // Arrange
         var id = Guid.NewGuid();
         var journal = new Journal
         {
@@ -68,8 +75,10 @@ public class JournalHandlersTests
         var handler = new UpdateJournalCommandHandler(repository.Object);
         var command = new UpdateJournalCommand(id, "New", 2, 2026, "New Publisher");
 
+        // Act
         var updated = await handler.Handle(command, CancellationToken.None);
 
+        // Assert
         updated.Should().BeTrue();
         journal.Title.Should().Be("New");
         journal.IssueNumber.Should().Be(2);
