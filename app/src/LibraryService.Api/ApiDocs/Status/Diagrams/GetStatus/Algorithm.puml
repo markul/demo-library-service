@@ -1,0 +1,11 @@
+@startuml
+skin rose
+start
+:Service health check;
+if (Service operational?) then (yes)
+:Return 200 OK with isActive=true;
+else (no)
+:Return 500 Internal Server Error;
+endif
+stop
+@enduml
