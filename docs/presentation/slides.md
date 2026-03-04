@@ -36,6 +36,7 @@ flowchart TB;
   LS <--> PAY["Payment Service"];
   LS <--> EBOOK["E-book Service (OData)"];
 ```
+
 ---
 
 ## Структура проекта
@@ -62,49 +63,6 @@ flowchart TB;
 
 ---
 
-<h2 class="slide-title-center">Сборка проекта</h2>
-
-<div class="case-info">
-  <div><strong>Команда:</strong> <code>Run the build and report the result</code></div>
-  <div><strong>Ветка:</strong> <code>{agent}/build</code></div>
-</div>
-<br>
-
-
-<table class="test-case">
-  <thead>
-    <tr>
-      <th>Агент</th>
-      <th>Результат</th>
-      <th>Комментарии</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td>Codex</td>
-      <td class="status-success">Успешно</td>
-      <td>Есть ветка и response с успешной сборкой.</td>
-    </tr>
-    <tr>
-      <td>Qwen3-Coder-30b</td>
-      <td class="status-success">Успешно</td>
-      <td>Есть ветка и response с успешной сборкой.</td>
-    </tr>
-    <tr>
-      <td>Qwen3-Coder-Next</td>
-      <td class="status-negative">Отрицательно</td>
-      <td>Нет ветки в истории сравнения.</td>
-    </tr>
-    <tr>
-      <td>Qa Automation Agent</td>
-      <td class="status-negative">Отрицательно</td>
-      <td>Ветка для этого кейса отсутствует.</td>
-    </tr>
-  </tbody>
-</table>
-
----
-
 <h2 class="slide-title-center">Структура проекта</h2>
 
 <div class="case-info">
@@ -125,22 +83,64 @@ flowchart TB;
     <tr>
       <td>Codex</td>
       <td class="status-success">Успешно</td>
-      <td>Есть ветка и обзор слоистой структуры проекта.</td>
+      <td>краткий, но содержательный обзор; в блоке <code>CASE RESULTS</code> указан статус <code>Passed</code>.</td>
     </tr>
     <tr>
       <td>Qwen3-Coder-30b</td>
       <td class="status-success">Успешно</td>
-      <td>Есть ветка и корректное описание модулей.</td>
+      <td>сформировано детальное и точное описание проекта.</td>
     </tr>
     <tr>
       <td>Qwen3-Coder-Next</td>
-      <td class="status-negative">Отрицательно</td>
-      <td>Нет ветки в истории сравнения.</td>
+      <td class="status-success">Успешно</td>
+      <td>дан подробный ответ, покрывающий основные аспекты проекта.</td>
     </tr>
     <tr>
       <td>Qa Automation Agent</td>
+      <td class="status-no-data">Нет данных</td>
+      <td>Ветка есть, но файл <code>Response.md</code> отсутствует.</td>
+    </tr>
+  </tbody>
+</table>
+
+---
+
+<h2 class="slide-title-center">Сборка проекта</h2>
+
+<div class="case-info">
+  <div><strong>Команда:</strong> <code>Run the build and report the result</code></div>
+  <div><strong>Ветка:</strong> <code>{agent}/build</code></div>
+</div>
+<br>
+
+<table class="test-case">
+  <thead>
+    <tr>
+      <th>Агент</th>
+      <th>Результат</th>
+      <th>Комментарии</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Codex</td>
       <td class="status-success">Успешно</td>
-      <td>Есть ветка и ответ с обзором структуры репозитория.</td>
+      <td>агент успешно выполнил сборку проекта.</td>
+    </tr>
+    <tr>
+      <td>Qwen3-Coder-30b</td>
+      <td class="status-partial">Частично</td>
+      <td>сборка была выполнена, но потребовалось ручное подтверждение.</td>
+    </tr>
+    <tr>
+      <td>Qwen3-Coder-Next</td>
+      <td class="status-partial">Частично</td>
+      <td>сборка завершилась успешно, но запуск терминального инструмента требовал ручного подтверждения.</td>
+    </tr>
+    <tr>
+      <td>Qa Automation Agent</td>
+      <td class="status-no-data">Нет данных</td>
+      <td>Нет ветки <code>qa-automation-agent/build</code> в истории сравнения.</td>
     </tr>
   </tbody>
 </table>
@@ -167,29 +167,29 @@ flowchart TB;
     <tr>
       <td>Codex</td>
       <td class="status-success">Успешно</td>
-      <td>Есть ветка, переименование выполнено по всему коду.</td>
+      <td>метод переименован корректно, проверка сборки прошла успешно.</td>
     </tr>
     <tr>
       <td>Qwen3-Coder-30b</td>
       <td class="status-success">Успешно</td>
-      <td>Есть ветка, переименование выполнено в коде и тестах.</td>
+      <td>метод переименован корректно, хотя тесты не запускались.</td>
     </tr>
     <tr>
       <td>Qwen3-Coder-Next</td>
-      <td class="status-negative">Отрицательно</td>
-      <td>Нет ветки в истории сравнения.</td>
+      <td class="status-partial">Частично</td>
+      <td class="long-comment">По предоставленному блоку <code>CASE RESULTS</code>: метод был переименован, сборка и тесты прошли, но потребовалось 10-15 ручных подтверждений для запуска терминальных инструментов. Агент несколько раз удалял несвязанный код, затем обнаружил ошибку и откатил изменения.</td>
     </tr>
     <tr>
       <td>Qa Automation Agent</td>
-      <td class="status-partial">Частично</td>
-      <td>Нашел все места использования, но запросил подтверждение и не завершил изменения.</td>
+      <td class="status-no-data">Нет данных</td>
+      <td>Ветка есть, но файл <code>Response.md</code> отсутствует.</td>
     </tr>
   </tbody>
 </table>
 
 ---
 
-<h2 class="slide-title-center">AAA в тестах</h2>
+<h2 class="slide-title-center">Реализация AAA в тестах</h2>
 
 <div class="case-info">
   <div><strong>Команда:</strong> <code>Implement Arrange Act Assert pattern in tests</code></div>
@@ -209,29 +209,29 @@ flowchart TB;
     <tr>
       <td>Codex</td>
       <td class="status-success">Успешно</td>
-      <td>Есть ветка, AAA-паттерн внедрен и отражен в response.</td>
+      <td>тесты были обновлены, после чего проверены сборка и прохождение тестов.</td>
     </tr>
     <tr>
       <td>Qwen3-Coder-30b</td>
-      <td class="status-partial">Частично</td>
-      <td>Есть ветка, но prompt смещен в сторону проверки build/tests, а не только AAA.</td>
+      <td class="status-negative">Отрицательно</td>
+      <td>сборка падала из-за проблем с кодировкой; затем часть тестов была удалена.</td>
     </tr>
     <tr>
       <td>Qwen3-Coder-Next</td>
       <td class="status-negative">Отрицательно</td>
-      <td>Нет ветки в истории сравнения.</td>
+      <td>агент удалял тесты, чтобы добиться успешного результата, и в итоге завершился с ошибкой.</td>
     </tr>
     <tr>
       <td>Qa Automation Agent</td>
-      <td class="status-partial">Частично</td>
-      <td>Есть ветка и заявление о рефакторинге, но без полной верификации результата.</td>
+      <td class="status-no-data">Нет данных</td>
+      <td>Ветка есть, но файл <code>Response.md</code> отсутствует.</td>
     </tr>
   </tbody>
 </table>
 
 ---
 
-<h2 class="slide-title-center">Status endpoint</h2>
+<h2 class="slide-title-center">Добление эндпоинта Status</h2>
 
 <div class="case-info">
   <div><strong>Команда:</strong> <code>add status endpoint that returns GetStatusResponseDto object with fields { IsActtive }</code></div>
@@ -251,32 +251,32 @@ flowchart TB;
     <tr>
       <td>Codex</td>
       <td class="status-success">Успешно</td>
-      <td>Есть ветка, endpoint добавлен и описан в response.</td>
+      <td>эндпоинт, документация, тесты и валидация были выполнены полностью.</td>
     </tr>
     <tr>
       <td>Qwen3-Coder-30b</td>
-      <td class="status-negative">Отрицательно</td>
-      <td>Ветка есть, но prompt не соответствует кейсу и реализация не доведена.</td>
+      <td class="status-partial">Частично</td>
+      <td>эндпоинт и документация добавлены, но тесты и диаграммы отсутствуют.</td>
     </tr>
     <tr>
       <td>Qwen3-Coder-Next</td>
-      <td class="status-negative">Отрицательно</td>
-      <td>Нет ветки в истории сравнения.</td>
+      <td class="status-partial">Частично</td>
+      <td>эндпоинт и документация добавлены, сборка прошла, но потребовались повторные попытки и ручные подтверждения.</td>
     </tr>
     <tr>
       <td>Qa Automation Agent</td>
-      <td class="status-partial">Частично</td>
-      <td>Есть ветка, но агент остановился на уточняющих вопросах.</td>
+      <td class="status-no-data">Нет данных</td>
+      <td>Ветка есть, но файл <code>Response.md</code> отсутствует.</td>
     </tr>
   </tbody>
 </table>
 
 ---
 
-<h2 class="slide-title-center">Бизнес-логика в Application</h2>
+<h2 class="slide-title-center">Добавление логики для эндпоинта Status</h2>
 
 <div class="case-info">
-  <div><strong>Команда:</strong> <code>business logic should be in Application layer</code></div>
+  <div><strong>Команда:</strong> <code>IsActive  in status response should be true when there are active subscriptions</code></div>
   <div><strong>Ветка:</strong> <code>{agent}/add-status-endpoint-base/add-business-logic</code></div>
 </div>
 <br>
@@ -293,29 +293,29 @@ flowchart TB;
     <tr>
       <td>Codex</td>
       <td class="status-success">Успешно</td>
-      <td>Есть ветка, логика вынесена в Application и кейс продолжен отдельным шагом.</td>
+      <td>логика перенесена в слой Application, документация и тесты обновлены, сборка и тесты проверены.</td>
     </tr>
     <tr>
       <td>Qwen3-Coder-30b</td>
-      <td class="status-negative">Отрицательно</td>
-      <td>Есть ветка, но response показывает незавершенную реализацию.</td>
+      <td class="status-partial">Частично</td>
+      <td>после исправления логика была перенесена, но тесты не были добавлены и потребовалось три попытки.</td>
     </tr>
     <tr>
       <td>Qwen3-Coder-Next</td>
-      <td class="status-negative">Отрицательно</td>
-      <td>Нет ветки в истории сравнения.</td>
+      <td class="status-partial">Частично</td>
+      <td>существующий обработчик был обновлен, но тесты и документация не были доведены до конца.</td>
     </tr>
     <tr>
       <td>Qa Automation Agent</td>
-      <td class="status-negative">Отрицательно</td>
-      <td>Ветка для этого кейса отсутствует.</td>
+      <td class="status-no-data">Нет данных</td>
+      <td>Нет ветки <code>qa-automation-agent/add-status-endpoint-base/add-business-logic</code> в истории сравнения.</td>
     </tr>
   </tbody>
 </table>
 
 ---
 
-<h2 class="slide-title-center">Новая сущность ClientAddress</h2>
+<h2 class="slide-title-center">Добавление новой сущности ClientAddress и эндпоинта</h2>
 
 <div class="case-info">
   <div><strong>Команда:</strong> <code>add a new entity ClientAddress {Id, ClientId, City, Country, Address, PostalCode} and a new endpoint to add it</code></div>
@@ -335,33 +335,33 @@ flowchart TB;
     <tr>
       <td>Codex</td>
       <td class="status-success">Успешно</td>
-      <td>Есть ветка, добавлены сущность, endpoint и сопутствующие изменения.</td>
+      <td>добавлены сущность, логика, документация, миграции и тесты; тесты были проверены.</td>
     </tr>
     <tr>
       <td>Qwen3-Coder-30b</td>
-      <td class="status-negative">Отрицательно</td>
-      <td>Есть ветка, но результат выглядит незавершенным и нестабильным.</td>
+      <td class="status-partial">Частично</td>
+      <td>агент создал хороший стартовый результат, но не довел задачу до конца.</td>
     </tr>
     <tr>
       <td>Qwen3-Coder-Next</td>
-      <td class="status-negative">Отрицательно</td>
-      <td>Нет ветки в истории сравнения.</td>
+      <td class="status-partial">Частично</td>
+      <td>основная часть работы была выполнена, но на финальном шаге агент завис и завершился с ошибкой.</td>
     </tr>
     <tr>
       <td>Qa Automation Agent</td>
-      <td class="status-negative">Отрицательно</td>
-      <td>Ветка для этого кейса отсутствует.</td>
+      <td class="status-no-data">Нет данных</td>
+      <td>Нет ветки <code>qa-automation-agent/add-client-address-entity</code> в истории сравнения.</td>
     </tr>
   </tbody>
 </table>
 
 ---
 
-<h2 class="slide-title-center">Повторная попытка ClientAddress</h2>
+<h2 class="slide-title-center">Работа над задачей из Jira</h2>
 
 <div class="case-info">
-  <div><strong>Команда:</strong> <code>add a new entity ClientAddress {Id, ClientId, City, Country, Address, PostalCode} and a new endpoint to add it</code></div>
-  <div><strong>Ветка:</strong> <code>{agent}/add-client-address-entity-try-2</code></div>
+  <div><strong>Команда:</strong> <code>get jira ISSUE DEMO-18 and create implementation plan</code></div>
+  <div><strong>Ветка:</strong> <code>{agent}/implement-jira-issue</code></div>
 </div>
 <br>
 
@@ -376,23 +376,23 @@ flowchart TB;
   <tbody>
     <tr>
       <td>Codex</td>
-      <td class="status-negative">Отрицательно</td>
-      <td>У Codex нет retry-ветки для этого кейса.</td>
+      <td class="status-success">Успешно</td>
+      <td>задача и связанные страницы были изучены, план составлен, изменения реализованы и проверены.</td>
     </tr>
     <tr>
       <td>Qwen3-Coder-30b</td>
-      <td class="status-partial">Частично</td>
-      <td>Есть повторная попытка, но отдельная retry-ветка не закрывает кейс полностью.</td>
+      <td class="status-negative">Отрицательно</td>
+      <td>агент получил задачу, но не понял требуемый объем реализации.</td>
     </tr>
     <tr>
       <td>Qwen3-Coder-Next</td>
       <td class="status-negative">Отрицательно</td>
-      <td>Нет ветки в истории сравнения.</td>
+      <td>данные из Jira и Confluence были получены, но план остался неясным, а требования были интерпретированы неверно.</td>
     </tr>
     <tr>
       <td>Qa Automation Agent</td>
-      <td class="status-negative">Отрицательно</td>
-      <td>Ветка для этого кейса отсутствует.</td>
+      <td class="status-no-data">Нет данных</td>
+      <td>Нет ветки <code>qa-automation-agent/implement-jira-issue</code> в истории сравнения.</td>
     </tr>
   </tbody>
 </table>
@@ -419,64 +419,22 @@ flowchart TB;
     <tr>
       <td>Codex</td>
       <td class="status-success">Успешно</td>
-      <td>Есть ветка и структурированный список рисков с предложенными исправлениями.</td>
+      <td>выявлен путь с наивысшим риском и предложен способ его устранения.</td>
     </tr>
     <tr>
       <td>Qwen3-Coder-30b</td>
       <td class="status-success">Успешно</td>
-      <td>Есть ветка и анализ уязвимостей с рекомендациями.</td>
+      <td>предоставлены подробные и применимые рекомендации по безопасности.</td>
     </tr>
     <tr>
       <td>Qwen3-Coder-Next</td>
-      <td class="status-negative">Отрицательно</td>
-      <td>Нет ветки в истории сравнения.</td>
-    </tr>
-    <tr>
-      <td>Qa Automation Agent</td>
       <td class="status-success">Успешно</td>
-      <td>Есть ветка и перечисление проблем безопасности в каталоге /app.</td>
-    </tr>
-  </tbody>
-</table>
-
----
-
-<h2 class="slide-title-center">Реализация Jira issue</h2>
-
-<div class="case-info">
-  <div><strong>Команда:</strong> <code>get jira ISSUE DEMO-18 and create implementation plan -&gt; Implement, on step 3 just replace the method</code></div>
-  <div><strong>Ветка:</strong> <code>{agent}/implement-jira-issue</code></div>
-</div>
-<br>
-
-<table class="test-case">
-  <thead>
-    <tr>
-      <th>Агент</th>
-      <th>Результат</th>
-      <th>Комментарии</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td>Codex</td>
-      <td class="status-partial">Частично</td>
-      <td>Есть ветка, issue получен из Jira и составлен план, но завершение реализации не зафиксировано.</td>
-    </tr>
-    <tr>
-      <td>Qwen3-Coder-30b</td>
-      <td class="status-negative">Отрицательно</td>
-      <td>Нет ветки в истории сравнения.</td>
-    </tr>
-    <tr>
-      <td>Qwen3-Coder-Next</td>
-      <td class="status-negative">Отрицательно</td>
-      <td>Нет ветки в истории сравнения.</td>
+      <td>сформированы применимые рекомендации по безопасности с конкретными исправлениями.</td>
     </tr>
     <tr>
       <td>Qa Automation Agent</td>
-      <td class="status-negative">Отрицательно</td>
-      <td>Ветка для этого кейса отсутствует.</td>
+      <td class="status-no-data">Нет данных</td>
+      <td>Ветка есть, но файл <code>Response.md</code> отсутствует.</td>
     </tr>
   </tbody>
 </table>
@@ -497,77 +455,67 @@ flowchart TB;
   </thead>
   <tbody>
     <tr>
-      <td>Сборка</td>
-      <td class="status-success">Успешно</td>
-      <td class="status-success">Успешно</td>
-      <td class="status-negative">Отрицательно</td>
-      <td class="status-negative">Отрицательно</td>
-    </tr>
-    <tr>
       <td>Структура проекта</td>
       <td class="status-success">Успешно</td>
       <td class="status-success">Успешно</td>
-      <td class="status-negative">Отрицательно</td>
       <td class="status-success">Успешно</td>
+      <td class="status-no-data">Нет данных</td>
+    </tr>
+    <tr>
+      <td>Сборка проекта</td>
+      <td class="status-success">Успешно</td>
+      <td class="status-partial">Частично</td>
+      <td class="status-partial">Частично</td>
+      <td class="status-no-data">Нет данных</td>
     </tr>
     <tr>
       <td>Переименование метода</td>
       <td class="status-success">Успешно</td>
       <td class="status-success">Успешно</td>
-      <td class="status-negative">Отрицательно</td>
       <td class="status-partial">Частично</td>
+      <td class="status-no-data">Нет данных</td>
     </tr>
     <tr>
-      <td>AAA в тестах</td>
-      <td class="status-success">Успешно</td>
-      <td class="status-partial">Частично</td>
-      <td class="status-negative">Отрицательно</td>
-      <td class="status-partial">Частично</td>
-    </tr>
-    <tr>
-      <td>Status endpoint</td>
+      <td>Реализация AAA в тестах</td>
       <td class="status-success">Успешно</td>
       <td class="status-negative">Отрицательно</td>
       <td class="status-negative">Отрицательно</td>
-      <td class="status-partial">Частично</td>
+      <td class="status-no-data">Нет данных</td>
     </tr>
     <tr>
-      <td>Логика в Application</td>
+      <td>Добление эндпоинта Status</td>
+      <td class="status-success">Успешно</td>
+      <td class="status-partial">Частично</td>
+      <td class="status-partial">Частично</td>
+      <td class="status-no-data">Нет данных</td>
+    </tr>
+    <tr>
+      <td>Добавление логики для эндпоинта Status</td>
+      <td class="status-success">Успешно</td>
+      <td class="status-partial">Частично</td>
+      <td class="status-partial">Частично</td>
+      <td class="status-no-data">Нет данных</td>
+    </tr>
+    <tr>
+      <td>Добавление новой сущности ClientAddress и эндпоинта</td>
+      <td class="status-success">Успешно</td>
+      <td class="status-partial">Частично</td>
+      <td class="status-partial">Частично</td>
+      <td class="status-no-data">Нет данных</td>
+    </tr>
+    <tr>
+      <td>Работа над задачей из Jira</td>
       <td class="status-success">Успешно</td>
       <td class="status-negative">Отрицательно</td>
       <td class="status-negative">Отрицательно</td>
-      <td class="status-negative">Отрицательно</td>
-    </tr>
-    <tr>
-      <td>ClientAddress</td>
-      <td class="status-success">Успешно</td>
-      <td class="status-negative">Отрицательно</td>
-      <td class="status-negative">Отрицательно</td>
-      <td class="status-negative">Отрицательно</td>
-    </tr>
-    <tr>
-      <td>ClientAddress retry</td>
-      <td class="status-negative">Отрицательно</td>
-      <td class="status-partial">Частично</td>
-      <td class="status-negative">Отрицательно</td>
-      <td class="status-negative">Отрицательно</td>
+      <td class="status-no-data">Нет данных</td>
     </tr>
     <tr>
       <td>Анализ уязвимостей</td>
       <td class="status-success">Успешно</td>
       <td class="status-success">Успешно</td>
-      <td class="status-negative">Отрицательно</td>
       <td class="status-success">Успешно</td>
-    </tr>
-    <tr>
-      <td>Реализация Jira issue</td>
-      <td class="status-partial">Частично</td>
-      <td class="status-negative">Отрицательно</td>
-      <td class="status-negative">Отрицательно</td>
-      <td class="status-negative">Отрицательно</td>
+      <td class="status-no-data">Нет данных</td>
     </tr>
   </tbody>
 </table>
-
-
-
