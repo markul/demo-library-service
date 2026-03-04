@@ -37,3 +37,11 @@ appsettings.*.local.json
 
 # Tool caches
 .cache/
+
+# Node.js dependencies
+**/node_modules/
+
+# Slidev presentation artifacts
+docs/presentation/dist/
+docs/presentation/.slidev/
+docs/presentation/.vite/
