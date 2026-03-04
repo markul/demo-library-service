@@ -1,0 +1,16 @@
+﻿@startuml
+skin rose
+start
+:Validate clientId path parameter;
+if (ClientId valid?) then (yes)
+:Check if address exists for client in DB <b>appdb</b>;
+if (Address found?) then (yes)
+:Return 200 OK with address record;
+else (no)
+:Return 404 Not Found;
+endif
+else (no)
+:Return 400 Bad Request;
+endif
+stop
+@enduml

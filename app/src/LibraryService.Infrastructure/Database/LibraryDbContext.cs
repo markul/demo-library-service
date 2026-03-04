@@ -16,6 +16,8 @@ public class LibraryDbContext : DbContext
 
     public DbSet<Client> Clients => Set<Client>();
 
+    public DbSet<ClientAddress> ClientAddresses => Set<ClientAddress>();
+
     public DbSet<SubscriptionType> SubscriptionTypes => Set<SubscriptionType>();
 
     public DbSet<Subscription> Subscriptions => Set<Subscription>();
@@ -30,3 +32,4 @@ public class LibraryDbContext : DbContext
         base.OnModelCreating(modelBuilder);
     }
 }
+
