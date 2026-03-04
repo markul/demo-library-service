@@ -63,6 +63,49 @@ flowchart TB;
 
 ---
 
+## Кейсы сравнения
+
+<div class="case-catalog">
+  <div class="case-catalog-item">
+    <div class="case-catalog-name">1. Структура проекта</div>
+    <div class="case-catalog-value">Показывает, насколько агент понимает архитектуру, границы слоев и может быстро построить корректную ментальную модель системы.</div>
+  </div>
+  <div class="case-catalog-item">
+    <div class="case-catalog-name">2. Сборка проекта</div>
+    <div class="case-catalog-value">Проверяет базовую самостоятельность агента: запустить инструменты, корректно интерпретировать результат и не ломать рабочее окружение.</div>
+  </div>
+  <div class="case-catalog-item">
+    <div class="case-catalog-name">3. Переименование метода</div>
+    <div class="case-catalog-value">Показывает аккуратность точечных refactoring-изменений, работу с зависимостями и дисциплину при валидации результата.</div>
+  </div>
+  <div class="case-catalog-item">
+    <div class="case-catalog-name">4. Реализация AAA в тестах</div>
+    <div class="case-catalog-value">Проверяет качество работы с тестовым кодом, понимание структуры тестов и склонность агента исправлять, а не удалять проверку.</div>
+  </div>
+  <div class="case-catalog-item">
+  <div class="case-catalog-name">5. Добавление эндпоинта Status</div>
+    <div class="case-catalog-value">Оценивает способность реализовать полный API-изменение: код, контракты, документацию и согласованность по слоям.</div>
+  </div>
+  <div class="case-catalog-item">
+    <div class="case-catalog-name">6. Добавление логики для эндпоинта Status</div>
+    <div class="case-catalog-value">Показывает, умеет ли агент держать архитектурные правила и выносить бизнес-логику в Application вместо контроллеров.</div>
+  </div>
+  <div class="case-catalog-item">
+    <div class="case-catalog-name">7. Добавление новой сущности ClientAddress и эндпоинта</div>
+    <div class="case-catalog-value">Проверяет работу на более широком vertical slice: доменная модель, persistence, API, миграции, тесты и связность изменений.</div>
+  </div>
+  <div class="case-catalog-item">
+    <div class="case-catalog-name">8. Работа над задачей из Jira</div>
+    <div class="case-catalog-value">Оценивает способность агента работать с внешними требованиями, извлекать контекст из Atlassian и превращать его в план и реализацию.</div>
+  </div>
+  <div class="case-catalog-item">
+    <div class="case-catalog-name">9. Анализ уязвимостей</div>
+    <div class="case-catalog-value">Показывает глубину инженерного мышления агента вне code generation: поиск рисков, приоритизация и практичность предлагаемых исправлений.</div>
+  </div>
+</div>
+
+---
+
 <h2 class="slide-title-center">Структура проекта</h2>
 
 <div class="case-info">
@@ -231,7 +274,7 @@ flowchart TB;
 
 ---
 
-<h2 class="slide-title-center">Добление эндпоинта Status</h2>
+<h2 class="slide-title-center">Добавление эндпоинта Status</h2>
 
 <div class="case-info">
   <div><strong>Команда:</strong> <code>add status endpoint that returns GetStatusResponseDto object with fields { IsActtive }</code></div>
@@ -483,7 +526,7 @@ flowchart TB;
       <td class="status-no-data">Нет данных</td>
     </tr>
     <tr>
-      <td>Добление эндпоинта Status</td>
+      <td>Добавление эндпоинта Status</td>
       <td class="status-success">Успешно</td>
       <td class="status-partial">Частично</td>
       <td class="status-partial">Частично</td>
