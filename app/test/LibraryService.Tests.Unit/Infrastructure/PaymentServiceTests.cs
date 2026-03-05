@@ -10,6 +10,7 @@ public class PaymentServiceTests
     [Fact]
     public async Task GetAllAsync_ShouldReturnPayments_WhenClientReturnsData()
     {
+        // Arrange
         var expected = new List<PaymentDto>
         {
             new()
@@ -30,8 +31,10 @@ public class PaymentServiceTests
 
         var service = new LibraryService.Infrastructure.Services.PaymentService(client.Object);
 
+        // Act
         var result = await service.GetAllAsync(CancellationToken.None);
 
+        // Assert
         result.Should().BeSameAs(expected);
         client.Verify(x => x.GetAllAsync(It.IsAny<CancellationToken>()), Times.Once);
     }
@@ -39,6 +42,7 @@ public class PaymentServiceTests
     [Fact]
     public async Task GetByIdAsync_ShouldReturnPayment_WhenClientReturnsData()
     {
+        // Arrange
         var id = Guid.NewGuid();
         var expected = new PaymentDto
         {
@@ -57,8 +61,10 @@ public class PaymentServiceTests
 
         var service = new LibraryService.Infrastructure.Services.PaymentService(client.Object);
 
+        // Act
         var result = await service.GetByIdAsync(id, CancellationToken.None);
 
+        // Assert
         result.Should().BeSameAs(expected);
         client.Verify(x => x.GetByIdAsync(id, It.IsAny<CancellationToken>()), Times.Once);
     }
@@ -66,6 +72,7 @@ public class PaymentServiceTests
     [Fact]
     public async Task CreateAsync_ShouldDelegateToClient_WhenRequestIsProvided()
     {
+        // Arrange
         var request = new CreatePaymentRequest
         {
             ClientId = "new-client",
@@ -91,8 +98,10 @@ public class PaymentServiceTests
 
         var service = new LibraryService.Infrastructure.Services.PaymentService(client.Object);
 
+        // Act
         var result = await service.CreateAsync(request, CancellationToken.None);
 
+        // Assert
         result.Should().BeSameAs(expected);
         client.Verify(x => x.CreateAsync(request, It.IsAny<CancellationToken>()), Times.Once);
     }
