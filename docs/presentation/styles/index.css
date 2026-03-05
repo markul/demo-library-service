@@ -278,7 +278,7 @@ body,
 
 .slidev-layout table.test-case:not(.summary-matrix) tbody tr,
 .slidev-page table.test-case:not(.summary-matrix) tbody tr {
-  height: calc((100% - 2rem) / 5);
+  height: calc((100% - 2rem) / 6);
 }
 
 h2.slide-title-center {
@@ -453,7 +453,7 @@ h2.slide-title-center {
 }
 
 table.summary-matrix {
-  font-size: 0.62rem;
+  font-size: 0.56rem;
   line-height: 1.12;
   width: 100%;
   height: calc(100% - 3.6rem);
@@ -477,7 +477,7 @@ table.summary-matrix tbody tr {
 
 table.summary-matrix td:first-child,
 table.summary-matrix th:first-child {
-  width: 30%;
+  width: 27%;
   white-space: normal;
   overflow-wrap: anywhere;
   word-break: normal;
@@ -485,16 +485,18 @@ table.summary-matrix th:first-child {
 }
 
 table.summary-matrix td:not(:first-child) {
-  white-space: nowrap;
+  white-space: normal;
+  overflow-wrap: anywhere;
+  line-height: 1.05;
 }
 
 table.summary-matrix th:not(:first-child) {
   white-space: normal;
   overflow-wrap: anywhere;
   word-break: normal;
-  line-height: 1.08;
+  line-height: 1.03;
   text-align: center;
-  font-size: 0.55rem;
+  font-size: 0.48rem;
 }
 
 .slidev-layout table.test-case.summary-matrix td.status-success,
@@ -509,6 +511,6 @@ table.summary-matrix th:not(:first-child) {
 .slidev-page table.test-case.summary-matrix td.status-partial-negative,
 .slidev-page table.test-case.summary-matrix td.status-negative,
 .slidev-page table.test-case.summary-matrix td.status-no-data {
-  font-size: 0.56rem;
+  font-size: 0.5rem;
   text-align: center !important;
 }

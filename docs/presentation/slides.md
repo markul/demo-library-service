@@ -23,6 +23,7 @@ layout: cover
 - Alfaget Copilot Qwen3 Coder 30b
 - Alfaget Copilot Qwen3 Coder Next
 - Kilo Qwen3 Coder Next
+- Kilo GLM 5
 - QA automation agent
 
 ---
@@ -142,8 +143,13 @@ flowchart TB;
     </tr>
     <tr>
       <td>Kilo-Qwen3-Coder-Next</td>
-      <td class="status-no-data">Нет данных</td>
-      <td>Нет ветки <code>kilo-qwen3-coder-next/project-structure</code> в истории сравнения.</td>
+      <td class="status-success">Успешно</td>
+      <td>агент предоставил качественное описание структуры проекта.</td>
+    </tr>
+    <tr>
+      <td>Kilo-GLM-5</td>
+      <td class="status-success">Успешно</td>
+      <td>агент предоставил качественное описание структуры проекта.</td>
     </tr>
     <tr>
       <td>Qa Automation Agent</td>
@@ -193,6 +199,11 @@ flowchart TB;
       <td>агент успешно выполнил сборку проекта.</td>
     </tr>
     <tr>
+      <td>Kilo-GLM-5</td>
+      <td class="status-success">Успешно</td>
+      <td>агент выполнил сборку проекта и вывел предупреждения.</td>
+    </tr>
+    <tr>
       <td>Qa Automation Agent</td>
       <td class="status-negative">Отрицательно</td>
       <td class="long-comment">агент сообщил, что не может выполнять shell-команды, предложил только альтернативные шаги и не выполнил сборку.</td>
@@ -238,6 +249,11 @@ flowchart TB;
       <td>Kilo-Qwen3-Coder-Next</td>
       <td class="status-success">Успешно</td>
       <td>агент переименовал метод и проверил сборку; тесты не запускались.</td>
+    </tr>
+    <tr>
+      <td>Kilo-GLM-5</td>
+      <td class="status-success">Успешно</td>
+      <td>агент переименовал метод, выполнил сборку проекта и запустил тесты.</td>
     </tr>
     <tr>
       <td>Qa Automation Agent</td>
@@ -287,6 +303,11 @@ flowchart TB;
       <td>агент обновил тесты, запустил их и получил успешный результат.</td>
     </tr>
     <tr>
+      <td>Kilo-GLM-5</td>
+      <td class="status-success">Успешно</td>
+      <td>агент добавил комментарии в тестах, собрал решение и запустил тесты.</td>
+    </tr>
+    <tr>
       <td>Qa Automation Agent</td>
       <td class="status-negative">Отрицательно</td>
       <td class="long-comment">агент понял требование и предложил план, но не реализовал изменения; пытался убедить, что все тесты уже обновлены.</td>
@@ -332,6 +353,11 @@ flowchart TB;
       <td>Kilo-Qwen3-Coder-Next</td>
       <td class="status-passed-partial">Успешно/Частично</td>
       <td>агент добавил эндпоинт и API-документацию, но тесты не были добавлены с первой попытки.</td>
+    </tr>
+    <tr>
+      <td>Kilo-GLM-5</td>
+      <td class="status-partial">Частично</td>
+      <td>агент добавил эндпоинт, но не добавил тесты и документацию.</td>
     </tr>
     <tr>
       <td>Qa Automation Agent</td>
@@ -381,6 +407,11 @@ flowchart TB;
       <td>агент добавил логику и создал сервис вместо MediatR; API-документация и тесты не обновлены.</td>
     </tr>
     <tr>
+      <td>Kilo-GLM-5</td>
+      <td class="status-passed-partial">Успешно/Частично</td>
+      <td>агент обновил эндпоинт Status и использовал MediatR, но не добавил тесты и не обновил документацию.</td>
+    </tr>
+    <tr>
       <td>Qa Automation Agent</td>
       <td class="status-no-data">Нет данных</td>
       <td>Нет ветки <code>qa-automation-agent/add-status-endpoint-base/add-business-logic</code> в истории сравнения.</td>
@@ -426,6 +457,11 @@ flowchart TB;
       <td>Kilo-Qwen3-Coder-Next</td>
       <td class="status-passed-partial">Успешно/Частично</td>
       <td class="long-comment">агент добавил сущность, репозиторий и обновил базу данных, следовал правилам по миграциям, но не добавил тесты и зациклился на ошибках при попытке их добавить.</td>
+    </tr>
+    <tr>
+      <td>Kilo-GLM-5</td>
+      <td class="status-partial-negative">Частично/Отрицательно</td>
+      <td>агент создал сущность, репозиторий и новый эндпоинт, но не добавил миграции, тесты и API-документацию.</td>
     </tr>
     <tr>
       <td>Qa Automation Agent</td>
@@ -475,6 +511,11 @@ flowchart TB;
       <td>агент смог получить данные из Jira и Confluence, но неверно понял требования.</td>
     </tr>
     <tr>
+      <td>Kilo-GLM-5</td>
+      <td class="status-negative">Отрицательно</td>
+      <td>агент смог получить данные из Jira и подготовил подробный план, но неверно понял требования.</td>
+    </tr>
+    <tr>
       <td>Qa Automation Agent</td>
       <td class="status-no-data">Нет данных</td>
       <td>Нет ветки <code>qa-automation-agent/implement-jira-issue</code> в истории сравнения.</td>
@@ -522,6 +563,11 @@ flowchart TB;
       <td>агент подготовил детальный отчет об уязвимостях в коде.</td>
     </tr>
     <tr>
+      <td>Kilo-GLM-5</td>
+      <td class="status-success">Успешно</td>
+      <td>агент подготовил подробный отчет об уязвимостях и рекомендации по исправлению.</td>
+    </tr>
+    <tr>
       <td>Qa Automation Agent</td>
       <td class="status-success">Успешно</td>
       <td>агент смог найти уязвимости, но несколько раз неожиданно прекращал работу.</td>
@@ -541,6 +587,7 @@ flowchart TB;
       <th>Qwen3 Coder 30b</th>
       <th>Qwen3 Coder Next</th>
       <th>Kilo Qwen3 Coder Next</th>
+      <th>Kilo GLM 5</th>
       <th>QA Automation Agent</th>
     </tr>
   </thead>
@@ -550,7 +597,8 @@ flowchart TB;
       <td class="status-success">Успешно</td>
       <td class="status-success">Успешно</td>
       <td class="status-success">Успешно</td>
-      <td class="status-no-data">Нет данных</td>
+      <td class="status-success">Успешно</td>
+      <td class="status-success">Успешно</td>
       <td class="status-partial">Частично</td>
     </tr>
     <tr>
@@ -558,6 +606,7 @@ flowchart TB;
       <td class="status-success">Успешно</td>
       <td class="status-partial">Частично</td>
       <td class="status-partial">Частично</td>
+      <td class="status-success">Успешно</td>
       <td class="status-success">Успешно</td>
       <td class="status-negative">Отрицательно</td>
     </tr>
@@ -567,6 +616,7 @@ flowchart TB;
       <td class="status-success">Успешно</td>
       <td class="status-partial">Частично</td>
       <td class="status-success">Успешно</td>
+      <td class="status-success">Успешно</td>
       <td class="status-partial-negative">Частично/Отрицательно</td>
     </tr>
     <tr>
@@ -574,6 +624,7 @@ flowchart TB;
       <td class="status-success">Успешно</td>
       <td class="status-negative">Отрицательно</td>
       <td class="status-negative">Отрицательно</td>
+      <td class="status-success">Успешно</td>
       <td class="status-success">Успешно</td>
       <td class="status-negative">Отрицательно</td>
     </tr>
@@ -583,6 +634,7 @@ flowchart TB;
       <td class="status-partial">Частично</td>
       <td class="status-partial">Частично</td>
       <td class="status-passed-partial">Успешно/Частично</td>
+      <td class="status-partial">Частично</td>
       <td class="status-partial-negative">Частично/Отрицательно</td>
     </tr>
     <tr>
@@ -591,6 +643,7 @@ flowchart TB;
       <td class="status-partial">Частично</td>
       <td class="status-partial">Частично</td>
       <td class="status-partial">Частично</td>
+      <td class="status-passed-partial">Успешно/Частично</td>
       <td class="status-no-data">Нет данных</td>
     </tr>
     <tr>
@@ -599,6 +652,7 @@ flowchart TB;
       <td class="status-partial">Частично</td>
       <td class="status-partial">Частично</td>
       <td class="status-passed-partial">Успешно/Частично</td>
+      <td class="status-partial-negative">Частично/Отрицательно</td>
       <td class="status-no-data">Нет данных</td>
     </tr>
     <tr>
@@ -607,10 +661,12 @@ flowchart TB;
       <td class="status-negative">Отрицательно</td>
       <td class="status-negative">Отрицательно</td>
       <td class="status-negative">Отрицательно</td>
+      <td class="status-negative">Отрицательно</td>
       <td class="status-no-data">Нет данных</td>
     </tr>
     <tr>
       <td>Анализ уязвимостей</td>
+      <td class="status-success">Успешно</td>
       <td class="status-success">Успешно</td>
       <td class="status-success">Успешно</td>
       <td class="status-success">Успешно</td>
