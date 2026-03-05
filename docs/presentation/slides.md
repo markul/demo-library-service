@@ -22,6 +22,7 @@ layout: cover
 - ChatGPT Codex
 - Alfaget Copilot Qwen3 Coder 30b
 - Alfaget Copilot Qwen3 Coder Next
+- Kilo Qwen3 Coder Next
 - QA automation agent
 
 ---
@@ -140,6 +141,11 @@ flowchart TB;
       <td>дан подробный ответ, покрывающий основные аспекты проекта.</td>
     </tr>
     <tr>
+      <td>Kilo-Qwen3-Coder-Next</td>
+      <td class="status-no-data">Нет данных</td>
+      <td>Нет ветки <code>kilo-qwen3-coder-next/project-structure</code> в истории сравнения.</td>
+    </tr>
+    <tr>
       <td>Qa Automation Agent</td>
       <td class="status-partial">Частично</td>
       <td>агент смог описать репозиторий, но работал нестабильно и испытывал проблемы с подключением.</td>
@@ -180,6 +186,11 @@ flowchart TB;
       <td>Qwen3-Coder-Next</td>
       <td class="status-partial">Частично</td>
       <td>сборка завершилась успешно, но запуск терминального инструмента требовал ручного подтверждения.</td>
+    </tr>
+    <tr>
+      <td>Kilo-Qwen3-Coder-Next</td>
+      <td class="status-success">Успешно</td>
+      <td>агент успешно выполнил сборку проекта.</td>
     </tr>
     <tr>
       <td>Qa Automation Agent</td>
@@ -224,6 +235,11 @@ flowchart TB;
       <td class="long-comment">По предоставленному блоку <code>CASE RESULTS</code>: метод был переименован, сборка и тесты прошли, но потребовалось 10-15 ручных подтверждений для запуска терминальных инструментов. Агент несколько раз удалял несвязанный код, затем обнаружил ошибку и откатил изменения.</td>
     </tr>
     <tr>
+      <td>Kilo-Qwen3-Coder-Next</td>
+      <td class="status-success">Успешно</td>
+      <td>агент переименовал метод и проверил сборку; тесты не запускались.</td>
+    </tr>
+    <tr>
       <td>Qa Automation Agent</td>
       <td class="status-partial-negative">Частично/Отрицательно</td>
       <td class="long-comment">агент понял задачу и сделал часть изменений, но не довел до конца; заявлял о прохождении тестов с некорректными данными, каждое изменение требовало ручного подтверждения.</td>
@@ -264,6 +280,11 @@ flowchart TB;
       <td>Qwen3-Coder-Next</td>
       <td class="status-negative">Отрицательно</td>
       <td>агент удалял тесты, чтобы добиться успешного результата, и в итоге завершился с ошибкой.</td>
+    </tr>
+    <tr>
+      <td>Kilo-Qwen3-Coder-Next</td>
+      <td class="status-success">Успешно</td>
+      <td>агент обновил тесты, запустил их и получил успешный результат.</td>
     </tr>
     <tr>
       <td>Qa Automation Agent</td>
@@ -308,6 +329,11 @@ flowchart TB;
       <td>эндпоинт и документация добавлены, сборка прошла, но потребовались повторные попытки и ручные подтверждения.</td>
     </tr>
     <tr>
+      <td>Kilo-Qwen3-Coder-Next</td>
+      <td class="status-passed-partial">Успешно/Частично</td>
+      <td>агент добавил эндпоинт и API-документацию, но тесты не были добавлены с первой попытки.</td>
+    </tr>
+    <tr>
       <td>Qa Automation Agent</td>
       <td class="status-partial-negative">Частично/Отрицательно</td>
       <td>агент внес нужные изменения, но не справился с проблемами кодировки.</td>
@@ -348,6 +374,11 @@ flowchart TB;
       <td>Qwen3-Coder-Next</td>
       <td class="status-partial">Частично</td>
       <td>существующий обработчик был обновлен, но тесты и документация не были доведены до конца.</td>
+    </tr>
+    <tr>
+      <td>Kilo-Qwen3-Coder-Next</td>
+      <td class="status-partial">Частично</td>
+      <td>агент добавил логику и создал сервис вместо MediatR; API-документация и тесты не обновлены.</td>
     </tr>
     <tr>
       <td>Qa Automation Agent</td>
@@ -392,6 +423,11 @@ flowchart TB;
       <td>основная часть работы была выполнена, но на финальном шаге агент завис и завершился с ошибкой.</td>
     </tr>
     <tr>
+      <td>Kilo-Qwen3-Coder-Next</td>
+      <td class="status-passed-partial">Успешно/Частично</td>
+      <td class="long-comment">агент добавил сущность, репозиторий и обновил базу данных, следовал правилам по миграциям, но не добавил тесты и зациклился на ошибках при попытке их добавить.</td>
+    </tr>
+    <tr>
       <td>Qa Automation Agent</td>
       <td class="status-no-data">Нет данных</td>
       <td>Нет ветки <code>qa-automation-agent/add-client-address-entity</code> в истории сравнения.</td>
@@ -432,6 +468,11 @@ flowchart TB;
       <td>Qwen3-Coder-Next</td>
       <td class="status-negative">Отрицательно</td>
       <td>данные из Jira и Confluence были получены, но план остался неясным, а требования были интерпретированы неверно.</td>
+    </tr>
+    <tr>
+      <td>Kilo-Qwen3-Coder-Next</td>
+      <td class="status-negative">Отрицательно</td>
+      <td>агент смог получить данные из Jira и Confluence, но неверно понял требования.</td>
     </tr>
     <tr>
       <td>Qa Automation Agent</td>
@@ -476,6 +517,11 @@ flowchart TB;
       <td>сформированы применимые рекомендации по безопасности с конкретными исправлениями.</td>
     </tr>
     <tr>
+      <td>Kilo-Qwen3-Coder-Next</td>
+      <td class="status-success">Успешно</td>
+      <td>агент подготовил детальный отчет об уязвимостях в коде.</td>
+    </tr>
+    <tr>
       <td>Qa Automation Agent</td>
       <td class="status-success">Успешно</td>
       <td>агент смог найти уязвимости, но несколько раз неожиданно прекращал работу.</td>
@@ -494,6 +540,7 @@ flowchart TB;
       <th>ChatGPT Codex</th>
       <th>Qwen3 Coder 30b</th>
       <th>Qwen3 Coder Next</th>
+      <th>Kilo Qwen3 Coder Next</th>
       <th>QA Automation Agent</th>
     </tr>
   </thead>
@@ -503,6 +550,7 @@ flowchart TB;
       <td class="status-success">Успешно</td>
       <td class="status-success">Успешно</td>
       <td class="status-success">Успешно</td>
+      <td class="status-no-data">Нет данных</td>
       <td class="status-partial">Частично</td>
     </tr>
     <tr>
@@ -510,6 +558,7 @@ flowchart TB;
       <td class="status-success">Успешно</td>
       <td class="status-partial">Частично</td>
       <td class="status-partial">Частично</td>
+      <td class="status-success">Успешно</td>
       <td class="status-negative">Отрицательно</td>
     </tr>
     <tr>
@@ -517,6 +566,7 @@ flowchart TB;
       <td class="status-success">Успешно</td>
       <td class="status-success">Успешно</td>
       <td class="status-partial">Частично</td>
+      <td class="status-success">Успешно</td>
       <td class="status-partial-negative">Частично/Отрицательно</td>
     </tr>
     <tr>
@@ -524,6 +574,7 @@ flowchart TB;
       <td class="status-success">Успешно</td>
       <td class="status-negative">Отрицательно</td>
       <td class="status-negative">Отрицательно</td>
+      <td class="status-success">Успешно</td>
       <td class="status-negative">Отрицательно</td>
     </tr>
     <tr>
@@ -531,11 +582,13 @@ flowchart TB;
       <td class="status-success">Успешно</td>
       <td class="status-partial">Частично</td>
       <td class="status-partial">Частично</td>
+      <td class="status-passed-partial">Успешно/Частично</td>
       <td class="status-partial-negative">Частично/Отрицательно</td>
     </tr>
     <tr>
       <td>Добавление логики для эндпоинта Status</td>
       <td class="status-success">Успешно</td>
+      <td class="status-partial">Частично</td>
       <td class="status-partial">Частично</td>
       <td class="status-partial">Частично</td>
       <td class="status-no-data">Нет данных</td>
@@ -545,6 +598,7 @@ flowchart TB;
       <td class="status-success">Успешно</td>
       <td class="status-partial">Частично</td>
       <td class="status-partial">Частично</td>
+      <td class="status-passed-partial">Успешно/Частично</td>
       <td class="status-no-data">Нет данных</td>
     </tr>
     <tr>
@@ -552,10 +606,12 @@ flowchart TB;
       <td class="status-success">Успешно</td>
       <td class="status-negative">Отрицательно</td>
       <td class="status-negative">Отрицательно</td>
+      <td class="status-negative">Отрицательно</td>
       <td class="status-no-data">Нет данных</td>
     </tr>
     <tr>
       <td>Анализ уязвимостей</td>
+      <td class="status-success">Успешно</td>
       <td class="status-success">Успешно</td>
       <td class="status-success">Успешно</td>
       <td class="status-success">Успешно</td>
