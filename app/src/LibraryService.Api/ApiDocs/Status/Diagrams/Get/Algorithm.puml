@@ -1,0 +1,6 @@
+@startuml
+skin rose
+start
+:Return 200 OK with status;
+stop
+@enduml

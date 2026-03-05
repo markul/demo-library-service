@@ -3,6 +3,7 @@ using LibraryService.Application.Books;
 using LibraryService.Application.Clients;
 using LibraryService.Application.Ebooks;
 using LibraryService.Application.Journals;
+using LibraryService.Application.Status;
 using LibraryService.Tests.Integration.Infrastructure;
 using System.Net;
 using System.Net.Http.Json;
@@ -157,5 +158,16 @@ public class LibraryControllersIntegrationTests : IClassFixture<LibraryApiFactor
         getResponse.StatusCode.Should().Be(HttpStatusCode.OK);
         fetched.Should().NotBeNull();
         fetched!.Id.Should().Be(created.Id);
+    }
+
+    [Fact]
+    public async Task GetStatus_ShouldReturnActive()
+    {
+        var response = await _client.GetAsync("/api/status");
+        var body = await response.Content.ReadFromJsonAsync<GetStatusResponseDto>();
+
+        response.StatusCode.Should().Be(HttpStatusCode.OK);
+        body.Should().NotBeNull();
+        body!.IsActive.Should().BeTrue();
     }
 }
