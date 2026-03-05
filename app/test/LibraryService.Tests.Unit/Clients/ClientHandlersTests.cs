@@ -12,6 +12,7 @@ public class ClientHandlersTests
     [Fact]
     public async Task CreateClientCommand_ShouldCreateClientAndReturnDto()
     {
+        // Arrange
         var repository = new Mock<IClientRepository>();
         repository
             .Setup(x => x.AddAsync(It.IsAny<Client>(), It.IsAny<CancellationToken>()))
