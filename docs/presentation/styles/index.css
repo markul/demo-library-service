@@ -377,17 +377,45 @@ body,
 table.summary-matrix {
   font-size: 0.68rem;
   line-height: 1.12;
+  width: 100%;
+  height: calc(100% - 3.6rem);
+  min-height: 26rem;
+  table-layout: fixed;
 }
 
 table.summary-matrix th,
 table.summary-matrix td {
   padding: 0.32rem 0.42rem !important;
+  vertical-align: middle;
+}
+
+table.summary-matrix thead tr {
+  height: 2.35rem;
+}
+
+table.summary-matrix tbody tr {
+  height: calc((100% - 2.35rem) / 9);
 }
 
 table.summary-matrix td:first-child,
 table.summary-matrix th:first-child {
+  width: 35%;
+  white-space: normal;
+  overflow-wrap: anywhere;
+  word-break: normal;
+  line-height: 1.18;
+}
+
+table.summary-matrix td:not(:first-child) {
   white-space: nowrap;
-  width: 26%;
+}
+
+table.summary-matrix th:not(:first-child) {
+  white-space: normal;
+  overflow-wrap: anywhere;
+  word-break: normal;
+  line-height: 1.08;
+  text-align: center;
 }
 
 .slidev-layout table.test-case.summary-matrix td.status-success,
