@@ -51,7 +51,7 @@ public class EbookCatalogService : IEbookCatalogService
         return books.Select(Map).ToArray();
     }
 
-    public async Task<IReadOnlyCollection<EbookCatalogItemDto>> FindBooksByNameAsync(
+    public async Task<IReadOnlyCollection<EbookCatalogItemDto>> FindBooksAsync(
         string name,
         CancellationToken cancellationToken = default)
     {

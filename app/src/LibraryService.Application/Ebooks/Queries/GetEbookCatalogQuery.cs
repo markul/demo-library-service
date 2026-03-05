@@ -24,6 +24,6 @@ public sealed class GetEbookCatalogByNameQueryHandler(IEbookCatalogService ebook
         GetEbookCatalogByNameQuery request,
         CancellationToken cancellationToken)
     {
-        return ebookCatalogService.FindBooksByNameAsync(request.Name, cancellationToken);
+        return ebookCatalogService.FindBooksAsync(request.Name, cancellationToken);
     }
 }
