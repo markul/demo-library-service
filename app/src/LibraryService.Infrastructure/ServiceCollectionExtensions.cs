@@ -26,6 +26,7 @@ public static class ServiceCollectionExtensions
         services.AddScoped<ISubscriptionRepository, SubscriptionRepository>();
         services.AddScoped<ISubscriptionTypeRepository, SubscriptionTypeRepository>();
         services.AddScoped<IPaymentRepository, PaymentRepository>();
+        services.AddScoped<IClientAddressRepository, ClientAddressRepository>();
         services.AddHttpClient<IPaymentServiceClient, PaymentServiceClient>((_, client) =>
         {
             var baseUrl = configuration["PaymentService:BaseUrl"] ?? "http://localhost:8082/";

@@ -24,6 +24,8 @@ public class LibraryDbContext : DbContext
 
     public DbSet<Payment> Payments => Set<Payment>();
 
+    public DbSet<ClientAddress> ClientAddresses => Set<ClientAddress>();
+
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         modelBuilder.ApplyConfigurationsFromAssembly(typeof(LibraryDbContext).Assembly);
