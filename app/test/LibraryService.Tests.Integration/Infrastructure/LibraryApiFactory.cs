@@ -6,7 +6,10 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc.Testing;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Storage;
-using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.DependencyInjection.Extensions;
+using System.Linq;
+using System.Collections.Generic;
+using System.Threading;
 using Microsoft.Extensions.DependencyInjection.Extensions;
 
 namespace LibraryService.Tests.Integration.Infrastructure;
@@ -100,7 +103,7 @@ public class LibraryApiFactory : WebApplicationFactory<Program>
         dbContext.SaveChanges();
     }
 
-    private sealed class FakeEbookCatalogService : IEbookCatalogService
+private sealed class FakeEbookCatalogService : IEbookCatalogService
     {
         private static readonly IReadOnlyCollection<EbookCatalogItemDto> Books =
         [
@@ -112,6 +115,7 @@ public class LibraryApiFactory : WebApplicationFactory<Program>
         public Task<IReadOnlyCollection<EbookCatalogItemDto>> GetBooksAsync(CancellationToken cancellationToken = default) =>
             Task.FromResult(Books);
 
+        // Existing method kept for backward compatibility (if any callers use it)
         public Task<IReadOnlyCollection<EbookCatalogItemDto>> FindBooksByNameAsync(
             string name,
             CancellationToken cancellationToken = default)
@@ -121,6 +125,15 @@ public class LibraryApiFactory : WebApplicationFactory<Program>
                 .ToArray();
 
             return Task.FromResult<IReadOnlyCollection<EbookCatalogItemDto>>(books);
+        }
+
+        // Implementation of the method required by IEbookCatalogService
+        public Task<IReadOnlyCollection<EbookCatalogItemDto>> FindBooksAsync(
+            string name,
+            CancellationToken cancellationToken = default)
+        {
+            // Reuse the existing FindBooksByNameAsync logic to satisfy the contract.
+            return FindBooksByNameAsync(name, cancellationToken);
         }
     }
 }
