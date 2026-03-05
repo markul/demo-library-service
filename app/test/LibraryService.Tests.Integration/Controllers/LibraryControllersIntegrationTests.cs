@@ -158,4 +158,40 @@ public class LibraryControllersIntegrationTests : IClassFixture<LibraryApiFactor
         fetched.Should().NotBeNull();
         fetched!.Id.Should().Be(created.Id);
     }
+
+    [Fact]
+    public async Task PostClientAddress_ShouldCreateAndReturnAddress()
+    {
+        // First create a client to associate the address with
+        var clientRequest = new CreateClientRequest("David", "Wilson", "david.wilson@example.com");
+        var postClientResponse = await _client.PostAsJsonAsync("/api/clients", clientRequest);
+        var createdClient = await postClientResponse.Content.ReadFromJsonAsync<ClientDto>();
+
+        postClientResponse.StatusCode.Should().Be(HttpStatusCode.Created);
+        createdClient.Should().NotBeNull();
+        createdClient!.Id.Should().NotBe(Guid.Empty);
+
+        // Now add an address for the client
+        var addressRequest = new CreateClientAddressRequest("New York", "USA", "123 Main St", "10001");
+
+        var postAddressResponse = await _client.PostAsJsonAsync($"/api/clients/{createdClient.Id}/addresses", addressRequest);
+        var createdAddress = await postAddressResponse.Content.ReadFromJsonAsync<ClientAddressDto>();
+
+        postAddressResponse.StatusCode.Should().Be(HttpStatusCode.Created);
+        createdAddress.Should().NotBeNull();
+        createdAddress!.Id.Should().NotBe(Guid.Empty);
+        createdAddress.City.Should().Be(addressRequest.City);
+        createdAddress.Country.Should().Be(addressRequest.Country);
+        createdAddress.Address.Should().Be(addressRequest.Address);
+        createdAddress.PostalCode.Should().Be(addressRequest.PostalCode);
+        createdAddress.ClientId.Should().Be(createdClient.Id);
+
+        // Verify we can retrieve the address
+        var getAddressResponse = await _client.GetAsync($"/api/clients/{createdClient.Id}/addresses/{createdAddress.Id}");
+        var fetchedAddress = await getAddressResponse.Content.ReadFromJsonAsync<ClientAddressDto>();
+
+        getAddressResponse.StatusCode.Should().Be(HttpStatusCode.OK);
+        fetchedAddress.Should().NotBeNull();
+        fetchedAddress!.Id.Should().Be(createdAddress.Id);
+    }
 }

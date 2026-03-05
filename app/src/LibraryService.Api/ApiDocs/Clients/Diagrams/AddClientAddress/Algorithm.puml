@@ -1,0 +1,21 @@
+﻿@startuml
+title Add Client Address Algorithm
+
+actor Client
+participant "Controller" as Controller
+participant "Mediator" as Mediator
+participant "Handler" as Handler
+participant "Repository" as Repository
+database DB
+
+Client -> Controller: POST /api/clients/{id}/addresses
+Controller -> Mediator: Send(CreateClientAddressCommand)
+Mediator -> Handler: Handle command
+Handler -> Repository: AddAsync(entity)
+Repository -> DB: INSERT client_address
+DB --> Repository: Returns created entity
+Repository --> Handler: ClientAddress
+Handler --> Mediator: ClientAddressDto
+Mediator --> Controller: ClientAddressDto
+Controller --> Client: 201 Created
+@enduml

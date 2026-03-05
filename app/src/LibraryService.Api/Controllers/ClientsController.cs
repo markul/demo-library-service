@@ -39,6 +39,14 @@ public class ClientsController : ControllerBase
         return CreatedAtAction(nameof(GetById), new { id = created.Id }, created);
     }
 
+    [HttpPost("{id:guid}/addresses")]
+    public async Task<ActionResult<ClientAddressDto>> AddAddress(Guid id, CreateClientAddressRequest request, CancellationToken cancellationToken)
+    {
+        var command = new CreateClientAddressCommand(id, request.City, request.Country, request.Address, request.PostalCode);
+        var created = await _mediator.Send(command, cancellationToken);
+        return CreatedAtAction(nameof(GetById), new { id = created.Id }, created);
+    }
+
     [HttpPut("{id:guid}")]
     public async Task<IActionResult> Update(Guid id, UpdateClientRequest request, CancellationToken cancellationToken)
     {
