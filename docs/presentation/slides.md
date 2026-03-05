@@ -183,8 +183,8 @@ flowchart TB;
     </tr>
     <tr>
       <td>Qa Automation Agent</td>
-      <td class="status-no-data">Нет данных</td>
-      <td>Нет ветки <code>qa-automation-agent/build</code> в истории сравнения.</td>
+      <td class="status-negative">Отрицательно</td>
+      <td class="long-comment">агент сообщил, что не может выполнять shell-команды, предложил только альтернативные шаги и не выполнил сборку.</td>
     </tr>
   </tbody>
 </table>
@@ -225,8 +225,8 @@ flowchart TB;
     </tr>
     <tr>
       <td>Qa Automation Agent</td>
-      <td class="status-no-data">Нет данных</td>
-      <td>В ветке есть файл <code>Response</code>, но в нем отсутствует блок <code>CASE RESULTS</code>.</td>
+      <td class="status-partial-negative">Частично/Отрицательно</td>
+      <td class="long-comment">агент понял задачу и сделал часть изменений, но не довел до конца; заявлял о прохождении тестов с некорректными данными, каждое изменение требовало ручного подтверждения.</td>
     </tr>
   </tbody>
 </table>
@@ -267,8 +267,8 @@ flowchart TB;
     </tr>
     <tr>
       <td>Qa Automation Agent</td>
-      <td class="status-no-data">Нет данных</td>
-      <td>В ветке есть файл <code>Response</code>, но в нем отсутствует блок <code>CASE RESULTS</code>.</td>
+      <td class="status-negative">Отрицательно</td>
+      <td class="long-comment">агент понял требование и предложил план, но не реализовал изменения; пытался убедить, что все тесты уже обновлены.</td>
     </tr>
   </tbody>
 </table>
@@ -309,8 +309,8 @@ flowchart TB;
     </tr>
     <tr>
       <td>Qa Automation Agent</td>
-      <td class="status-no-data">Нет данных</td>
-      <td>В ветке есть файл <code>Response</code>, но в нем отсутствует блок <code>CASE RESULTS</code>.</td>
+      <td class="status-partial-negative">Частично/Отрицательно</td>
+      <td>агент внес нужные изменения, но не справился с проблемами кодировки.</td>
     </tr>
   </tbody>
 </table>
@@ -510,28 +510,28 @@ flowchart TB;
       <td class="status-success">Успешно</td>
       <td class="status-partial">Частично</td>
       <td class="status-partial">Частично</td>
-      <td class="status-no-data">Нет данных</td>
+      <td class="status-negative">Отрицательно</td>
     </tr>
     <tr>
       <td>Переименование метода</td>
       <td class="status-success">Успешно</td>
       <td class="status-success">Успешно</td>
       <td class="status-partial">Частично</td>
-      <td class="status-no-data">Нет данных</td>
+      <td class="status-partial-negative">Частично/Отрицательно</td>
     </tr>
     <tr>
       <td>Реализация AAA в тестах</td>
       <td class="status-success">Успешно</td>
       <td class="status-negative">Отрицательно</td>
       <td class="status-negative">Отрицательно</td>
-      <td class="status-no-data">Нет данных</td>
+      <td class="status-negative">Отрицательно</td>
     </tr>
     <tr>
       <td>Добавление эндпоинта Status</td>
       <td class="status-success">Успешно</td>
       <td class="status-partial">Частично</td>
       <td class="status-partial">Частично</td>
-      <td class="status-no-data">Нет данных</td>
+      <td class="status-partial-negative">Частично/Отрицательно</td>
     </tr>
     <tr>
       <td>Добавление логики для эндпоинта Status</td>
