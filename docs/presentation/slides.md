@@ -10,6 +10,7 @@ drawings:
 transition: slide-left
 mdc: true
 colorSchema: light
+showSlideNumber: all
 ---
 
 ---
@@ -140,8 +141,8 @@ flowchart TB;
     </tr>
     <tr>
       <td>Qa Automation Agent</td>
-      <td class="status-no-data">Нет данных</td>
-      <td>Ветка есть, но файл <code>Response.md</code> отсутствует.</td>
+      <td class="status-partial">Частично</td>
+      <td>агент смог описать репозиторий, но работал нестабильно и испытывал проблемы с подключением.</td>
     </tr>
   </tbody>
 </table>
@@ -225,7 +226,7 @@ flowchart TB;
     <tr>
       <td>Qa Automation Agent</td>
       <td class="status-no-data">Нет данных</td>
-      <td>Ветка есть, но файл <code>Response.md</code> отсутствует.</td>
+      <td>В ветке есть файл <code>Response</code>, но в нем отсутствует блок <code>CASE RESULTS</code>.</td>
     </tr>
   </tbody>
 </table>
@@ -267,7 +268,7 @@ flowchart TB;
     <tr>
       <td>Qa Automation Agent</td>
       <td class="status-no-data">Нет данных</td>
-      <td>Ветка есть, но файл <code>Response.md</code> отсутствует.</td>
+      <td>В ветке есть файл <code>Response</code>, но в нем отсутствует блок <code>CASE RESULTS</code>.</td>
     </tr>
   </tbody>
 </table>
@@ -309,7 +310,7 @@ flowchart TB;
     <tr>
       <td>Qa Automation Agent</td>
       <td class="status-no-data">Нет данных</td>
-      <td>Ветка есть, но файл <code>Response.md</code> отсутствует.</td>
+      <td>В ветке есть файл <code>Response</code>, но в нем отсутствует блок <code>CASE RESULTS</code>.</td>
     </tr>
   </tbody>
 </table>
@@ -476,8 +477,8 @@ flowchart TB;
     </tr>
     <tr>
       <td>Qa Automation Agent</td>
-      <td class="status-no-data">Нет данных</td>
-      <td>Ветка есть, но файл <code>Response.md</code> отсутствует.</td>
+      <td class="status-success">Успешно</td>
+      <td>агент смог найти уязвимости, но несколько раз неожиданно прекращал работу.</td>
     </tr>
   </tbody>
 </table>
@@ -502,7 +503,7 @@ flowchart TB;
       <td class="status-success">Успешно</td>
       <td class="status-success">Успешно</td>
       <td class="status-success">Успешно</td>
-      <td class="status-no-data">Нет данных</td>
+      <td class="status-partial">Частично</td>
     </tr>
     <tr>
       <td>Сборка проекта</td>
@@ -558,7 +559,7 @@ flowchart TB;
       <td class="status-success">Успешно</td>
       <td class="status-success">Успешно</td>
       <td class="status-success">Успешно</td>
-      <td class="status-no-data">Нет данных</td>
+      <td class="status-success">Успешно</td>
     </tr>
   </tbody>
 </table>
