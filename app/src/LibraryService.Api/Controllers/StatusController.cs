@@ -1,4 +1,6 @@
 ﻿using LibraryService.Application.Status;
+using LibraryService.Application.Status.Queries;
+using MediatR;
 using Microsoft.AspNetCore.Mvc;
 
 namespace LibraryService.Api.Controllers;
@@ -7,9 +9,17 @@ namespace LibraryService.Api.Controllers;
 [Route("api/status")]
 public class StatusController : ControllerBase
 {
-    [HttpGet]
-    public ActionResult<GetStatusResponseDto> Get()
+    private readonly IMediator _mediator;
+
+    public StatusController(IMediator mediator)
     {
-        return Ok(new GetStatusResponseDto(IsActive: true));
+        _mediator = mediator;
+    }
+
+    [HttpGet]
+    public async Task<ActionResult<GetStatusResponseDto>> Get(CancellationToken cancellationToken)
+    {
+        var result = await _mediator.Send(new GetStatusQuery(), cancellationToken);
+        return Ok(result);
     }
 }
