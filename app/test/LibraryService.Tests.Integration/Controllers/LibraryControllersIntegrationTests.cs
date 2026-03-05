@@ -22,9 +22,14 @@ public class LibraryControllersIntegrationTests : IClassFixture<LibraryApiFactor
     [Fact]
     public async Task GetBooks_ShouldReturnSeededData()
     {
+        // Arrange
+        // Factory seeds data in constructor
+
+        // Act
         var response = await _client.GetAsync("/api/books");
         var body = await response.Content.ReadFromJsonAsync<IReadOnlyCollection<BookDto>>();
 
+        // Assert
         response.StatusCode.Should().Be(HttpStatusCode.OK);
         body.Should().NotBeNull();
         body.Should().HaveCount(2);
@@ -34,9 +39,14 @@ public class LibraryControllersIntegrationTests : IClassFixture<LibraryApiFactor
     [Fact]
     public async Task GetEbooks_ShouldReturnAllEbookCatalogItems()
     {
+        // Arrange
+        // Factory seeds data in constructor
+
+        // Act
         var response = await _client.GetAsync("/api/ebooks");
         var body = await response.Content.ReadFromJsonAsync<IReadOnlyCollection<EbookCatalogItemDto>>();
 
+        // Assert
         response.StatusCode.Should().Be(HttpStatusCode.OK);
         body.Should().NotBeNull();
         body.Should().HaveCount(3);
@@ -45,9 +55,14 @@ public class LibraryControllersIntegrationTests : IClassFixture<LibraryApiFactor
     [Fact]
     public async Task SearchEbooksByName_ShouldReturnMatchingItems()
     {
+        // Arrange
+        // Factory seeds data in constructor
+
+        // Act
         var response = await _client.GetAsync("/api/ebooks/search?name=Hobbit");
         var body = await response.Content.ReadFromJsonAsync<IReadOnlyCollection<EbookCatalogItemDto>>();
 
+        // Assert
         response.StatusCode.Should().Be(HttpStatusCode.OK);
         body.Should().NotBeNull();
         body.Should().HaveCount(1);
@@ -57,9 +72,14 @@ public class LibraryControllersIntegrationTests : IClassFixture<LibraryApiFactor
     [Fact]
     public async Task SearchEbooksByName_ShouldReturnBadRequest_WhenNameIsMissing()
     {
+        // Arrange
+        // Factory seeds data in constructor
+
+        // Act
         var response = await _client.GetAsync("/api/ebooks/search");
         var body = await response.Content.ReadAsStringAsync();
 
+        // Assert
         response.StatusCode.Should().Be(HttpStatusCode.BadRequest);
         body.Should().Contain("name");
     }
@@ -67,9 +87,14 @@ public class LibraryControllersIntegrationTests : IClassFixture<LibraryApiFactor
     [Fact]
     public async Task GetJournals_ShouldReturnSeededData()
     {
+        // Arrange
+        // Factory seeds data in constructor
+
+        // Act
         var response = await _client.GetAsync("/api/journals");
         var body = await response.Content.ReadFromJsonAsync<IReadOnlyCollection<JournalDto>>();
 
+        // Assert
         response.StatusCode.Should().Be(HttpStatusCode.OK);
         body.Should().NotBeNull();
         body.Should().HaveCount(2);
@@ -79,9 +104,14 @@ public class LibraryControllersIntegrationTests : IClassFixture<LibraryApiFactor
     [Fact]
     public async Task GetClients_ShouldReturnSeededData()
     {
+        // Arrange
+        // Factory seeds data in constructor
+
+        // Act
         var response = await _client.GetAsync("/api/clients");
         var body = await response.Content.ReadFromJsonAsync<IReadOnlyCollection<ClientDto>>();
 
+        // Assert
         response.StatusCode.Should().Be(HttpStatusCode.OK);
         body.Should().NotBeNull();
         body.Should().HaveCount(2);
@@ -91,11 +121,14 @@ public class LibraryControllersIntegrationTests : IClassFixture<LibraryApiFactor
     [Fact]
     public async Task PostBook_ShouldCreateAndReturnBook()
     {
+        // Arrange
         var request = new CreateBookRequest("The Pragmatic Programmer", "Andrew Hunt", 1999, "978-0201616224");
 
+        // Act
         var postResponse = await _client.PostAsJsonAsync("/api/books", request);
         var created = await postResponse.Content.ReadFromJsonAsync<BookDto>();
 
+        // Assert
         postResponse.StatusCode.Should().Be(HttpStatusCode.Created);
         created.Should().NotBeNull();
         created!.Id.Should().NotBe(Guid.Empty);
@@ -115,11 +148,14 @@ public class LibraryControllersIntegrationTests : IClassFixture<LibraryApiFactor
     [Fact]
     public async Task PostJournal_ShouldCreateAndReturnJournal()
     {
+        // Arrange
         var request = new CreateJournalRequest("Nature", 15, 2026, "Springer");
 
+        // Act
         var postResponse = await _client.PostAsJsonAsync("/api/journals", request);
         var created = await postResponse.Content.ReadFromJsonAsync<JournalDto>();
 
+        // Assert
         postResponse.StatusCode.Should().Be(HttpStatusCode.Created);
         created.Should().NotBeNull();
         created!.Id.Should().NotBe(Guid.Empty);
@@ -139,11 +175,14 @@ public class LibraryControllersIntegrationTests : IClassFixture<LibraryApiFactor
     [Fact]
     public async Task PostClient_ShouldCreateAndReturnClient()
     {
+        // Arrange
         var request = new CreateClientRequest("Charlie", "Brown", "charlie.brown@example.com");
 
+        // Act
         var postResponse = await _client.PostAsJsonAsync("/api/clients", request);
         var created = await postResponse.Content.ReadFromJsonAsync<ClientDto>();
 
+        // Assert
         postResponse.StatusCode.Should().Be(HttpStatusCode.Created);
         created.Should().NotBeNull();
         created!.Id.Should().NotBe(Guid.Empty);
