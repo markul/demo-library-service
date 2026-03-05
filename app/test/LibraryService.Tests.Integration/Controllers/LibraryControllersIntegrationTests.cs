@@ -161,13 +161,13 @@ public class LibraryControllersIntegrationTests : IClassFixture<LibraryApiFactor
     }
 
     [Fact]
-    public async Task GetStatus_ShouldReturnActive()
+    public async Task GetStatus_ShouldReturnInactive_WhenNoActiveSubscriptions()
     {
         var response = await _client.GetAsync("/api/status");
         var body = await response.Content.ReadFromJsonAsync<GetStatusResponseDto>();
 
         response.StatusCode.Should().Be(HttpStatusCode.OK);
         body.Should().NotBeNull();
-        body!.IsActive.Should().BeTrue();
+        body!.IsActive.Should().BeFalse();
     }
 }

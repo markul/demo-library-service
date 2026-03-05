@@ -7,9 +7,17 @@ namespace LibraryService.Api.Controllers;
 [Route("api/status")]
 public class StatusController : ControllerBase
 {
-    [HttpGet]
-    public ActionResult<GetStatusResponseDto> Get()
+    private readonly StatusService _statusService;
+
+    public StatusController(StatusService statusService)
     {
-        return Ok(new GetStatusResponseDto(IsActive: true));
+        _statusService = statusService;
+    }
+
+    [HttpGet]
+    public async Task<ActionResult<GetStatusResponseDto>> Get(CancellationToken cancellationToken)
+    {
+        var status = await _statusService.GetStatusAsync(cancellationToken);
+        return Ok(status);
     }
 }
