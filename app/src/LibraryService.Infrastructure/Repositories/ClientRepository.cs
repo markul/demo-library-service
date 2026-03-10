@@ -54,4 +54,9 @@ public class ClientRepository : IClientRepository
         _dbContext.Clients.Remove(entity);
         return await _dbContext.SaveChangesAsync(cancellationToken) > 0;
     }
+
+    public Task<bool> ExistsAsync(Guid id, CancellationToken cancellationToken)
+    {
+        return _dbContext.Clients.AnyAsync(x => x.Id == id, cancellationToken);
+    }
 }

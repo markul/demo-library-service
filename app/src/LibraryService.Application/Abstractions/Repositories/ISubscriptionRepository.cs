@@ -17,4 +17,8 @@ public interface ISubscriptionRepository
     Task<bool> AllClientsExistAsync(IReadOnlyCollection<Guid> clientIds, CancellationToken cancellationToken);
 
     Task<bool> SubscriptionTypeExistsAsync(Guid subscriptionTypeId, CancellationToken cancellationToken);
+
+    Task<bool> ClientExistsAsync(Guid clientId, CancellationToken cancellationToken);
+
+    Task<Subscription?> GetByIdWithPaymentsAsync(Guid id, CancellationToken cancellationToken);
 }

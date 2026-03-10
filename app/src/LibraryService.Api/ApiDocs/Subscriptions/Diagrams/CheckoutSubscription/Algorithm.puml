@@ -1,0 +1,27 @@
+@startuml CheckoutSubscription
+start
+:Receive checkout request;
+:Check idempotency key;
+if (Payment exists with key?) then (yes)
+  :Return existing subscription\nand payment status;
+  stop
+else (no)
+endif
+:Validate client exists;
+if (Client found?) then (no)
+  :Return 404 Not Found;
+  stop
+else (yes)
+endif
+:Validate subscription type exists;
+if (Type found?) then (no)
+  :Return 404 Not Found;
+  stop
+else (yes)
+endif
+:Create subscription (inactive);
+:Create payment (Processing);
+:Save to database;
+:Return subscription ID\nand payment status;
+stop
+@enduml

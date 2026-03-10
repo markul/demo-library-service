@@ -13,4 +13,6 @@ public interface IClientRepository
     Task<bool> UpdateAsync(Client entity, CancellationToken cancellationToken);
 
     Task<bool> DeleteAsync(Guid id, CancellationToken cancellationToken);
+
+    Task<bool> ExistsAsync(Guid id, CancellationToken cancellationToken);
 }

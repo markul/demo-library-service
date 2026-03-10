@@ -49,6 +49,24 @@ public class SubscriptionsController : ControllerBase
         return CreatedAtAction(nameof(GetById), new { id = created.Id }, created);
     }
 
+    [HttpPost("checkout")]
+    public async Task<ActionResult<SubscriptionCheckoutResult>> Checkout(
+        SubscriptionCheckoutRequest request,
+        CancellationToken cancellationToken)
+    {
+        var command = new SubscriptionCheckoutCommand(
+            request.SubscriptionTypeId,
+            request.ClientId,
+            request.IdempotencyKey);
+        var result = await _mediator.Send(command, cancellationToken);
+        if (result is null)
+        {
+            return NotFound("Client or subscription type not found.");
+        }
+
+        return Ok(result);
+    }
+
     [HttpPut("{id:guid}")]
     public async Task<IActionResult> Update(Guid id, UpdateSubscriptionRequest request, CancellationToken cancellationToken)
     {
