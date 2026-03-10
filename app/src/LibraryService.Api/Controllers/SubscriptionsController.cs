@@ -104,4 +104,21 @@ public class SubscriptionsController : ControllerBase
         var deleted = await _mediator.Send(new DeleteSubscriptionTypeCommand(id), cancellationToken);
         return deleted ? NoContent() : NotFound();
     }
+
+    [HttpPost("checkout")]
+    public async Task<ActionResult<SubscriptionCheckoutResult>> Checkout(
+        CheckoutSubscriptionRequest request,
+        CancellationToken cancellationToken)
+    {
+        var command = new CheckoutSubscriptionCommand(
+            request.SubscriptionTypeId,
+            request.ClientId,
+            request.IdempotencyKey);
+        var result = await _mediator.Send(command, cancellationToken);
+        if (result is null)
+        {
+            return NotFound("Subscription type or client was not found.");
+        }
+        return Ok(result);
+    }
 }

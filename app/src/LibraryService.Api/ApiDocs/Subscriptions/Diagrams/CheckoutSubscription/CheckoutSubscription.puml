@@ -1,0 +1,52 @@
+@startuml
+title Checkout Subscription Sequence Diagram
+
+actor Client
+participant "SubscriptionsController" as ctrl
+participant "CheckoutSubscriptionCommandHandler" as handler
+participant "ISubscriptionRepository" as subRepo
+participant "IPaymentRepository" as payRepo
+participant "PaymentService" as ps
+
+Client -> ctrl: POST /api/subscriptions/checkout
+ctrl -> handler: CheckoutSubscriptionCommand
+handler -> subRepo: ClientExistsAsync(clientId)
+subRepo --> handler: true/false
+alt Client Not Found
+    handler --> ctrl: null
+    ctrl --> Client: 404 Not Found
+else Client Found
+    handler -> subRepo: SubscriptionTypeExistsAsync(subscriptionTypeId)
+    subRepo --> handler: true/false
+    alt Type Not Found
+        handler --> ctrl: null
+        ctrl --> Client: 404 Not Found
+    else Type Found
+        handler -> handler: Create Subscription entity
+        handler -> subRepo: AddAsync(subscription, clientIds)
+        subRepo --> handler: Created Subscription
+        handler -> handler: Get subscription type (for price)
+        handler -> handler: Create Payment entity
+        handler -> payRepo: AddAsync(payment)
+        payRepo --> handler: Created Payment
+        handler -> ps: ProcessPayment(amount, idempotencyKey)
+        ps --> handler: PaymentStatus
+        alt Payment Paid
+            handler -> handler: Set subscription.IsActive = true
+            handler -> subRepo: UpdateAsync(subscription)
+            handler -> handler: Set payment.Status = Paid
+            handler -> payRepo: UpdateAsync(payment)
+            handler --> ctrl: SubscriptionCheckoutResult (Paid)
+            ctrl --> Client: 200 OK
+        alt Payment Failed
+            handler -> handler: Set payment.Status = Failed
+            handler -> payRepo: UpdateAsync(payment)
+            handler --> ctrl: SubscriptionCheckoutResult (Failed)
+            ctrl --> Client: 200 OK
+        alt Payment Processing
+            handler --> ctrl: SubscriptionCheckoutResult (Processing)
+            ctrl --> Client: 200 OK
+        end
+    end
+end
+@enduml

@@ -73,6 +73,12 @@ public class SubscriptionRepository : ISubscriptionRepository
         return await _dbContext.SaveChangesAsync(cancellationToken) > 0;
     }
 
+    public async Task<bool> UpdateAsync(Subscription entity, CancellationToken cancellationToken)
+    {
+        _dbContext.Subscriptions.Update(entity);
+        return await _dbContext.SaveChangesAsync(cancellationToken) > 0;
+    }
+
     public async Task<bool> DeleteAsync(Guid id, CancellationToken cancellationToken)
     {
         var entity = await _dbContext.Subscriptions.FirstOrDefaultAsync(x => x.Id == id, cancellationToken);
@@ -113,6 +119,11 @@ public class SubscriptionRepository : ISubscriptionRepository
     public Task<bool> SubscriptionTypeExistsAsync(Guid subscriptionTypeId, CancellationToken cancellationToken)
     {
         return _dbContext.SubscriptionTypes.AnyAsync(x => x.Id == subscriptionTypeId, cancellationToken);
+    }
+
+    public Task<bool> ClientExistsAsync(Guid clientId, CancellationToken cancellationToken)
+    {
+        return _dbContext.Clients.AnyAsync(x => x.Id == clientId, cancellationToken);
     }
 
     private Task<Subscription?> LoadByIdAsync(Guid id, CancellationToken cancellationToken)

@@ -12,9 +12,13 @@ public interface ISubscriptionRepository
 
     Task<bool> UpdateAsync(Subscription entity, IReadOnlyCollection<Guid> clientIds, CancellationToken cancellationToken);
 
+    Task<bool> UpdateAsync(Subscription entity, CancellationToken cancellationToken);
+
     Task<bool> DeleteAsync(Guid id, CancellationToken cancellationToken);
 
     Task<bool> AllClientsExistAsync(IReadOnlyCollection<Guid> clientIds, CancellationToken cancellationToken);
+
+    Task<bool> ClientExistsAsync(Guid clientId, CancellationToken cancellationToken);
 
     Task<bool> SubscriptionTypeExistsAsync(Guid subscriptionTypeId, CancellationToken cancellationToken);
 }
