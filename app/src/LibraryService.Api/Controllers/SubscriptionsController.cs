@@ -104,4 +104,38 @@ public class SubscriptionsController : ControllerBase
         var deleted = await _mediator.Send(new DeleteSubscriptionTypeCommand(id), cancellationToken);
         return deleted ? NoContent() : NotFound();
     }
+
+    [HttpPost("checkout")]
+    public async Task<IActionResult> Checkout(CheckoutSubscriptionRequest request, CancellationToken cancellationToken)
+    {
+        var command = new CheckoutSubscriptionCommand(
+            request.ClientId,
+            request.SubscriptionTypeId,
+            request.IdempotencyKey);
+        var result = await _mediator.Send(command, cancellationToken);
+
+        if (result.Response is null)
+        {
+            return result.Outcome switch
+            {
+                CheckoutSubscriptionOutcome.NotFound => NotFound("Client or subscription type was not found."),
+                CheckoutSubscriptionOutcome.Conflict => Conflict("Idempotency key is already used with a different request payload."),
+                _ => StatusCode(StatusCodes.Status500InternalServerError),
+            };
+        }
+
+        return result.Outcome switch
+        {
+            CheckoutSubscriptionOutcome.Created => CreatedAtAction(
+                nameof(GetById),
+                new { id = result.Response.SubscriptionId },
+                result.Response),
+            CheckoutSubscriptionOutcome.Ok => Ok(result.Response),
+            CheckoutSubscriptionOutcome.Accepted => Accepted(result.Response),
+            CheckoutSubscriptionOutcome.PaymentRequired => StatusCode(
+                StatusCodes.Status402PaymentRequired,
+                result.Response),
+            _ => StatusCode(StatusCodes.Status500InternalServerError),
+        };
+    }
 }

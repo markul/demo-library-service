@@ -26,6 +26,7 @@ public static class ServiceCollectionExtensions
         services.AddScoped<ISubscriptionRepository, SubscriptionRepository>();
         services.AddScoped<ISubscriptionTypeRepository, SubscriptionTypeRepository>();
         services.AddScoped<IPaymentRepository, PaymentRepository>();
+        services.AddScoped<ISubscriptionCheckoutRepository, SubscriptionCheckoutRepository>();
         services.AddHttpClient<IPaymentServiceClient, PaymentServiceClient>((_, client) =>
         {
             var baseUrl = configuration["PaymentService:BaseUrl"] ?? "http://localhost:8082/";
@@ -39,6 +40,7 @@ public static class ServiceCollectionExtensions
             return new EbookContainer(serviceRoot);
         });
         services.AddScoped<IPaymentService, Services.PaymentService>();
+        services.AddScoped<ISubscriptionCheckoutPaymentGateway, SubscriptionCheckoutPaymentGateway>();
         services.AddScoped<IEbookCatalogService, EbookCatalogService>();
 
         return services;

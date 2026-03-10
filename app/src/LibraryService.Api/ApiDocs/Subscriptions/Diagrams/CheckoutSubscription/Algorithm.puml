@@ -1,0 +1,34 @@
+@startuml
+start
+:Find payment by idempotencyKey;
+if (Already exists?) then (yes)
+  if (Payload matches?) then (yes)
+    :Return result by existing payment status;
+  else (no)
+    :Return 409 Conflict;
+  endif
+  stop
+endif
+
+:Validate client and subscription type;
+if (Missing data?) then (yes)
+  :Return 404 Not Found;
+  stop
+endif
+
+:Calculate final price;
+:Create subscription + processing payment;
+:Send payment to external service;
+
+if (Accepted?) then (yes)
+  :Set payment Paid;\nSet subscription active;
+  :Return 201 Created;
+elseif (Rejected?) then (yes)
+  :Set payment Failed;
+  :Return 402 Payment Required;
+else (error/timeout)
+  :Keep payment Processing;\nKeep subscription inactive;
+  :Return 202 Accepted;
+endif
+stop
+@enduml

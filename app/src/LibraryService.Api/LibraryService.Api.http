@@ -61,6 +61,17 @@ Content-Type: application/json
 
 ###
 
+POST {{LibraryService.Api_HostAddress}}/api/subscriptions/checkout
+Content-Type: application/json
+
+{
+  "clientId": "00000000-0000-0000-0000-000000000000",
+  "subscriptionTypeId": "00000000-0000-0000-0000-000000000000",
+  "idempotencyKey": "checkout-10001"
+}
+
+###
+
 GET {{LibraryService.Api_HostAddress}}/api/payments
 Accept: application/json
 

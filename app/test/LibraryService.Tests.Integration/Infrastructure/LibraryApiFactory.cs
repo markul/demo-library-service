@@ -13,6 +13,11 @@ namespace LibraryService.Tests.Integration.Infrastructure;
 
 public class LibraryApiFactory : WebApplicationFactory<Program>
 {
+    public static readonly Guid AliceClientId = Guid.Parse("11111111-1111-1111-1111-111111111111");
+    public static readonly Guid BobClientId = Guid.Parse("22222222-2222-2222-2222-222222222222");
+    public static readonly Guid StandardSubscriptionTypeId = Guid.Parse("aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa");
+    public static readonly Guid PremiumSubscriptionTypeId = Guid.Parse("bbbbbbbb-bbbb-bbbb-bbbb-bbbbbbbbbbbb");
+
     private readonly InMemoryDatabaseRoot _databaseRoot = new();
     private readonly string _databaseName = $"library-tests-{Guid.NewGuid()}";
 
@@ -23,10 +28,12 @@ public class LibraryApiFactory : WebApplicationFactory<Program>
             services.RemoveAll(typeof(DbContextOptions<LibraryDbContext>));
             services.RemoveAll(typeof(LibraryDbContext));
             services.RemoveAll<IEbookCatalogService>();
+            services.RemoveAll<ISubscriptionCheckoutPaymentGateway>();
 
             services.AddDbContext<LibraryDbContext>(options =>
                 options.UseInMemoryDatabase(_databaseName, _databaseRoot));
             services.AddScoped<IEbookCatalogService, FakeEbookCatalogService>();
+            services.AddScoped<ISubscriptionCheckoutPaymentGateway, FakeSubscriptionCheckoutPaymentGateway>();
         });
     }
 
@@ -82,7 +89,7 @@ public class LibraryApiFactory : WebApplicationFactory<Program>
         dbContext.Clients.AddRange(
             new Client
             {
-                Id = Guid.NewGuid(),
+                Id = AliceClientId,
                 FirstName = "Alice",
                 LastName = "Johnson",
                 Email = "alice.johnson@example.com",
@@ -90,11 +97,27 @@ public class LibraryApiFactory : WebApplicationFactory<Program>
             },
             new Client
             {
-                Id = Guid.NewGuid(),
+                Id = BobClientId,
                 FirstName = "Bob",
                 LastName = "Miller",
                 Email = "bob.miller@example.com",
                 RegisteredAtUtc = now.AddDays(-1),
+            });
+
+        dbContext.SubscriptionTypes.AddRange(
+            new SubscriptionType
+            {
+                Id = StandardSubscriptionTypeId,
+                Name = "Standard",
+                Period = 30,
+                Price = 9.99m,
+            },
+            new SubscriptionType
+            {
+                Id = PremiumSubscriptionTypeId,
+                Name = "Premium",
+                Period = 30,
+                Price = 99.99m,
             });
 
         dbContext.SaveChanges();
@@ -121,6 +144,32 @@ public class LibraryApiFactory : WebApplicationFactory<Program>
                 .ToArray();
 
             return Task.FromResult<IReadOnlyCollection<EbookCatalogItemDto>>(books);
+        }
+    }
+
+    private sealed class FakeSubscriptionCheckoutPaymentGateway : ISubscriptionCheckoutPaymentGateway
+    {
+        public Task<SubscriptionCheckoutPaymentResult> CreatePaymentAsync(
+            SubscriptionCheckoutPaymentRequest request,
+            CancellationToken cancellationToken)
+        {
+            if (request.IdempotencyKey.Contains("reject", StringComparison.OrdinalIgnoreCase))
+            {
+                return Task.FromResult(new SubscriptionCheckoutPaymentResult(
+                    SubscriptionCheckoutPaymentStatus.Rejected,
+                    $"ext-{request.IdempotencyKey}"));
+            }
+
+            if (request.IdempotencyKey.Contains("error", StringComparison.OrdinalIgnoreCase))
+            {
+                return Task.FromResult(new SubscriptionCheckoutPaymentResult(
+                    SubscriptionCheckoutPaymentStatus.TechnicalFailure,
+                    null));
+            }
+
+            return Task.FromResult(new SubscriptionCheckoutPaymentResult(
+                SubscriptionCheckoutPaymentStatus.Accepted,
+                $"ext-{request.IdempotencyKey}"));
         }
     }
 }
