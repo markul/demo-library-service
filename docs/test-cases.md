@@ -7,5 +7,6 @@
 | 5 | `{agent}/add-status-endpoint` | Добавление эндпоинта Status | `add status endpoint that returns GetStatusResponseDto object with fields { IsActtive }` |
 | 6 | `{agent}/add-status-endpoint-base/add-business-logic` | Добавление логики для эндпоинта Status | `IsActive  in status response should be true when there are active subscriptions` |
 | 7 | `{agent}/add-client-address-entity` | Добавление новой сущности ClientAddress и эндпоинта | `add a new entity ClientAddress {Id, ClientId, City, Country, Address, PostalCode} and a new endpoint to add it` |
-| 8 | `{agent}/implement-jira-issue` | Работа над задачей из Jira | `get jira ISSUE DEMO-18 and create implementation plan` |
-| 9 | `{agent}/vulnerabilities` | Анализ уязвимостей | `analyze vulnerabilities, propose a fix` |
+| 8 | `{agent}/implement-jira-issue` | Работа над простой задачей из Jira | `get jira ISSUE DEMO-18 and create implementation plan` |
+| 9 | `{agent}/plan-and-implement-complex-jira-issue` | Работа над сложной задачей из Jira | `Get jira issue DEMO-19, create implementation plan` |
+| 10 | `{agent}/vulnerabilities` | Анализ уязвимостей | `analyze vulnerabilities, propose a fix` |

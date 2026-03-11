@@ -98,11 +98,15 @@ flowchart TB;
     <div class="case-catalog-value">Проверяет работу на более широком vertical slice: доменная модель, persistence, API, миграции, тесты и связность изменений.</div>
   </div>
   <div class="case-catalog-item">
-    <div class="case-catalog-name">8. Работа над задачей из Jira</div>
+    <div class="case-catalog-name">8. Работа над простой задачей из Jira</div>
     <div class="case-catalog-value">Оценивает способность агента работать с внешними требованиями, извлекать контекст из Atlassian и превращать его в план и реализацию.</div>
   </div>
   <div class="case-catalog-item">
-    <div class="case-catalog-name">9. Анализ уязвимостей</div>
+    <div class="case-catalog-name">9. Работа над сложной задачей из Jira</div>
+    <div class="case-catalog-value">Показывает, как агент ведет многосоставную задачу: анализ требований, декомпозиция, реализация, интеграции и контроль технического качества результата.</div>
+  </div>
+  <div class="case-catalog-item">
+    <div class="case-catalog-name">10. Анализ уязвимостей</div>
     <div class="case-catalog-value">Показывает глубину инженерного мышления агента вне code generation: поиск рисков, приоритизация и практичность предлагаемых исправлений.</div>
   </div>
 </div>
@@ -473,7 +477,7 @@ flowchart TB;
 
 ---
 
-<h2 class="slide-title-center">Работа над задачей из Jira</h2>
+<h2 class="slide-title-center">Работа над простой задачей из Jira</h2>
 
 <div class="case-info">
   <div><strong>Команда:</strong> <code>get jira ISSUE DEMO-18 and create implementation plan</code></div>
@@ -512,13 +516,65 @@ flowchart TB;
     </tr>
     <tr>
       <td>Kilo-GLM-5</td>
-      <td class="status-negative">Отрицательно</td>
-      <td>агент смог получить данные из Jira и подготовил подробный план, но неверно понял требования.</td>
+      <td class="status-partial">Частично</td>
+      <td>по последней версии ветки <code>kilo-glm-5/implement-jira-issue-v2</code> агент понял задачу и реализовал код, но не обновил API-документацию и не добавил тесты.</td>
     </tr>
     <tr>
       <td>Qa Automation Agent</td>
       <td class="status-no-data">Нет данных</td>
       <td>Нет ветки <code>qa-automation-agent/implement-jira-issue</code> в истории сравнения.</td>
+    </tr>
+  </tbody>
+</table>
+
+---
+
+<h2 class="slide-title-center">Работа над сложной задачей из Jira</h2>
+
+<div class="case-info">
+  <div><strong>Команда:</strong> <code>Get jira issue DEMO-19, create implementation plan</code></div>
+  <div><strong>Ветка:</strong> <code>{agent}/plan-and-implement-complex-jira-issue</code></div>
+</div>
+<br>
+
+<table class="test-case">
+  <thead>
+    <tr>
+      <th>Агент</th>
+      <th>Результат</th>
+      <th>Комментарии</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Codex</td>
+      <td class="status-partial">Частично</td>
+      <td class="long-comment">по <code>codex-gpt5.3-medium/plan-and-implement-complex-jira-issue</code>: реализован большой объем изменений, но в <code>CASE RESULTS</code> отмечен статус <code>Partially</code> из-за незакрытых вопросов по требованиям и доработок по идемпотентности.</td>
+    </tr>
+    <tr>
+      <td>Qwen3-Coder-30b</td>
+      <td class="status-no-data">Нет данных</td>
+      <td>Нет ветки <code>qwen3-coder-30b/plan-and-implement-complex-jira-issue</code> в истории сравнения.</td>
+    </tr>
+    <tr>
+      <td>Qwen3-Coder-Next</td>
+      <td class="status-no-data">Нет данных</td>
+      <td>Нет ветки <code>qwen3-coder-next/plan-and-implement-complex-jira-issue</code> в истории сравнения.</td>
+    </tr>
+    <tr>
+      <td>Kilo-Qwen3-Coder-Next</td>
+      <td class="status-partial-negative">Частично/Отрицательно</td>
+      <td class="long-comment">по <code>kilo-qwen3-coder-next/plan-and-implement-complex-jira-issue</code>: план минимальный, реализация базовая, тесты отсутствуют, интеграция платежного сервиса имитируется, есть проблемы с идемпотентностью и расчетом цены.</td>
+    </tr>
+    <tr>
+      <td>Kilo-GLM-5</td>
+      <td class="status-partial">Частично</td>
+      <td class="long-comment">по последней версии <code>kilo-glm-5/plan-and-implement-complex-jira-issue-v2</code>: план и реализация созданы, но без тестов; документация эндпоинта не полностью соответствует коду, идемпотентность реализована минималистично.</td>
+    </tr>
+    <tr>
+      <td>Qa Automation Agent</td>
+      <td class="status-no-data">Нет данных</td>
+      <td>Нет ветки <code>qa-automation-agent/plan-and-implement-complex-jira-issue</code> в истории сравнения.</td>
     </tr>
   </tbody>
 </table>
@@ -656,12 +712,21 @@ flowchart TB;
       <td class="status-no-data">Нет данных</td>
     </tr>
     <tr>
-      <td>Работа над задачей из Jira</td>
+      <td>Работа над простой задачей из Jira</td>
       <td class="status-success">Успешно</td>
       <td class="status-negative">Отрицательно</td>
       <td class="status-negative">Отрицательно</td>
       <td class="status-negative">Отрицательно</td>
-      <td class="status-negative">Отрицательно</td>
+      <td class="status-partial">Частично</td>
+      <td class="status-no-data">Нет данных</td>
+    </tr>
+    <tr>
+      <td>Работа над сложной задачей из Jira</td>
+      <td class="status-partial">Частично</td>
+      <td class="status-no-data">Нет данных</td>
+      <td class="status-no-data">Нет данных</td>
+      <td class="status-partial-negative">Частично/Отрицательно</td>
+      <td class="status-partial">Частично</td>
       <td class="status-no-data">Нет данных</td>
     </tr>
     <tr>

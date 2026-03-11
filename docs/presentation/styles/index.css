@@ -239,7 +239,7 @@ body,
 
 .slidev-layout table.test-case td.status-no-data,
 .slidev-page table.test-case td.status-no-data {
-  background: rgba(148, 163, 184, 0.18) !important;
+  background: rgba(255, 255, 255, 0.96) !important;
   color: #475569 !important;
 }
 
@@ -472,7 +472,7 @@ table.summary-matrix thead tr {
 }
 
 table.summary-matrix tbody tr {
-  height: calc((100% - 2.35rem) / 9);
+  height: calc((100% - 2.35rem) / 10);
 }
 
 table.summary-matrix td:first-child,
