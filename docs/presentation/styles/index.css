@@ -109,6 +109,35 @@ body,
   line-height: 1;
 }
 
+.vm-slide .mermaid {
+  position: relative;
+  margin: 0.6rem auto 0;
+  padding: 1.15rem 0.95rem 0.85rem;
+  border: 2px solid rgba(71, 85, 105, 0.5);
+  border-radius: 14px;
+  background: rgba(255, 255, 255, 0.66);
+}
+
+.vm-slide .mermaid::before {
+  content: "VM";
+  position: absolute;
+  top: -0.72rem;
+  left: 0.9rem;
+  padding: 0.08rem 0.5rem;
+  border-radius: 999px;
+  border: 1px solid rgba(71, 85, 105, 0.45);
+  background: rgba(255, 255, 255, 0.96);
+  color: #334155;
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  line-height: 1.2;
+}
+
+.vm-slide .mermaid svg {
+  margin: 0 auto;
+}
+
 .project-tree {
   margin-top: 1.25rem;
   padding: 1.2rem 1.4rem;
@@ -465,6 +494,11 @@ table.summary-matrix th,
 table.summary-matrix td {
   padding: 0.24rem 0.3rem !important;
   vertical-align: middle;
+}
+
+.slidev-layout table.test-case.summary-matrix thead th,
+.slidev-page table.test-case.summary-matrix thead th {
+  text-align: center !important;
 }
 
 table.summary-matrix thead tr {

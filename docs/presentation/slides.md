@@ -11,24 +11,71 @@ transition: slide-left
 mdc: true
 colorSchema: light
 showSlideNumber: all
----
-
----
 layout: cover
 ---
 
-# Сравнение ИИ-агентов
+# Сравнение ИИ агентов
 
-- ChatGPT Codex
-- Alfaget Copilot Qwen3 Coder 30b
-- Alfaget Copilot Qwen3 Coder Next
-- Kilo Qwen3 Coder Next
-- Kilo GLM 5
-- QA automation agent
+**Автор:** Кульмухаметом М.М.
+
+**Команда:** УТК-2
 
 ---
 
-## Абстрактная типовая среда
+## Участники сравнения
+
+<table class="test-case">
+  <thead>
+    <tr>
+      <th>Агент</th>
+      <th>Информация</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>ChatGPT Codex</td>
+      <td>https://developers.openai.com/codex/quickstart/</td>
+    </tr>
+    <tr>
+      <td>Qwen3 Coder 30b - Alfagen Copilot</td>
+      <td rowspan="2">Инструкция по IDE-плагину для Пользователей https://confluence.moscow.alfaintra.net/pages/viewpage.action?pageId=2128941831</td>
+    </tr>
+    <tr>
+      <td>Qwen3 Coder Next - Alfagen Copilot</td>
+    </tr>
+    <tr>
+      <td>Qwen3 Coder Next - Kilo</td>
+      <td rowspan="2">Инструкция по установке Kilo Сode https://confluence.moscow.alfaintra.net/pages/viewpage.action?pageId=3153282540</td>
+    </tr>
+    <tr>
+      <td>GLM 5 - Kilo</td>
+    </tr>
+    <tr>
+      <td>QA automation agent</td>
+      <td>ИИ агент для генерации кода автотестов https://confluence.moscow.alfaintra.net/pages/viewpage.action?pageId=3043890467</td>
+    </tr>
+  </tbody>
+</table>
+<table>
+  <thead>
+    <tr>
+      <th>Исходники</th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Demo LibraryService</td>
+      <td>https://github.com/markul/demo-library-service</td>
+    </tr>
+  </tbody>
+</table>
+
+---
+class: text-center vm-slide
+---
+
+## Окружение
 <br>
 
 ```mermaid
@@ -38,6 +85,7 @@ flowchart TB;
   LS <--> DB["PostgreSQL DB"];
   LS <--> PAY["Payment Service"];
   LS <--> EBOOK["E-book Service (OData)"];
+  style LS fill:#86efac,stroke:#15803d,stroke-width:2px,color:#14532d;
 ```
 
 ---
@@ -133,7 +181,7 @@ flowchart TB;
     <tr>
       <td>Codex</td>
       <td class="status-success">Успешно</td>
-      <td>краткий, но содержательный обзор; в блоке <code>CASE RESULTS</code> указан статус <code>Passed</code>.</td>
+      <td>краткий, но содержательный обзор структуры проекта.</td>
     </tr>
     <tr>
       <td>Qwen3-Coder-30b</td>
@@ -247,7 +295,7 @@ flowchart TB;
     <tr>
       <td>Qwen3-Coder-Next</td>
       <td class="status-partial">Частично</td>
-      <td class="long-comment">По предоставленному блоку <code>CASE RESULTS</code>: метод был переименован, сборка и тесты прошли, но потребовалось 10-15 ручных подтверждений для запуска терминальных инструментов. Агент несколько раз удалял несвязанный код, затем обнаружил ошибку и откатил изменения.</td>
+      <td class="long-comment">метод был переименован, сборка и тесты прошли, но потребовалось 10-15 ручных подтверждений для запуска терминальных инструментов. Агент несколько раз удалял несвязанный код, затем обнаружил ошибку и откатил изменения.</td>
     </tr>
     <tr>
       <td>Kilo-Qwen3-Coder-Next</td>
@@ -418,7 +466,7 @@ flowchart TB;
     <tr>
       <td>Qa Automation Agent</td>
       <td class="status-no-data">Нет данных</td>
-      <td>Нет ветки <code>qa-automation-agent/add-status-endpoint-base/add-business-logic</code> в истории сравнения.</td>
+      <td>Нет данных по этому кейсу.</td>
     </tr>
   </tbody>
 </table>
@@ -470,7 +518,7 @@ flowchart TB;
     <tr>
       <td>Qa Automation Agent</td>
       <td class="status-no-data">Нет данных</td>
-      <td>Нет ветки <code>qa-automation-agent/add-client-address-entity</code> в истории сравнения.</td>
+      <td>Нет данных по этому кейсу.</td>
     </tr>
   </tbody>
 </table>
@@ -517,12 +565,12 @@ flowchart TB;
     <tr>
       <td>Kilo-GLM-5</td>
       <td class="status-partial">Частично</td>
-      <td>по последней версии ветки <code>kilo-glm-5/implement-jira-issue-v2</code> агент понял задачу и реализовал код, но не обновил API-документацию и не добавил тесты.</td>
+      <td>агент понял задачу и реализовал код, но не обновил API-документацию и не добавил тесты.</td>
     </tr>
     <tr>
       <td>Qa Automation Agent</td>
       <td class="status-no-data">Нет данных</td>
-      <td>Нет ветки <code>qa-automation-agent/implement-jira-issue</code> в истории сравнения.</td>
+      <td>Нет данных по этому кейсу.</td>
     </tr>
   </tbody>
 </table>
@@ -548,33 +596,33 @@ flowchart TB;
   <tbody>
     <tr>
       <td>Codex</td>
-      <td class="status-partial">Частично</td>
-      <td class="long-comment">по <code>codex-gpt5.3-medium/plan-and-implement-complex-jira-issue</code>: реализован большой объем изменений, но в <code>CASE RESULTS</code> отмечен статус <code>Partially</code> из-за незакрытых вопросов по требованиям и доработок по идемпотентности.</td>
+      <td class="status-success">Успешно</td>
+      <td class="long-comment">агент уточнил спорные требования по идемпотентности, кодам ответа и настройке валюты, после чего успешно реализовал задачу.</td>
     </tr>
     <tr>
       <td>Qwen3-Coder-30b</td>
       <td class="status-no-data">Нет данных</td>
-      <td>Нет ветки <code>qwen3-coder-30b/plan-and-implement-complex-jira-issue</code> в истории сравнения.</td>
+      <td>Нет данных по этому кейсу.</td>
     </tr>
     <tr>
       <td>Qwen3-Coder-Next</td>
       <td class="status-no-data">Нет данных</td>
-      <td>Нет ветки <code>qwen3-coder-next/plan-and-implement-complex-jira-issue</code> в истории сравнения.</td>
+      <td>Нет данных по этому кейсу.</td>
     </tr>
     <tr>
       <td>Kilo-Qwen3-Coder-Next</td>
       <td class="status-partial-negative">Частично/Отрицательно</td>
-      <td class="long-comment">по <code>kilo-qwen3-coder-next/plan-and-implement-complex-jira-issue</code>: план минимальный, реализация базовая, тесты отсутствуют, интеграция платежного сервиса имитируется, есть проблемы с идемпотентностью и расчетом цены.</td>
+      <td class="long-comment">план минимальный, реализация базовая, тесты отсутствуют, интеграция платежного сервиса имитируется, есть проблемы с идемпотентностью и расчетом цены.</td>
     </tr>
     <tr>
       <td>Kilo-GLM-5</td>
       <td class="status-partial">Частично</td>
-      <td class="long-comment">по последней версии <code>kilo-glm-5/plan-and-implement-complex-jira-issue-v2</code>: план и реализация созданы, но без тестов; документация эндпоинта не полностью соответствует коду, идемпотентность реализована минималистично.</td>
+      <td class="long-comment">план и реализация созданы, но без тестов; документация эндпоинта не полностью соответствует коду, идемпотентность реализована минималистично.</td>
     </tr>
     <tr>
       <td>Qa Automation Agent</td>
       <td class="status-no-data">Нет данных</td>
-      <td>Нет ветки <code>qa-automation-agent/plan-and-implement-complex-jira-issue</code> в истории сравнения.</td>
+      <td>Нет данных по этому кейсу.</td>
     </tr>
   </tbody>
 </table>
@@ -722,7 +770,7 @@ flowchart TB;
     </tr>
     <tr>
       <td>Работа над сложной задачей из Jira</td>
-      <td class="status-partial">Частично</td>
+      <td class="status-success">Успешно</td>
       <td class="status-no-data">Нет данных</td>
       <td class="status-no-data">Нет данных</td>
       <td class="status-partial-negative">Частично/Отрицательно</td>
