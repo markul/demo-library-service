@@ -38,8 +38,10 @@ public static class ServiceCollectionExtensions
 
             return new EbookContainer(serviceRoot);
         });
-        services.AddScoped<IPaymentService, Services.PaymentService>();
         services.AddScoped<IEbookCatalogService, EbookCatalogService>();
+        services.AddScoped<ISubscriptionPaymentService, SubscriptionPaymentService>();
+        services.AddScoped<ISubscriptionPricingService, SubscriptionPricingService>();
+        services.AddScoped<IPaymentService, Services.PaymentService>();
 
         return services;
     }

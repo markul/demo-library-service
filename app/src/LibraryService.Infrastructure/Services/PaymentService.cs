@@ -2,20 +2,30 @@
 
 namespace LibraryService.Infrastructure.Services;
 
-public sealed class PaymentService(IPaymentServiceClient paymentServiceClient) : IPaymentService
+/// <summary>
+/// Implementation of payment service that wraps the external PaymentServiceClient.
+/// </summary>
+public class PaymentService : IPaymentService
 {
-    public Task<ICollection<PaymentDto>> GetAllAsync(CancellationToken cancellationToken = default)
+    private readonly IPaymentServiceClient _client;
+
+    public PaymentService(IPaymentServiceClient client)
     {
-        return paymentServiceClient.GetAllAsync(cancellationToken);
+        _client = client;
     }
 
-    public Task<PaymentDto> GetByIdAsync(Guid id, CancellationToken cancellationToken = default)
+    public async Task<ICollection<PaymentDto>> GetAllAsync(CancellationToken cancellationToken = default)
     {
-        return paymentServiceClient.GetByIdAsync(id, cancellationToken);
+        return await _client.GetAllAsync(cancellationToken);
     }
 
-    public Task<PaymentDto> CreateAsync(CreatePaymentRequest request, CancellationToken cancellationToken = default)
+    public async Task<PaymentDto> GetByIdAsync(Guid id, CancellationToken cancellationToken = default)
     {
-        return paymentServiceClient.CreateAsync(request, cancellationToken);
+        return await _client.GetByIdAsync(id, cancellationToken);
+    }
+
+    public async Task<PaymentDto> CreateAsync(CreatePaymentRequest request, CancellationToken cancellationToken = default)
+    {
+        return await _client.CreateAsync(request, cancellationToken);
     }
 }

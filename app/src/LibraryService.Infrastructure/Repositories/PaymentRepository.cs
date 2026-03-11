@@ -70,4 +70,11 @@ public class PaymentRepository : IPaymentRepository
             x => x.UniqueId == uniqueId && (!excludedPaymentId.HasValue || x.Id != excludedPaymentId.Value),
             cancellationToken);
     }
+
+    public Task<Payment?> GetByUniqueIdAsync(string uniqueId, CancellationToken cancellationToken)
+    {
+        return _dbContext.Payments
+            .AsNoTracking()
+            .FirstOrDefaultAsync(x => x.UniqueId == uniqueId, cancellationToken);
+    }
 }

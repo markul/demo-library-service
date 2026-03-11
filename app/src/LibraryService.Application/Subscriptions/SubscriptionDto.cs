@@ -28,3 +28,8 @@ public record UpdateSubscriptionRequest(
 public record CreateSubscriptionTypeRequest(string Name, int Period, decimal Price);
 
 public record UpdateSubscriptionTypeRequest(string Name, int Period, decimal Price);
+
+public record CheckoutSubscriptionRequest(
+    Guid SubscriptionTypeId,
+    Guid ClientId,
+    string IdempotencyKey);

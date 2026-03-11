@@ -19,4 +19,6 @@ public interface IPaymentRepository
     Task<bool> SubscriptionExistsAsync(Guid subscriptionId, CancellationToken cancellationToken);
 
     Task<bool> UniqueIdExistsAsync(string uniqueId, Guid? excludedPaymentId, CancellationToken cancellationToken);
+
+    Task<Payment?> GetByUniqueIdAsync(string uniqueId, CancellationToken cancellationToken);
 }

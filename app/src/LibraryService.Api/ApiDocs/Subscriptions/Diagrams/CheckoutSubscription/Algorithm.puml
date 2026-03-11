@@ -1,0 +1,82 @@
+@startuml CheckoutSubscription
+skinparam backgroundColor #FFFFFF
+skinparam defaultFontName Segoe UI
+
+title Subscription Checkout Process
+
+start
+
+:Receive checkout request;
+note right
+  subscriptionTypeId
+  clientId
+  idempotencyKey
+end note
+
+:Validate client exists;
+
+if (Client found?) then (No)
+  :Return 404 Not Found;
+  stop
+else (Yes)
+endif
+
+:Validate subscription type exists;
+
+if (Subscription type found?) then (No)
+  :Return 404 Not Found;
+  stop
+else (Yes)
+endif
+
+:Check idempotency key;
+
+if (Key already used?) then (Yes)
+  :Return existing checkout result;
+  stop
+else (No)
+endif
+
+:Calculate subscription price;
+note right
+  Base price from type
+  Apply discount based on
+  existing subscriptions
+  (5% per sub, max 20%)
+end note
+
+:Create subscription (inactive);
+note right
+  is_active = false
+  start_date_utc = now
+end note
+
+:Create payment (processing);
+note right
+  status = Processing
+  unique_id = idempotencyKey
+end note
+
+:Call payment service;
+
+if (Payment successful?) then (Yes)
+  :Activate subscription;
+  note right: is_active = true
+  :Update payment status = Paid;
+  :Set external_id from response;
+elseif (Payment declined?) then (Yes)
+  :Update payment status = Failed;
+else (Error)
+  note right: Keep status = Processing
+endif
+
+:Return checkout result;
+note right
+  subscriptionId
+  paymentStatus
+  amount
+end note
+
+stop
+
+@enduml
