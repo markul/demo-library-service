@@ -17,6 +17,14 @@ param(
 
 $ErrorActionPreference = "Stop"
 
+function Initialize-Utf8Io {
+    # Ensure Cyrillic and other non-ASCII symbols are preserved in CLI input/output.
+    $utf8NoBom = New-Object System.Text.UTF8Encoding($false)
+    [Console]::InputEncoding = $utf8NoBom
+    [Console]::OutputEncoding = $utf8NoBom
+    $global:OutputEncoding = $utf8NoBom
+}
+
 function Get-ProductConfig {
     param([string]$Target)
 
@@ -130,6 +138,7 @@ function Assert-DnsResolution {
 }
 
 $config = Get-ProductConfig -Target $Product
+Initialize-Utf8Io
 
 if ([string]::IsNullOrWhiteSpace($config.Url)) {
     throw "Base URL is not set for the selected product."
@@ -141,7 +150,8 @@ $trimmedPath = $Path.TrimStart("/")
 $uri = "$trimmedBase/$trimmedPath"
 
 $headers = @{
-    Accept = "application/json"
+    Accept = "application/json; charset=utf-8"
+    "Accept-Charset" = "utf-8"
 }
 $authHeaders = Get-AuthHeaders -Username $config.Username -Token $config.Token
 
@@ -152,8 +162,8 @@ $invokeParams = @{
 }
 
 if (-not [string]::IsNullOrWhiteSpace($BodyJson)) {
-    $invokeParams.ContentType = "application/json"
-    $invokeParams.Body = $BodyJson
+    $invokeParams.ContentType = "application/json; charset=utf-8"
+    $invokeParams.Body = [System.Text.Encoding]::UTF8.GetBytes($BodyJson)
 }
 
 if ($config.SslVerify -match "^(?i:false|0|no)$") {

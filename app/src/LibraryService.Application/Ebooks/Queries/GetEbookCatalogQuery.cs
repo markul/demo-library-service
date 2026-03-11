@@ -4,7 +4,7 @@ using MediatR;
 namespace LibraryService.Application.Ebooks.Queries;
 
 public sealed record GetEbookCatalogQuery : IRequest<IReadOnlyCollection<EbookCatalogItemDto>>;
-public sealed record GetEbookCatalogByNameQuery(string Name) : IRequest<IReadOnlyCollection<EbookCatalogItemDto>>;
+public sealed record GetEbookCatalogByNameQuery(string Name) : IRequest<IReadOnlyCollection<EbookSearchResultDto>>;
 
 public sealed class GetEbookCatalogQueryHandler(IEbookCatalogService ebookCatalogService)
     : IRequestHandler<GetEbookCatalogQuery, IReadOnlyCollection<EbookCatalogItemDto>>
@@ -18,12 +18,13 @@ public sealed class GetEbookCatalogQueryHandler(IEbookCatalogService ebookCatalo
 }
 
 public sealed class GetEbookCatalogByNameQueryHandler(IEbookCatalogService ebookCatalogService)
-    : IRequestHandler<GetEbookCatalogByNameQuery, IReadOnlyCollection<EbookCatalogItemDto>>
+    : IRequestHandler<GetEbookCatalogByNameQuery, IReadOnlyCollection<EbookSearchResultDto>>
 {
-    public Task<IReadOnlyCollection<EbookCatalogItemDto>> Handle(
+    public async Task<IReadOnlyCollection<EbookSearchResultDto>> Handle(
         GetEbookCatalogByNameQuery request,
         CancellationToken cancellationToken)
     {
-        return ebookCatalogService.FindBooksByNameAsync(request.Name, cancellationToken);
+        var items = await ebookCatalogService.FindBooksByNameAsync(request.Name, cancellationToken);
+        return items.Select(item => new EbookSearchResultDto(item.Id, item.Title)).ToList();
     }
 }
