@@ -139,7 +139,7 @@ body,
 }
 
 .project-tree {
-  margin-top: 1.25rem;
+  margin: 1.25rem 0 0;
   padding: 1.2rem 1.4rem;
   border-radius: 20px;
   background: rgba(10, 14, 23, 0.96);
@@ -149,7 +149,15 @@ body,
   font-family: "Cascadia Code", "Fira Code", Consolas, monospace;
   font-size: 0.92rem;
   line-height: 1.65;
-  max-width: 58rem;
+  width: 50%;
+  max-width: 50%;
+}
+
+@media (max-width: 900px) {
+  .project-tree {
+    width: 100%;
+    max-width: 100%;
+  }
 }
 
 .tree-line {
@@ -310,9 +318,14 @@ body,
   height: calc((100% - 2rem) / 6);
 }
 
+h1,
+h2 {
+  margin-bottom: 0.8rem;
+}
+
 h2.slide-title-center {
   margin-top: 0.1rem;
-  margin-bottom: 0.3rem;
+  margin-bottom: 0.62rem;
   font-size: 1.55rem;
   line-height: 1.08;
 }
@@ -547,4 +560,46 @@ table.summary-matrix th:not(:first-child) {
 .slidev-page table.test-case.summary-matrix td.status-no-data {
   font-size: 0.5rem;
   text-align: center !important;
+}
+
+.conclusions-catalog {
+  margin-top: 0.2rem;
+  gap: 0.3rem 0.46rem;
+}
+
+.conclusions-catalog .case-catalog-item {
+  padding: 0.4rem 0.5rem;
+}
+
+.conclusions-catalog .case-catalog-name {
+  margin-bottom: 0.08rem;
+  font-size: 0.9rem;
+}
+
+.conclusions-catalog .case-catalog-value {
+  font-size: 0.72rem;
+  line-height: 1.2;
+}
+
+.slidev-layout.final-thanks-slide,
+.slidev-page.final-thanks-slide {
+  position: relative;
+}
+
+.slidev-layout.final-thanks-slide .final-source,
+.slidev-page.final-thanks-slide .final-source {
+  position: absolute;
+  left: 1.4rem;
+  right: 3.8rem;
+  bottom: 0.95rem;
+  font-size: 0.72rem;
+  line-height: 1.25;
+  text-align: left;
+  color: #334155;
+}
+
+.slidev-layout.final-thanks-slide .final-source a,
+.slidev-page.final-thanks-slide .final-source a {
+  color: #1e3a8a;
+  text-decoration: underline;
 }

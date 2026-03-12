@@ -22,7 +22,7 @@ layout: cover
 
 ---
 
-## Участники сравнения
+<h2 class="slide-title-center">Участники сравнения</h2>
 
 <table class="test-case">
   <thead>
@@ -56,26 +56,12 @@ layout: cover
     </tr>
   </tbody>
 </table>
-<table>
-  <thead>
-    <tr>
-      <th>Исходники</th>
-      <th></th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td>Demo LibraryService</td>
-      <td>https://github.com/markul/demo-library-service</td>
-    </tr>
-  </tbody>
-</table>
 
 ---
 class: text-center vm-slide
 ---
 
-## Окружение
+<h2 class="slide-title-center">Окружение</h2>
 <br>
 
 ```mermaid
@@ -90,7 +76,7 @@ flowchart TB;
 
 ---
 
-## Структура проекта
+<h2 class="slide-title-center">Структура проекта</h2>
 
 <div class="project-tree">
   <div class="tree-line tree-root">⌄ app</div>
@@ -114,7 +100,7 @@ flowchart TB;
 
 ---
 
-## Кейсы сравнения
+<h2 class="slide-title-center">Кейсы сравнения</h2>
 
 <div class="case-catalog">
   <div class="case-catalog-item">
@@ -205,7 +191,7 @@ flowchart TB;
     </tr>
     <tr>
       <td>Qa Automation Agent</td>
-      <td class="status-partial">Частично</td>
+      <td class="status-passed-partial">Успешно/Частично</td>
       <td>агент смог описать репозиторий, но работал нестабильно и испытывал проблемы с подключением.</td>
     </tr>
   </tbody>
@@ -289,7 +275,7 @@ flowchart TB;
     </tr>
     <tr>
       <td>Qwen3-Coder-30b</td>
-      <td class="status-success">Успешно</td>
+      <td class="status-passed-partial">Успешно/Частично</td>
       <td>метод переименован корректно, хотя тесты не запускались.</td>
     </tr>
     <tr>
@@ -512,7 +498,7 @@ flowchart TB;
     </tr>
     <tr>
       <td>Kilo-GLM-5</td>
-      <td class="status-partial-negative">Частично/Отрицательно</td>
+      <td class="status-partial">Частично</td>
       <td>агент создал сущность, репозиторий и новый эндпоинт, но не добавил миграции, тесты и API-документацию.</td>
     </tr>
     <tr>
@@ -703,7 +689,7 @@ flowchart TB;
       <td class="status-success">Успешно</td>
       <td class="status-success">Успешно</td>
       <td class="status-success">Успешно</td>
-      <td class="status-partial">Частично</td>
+      <td class="status-passed-partial">Успешно/Частично</td>
     </tr>
     <tr>
       <td>Сборка проекта</td>
@@ -717,7 +703,7 @@ flowchart TB;
     <tr>
       <td>Переименование метода</td>
       <td class="status-success">Успешно</td>
-      <td class="status-success">Успешно</td>
+      <td class="status-passed-partial">Успешно/Частично</td>
       <td class="status-partial">Частично</td>
       <td class="status-success">Успешно</td>
       <td class="status-success">Успешно</td>
@@ -756,7 +742,7 @@ flowchart TB;
       <td class="status-partial">Частично</td>
       <td class="status-partial">Частично</td>
       <td class="status-passed-partial">Успешно/Частично</td>
-      <td class="status-partial-negative">Частично/Отрицательно</td>
+      <td class="status-partial">Частично</td>
       <td class="status-no-data">Нет данных</td>
     </tr>
     <tr>
@@ -788,3 +774,47 @@ flowchart TB;
     </tr>
   </tbody>
 </table>
+
+---
+class: text-center
+---
+
+<h2 class="slide-title-center">Выводы</h2>
+
+<div class="case-catalog conclusions-catalog">
+  <div class="case-catalog-item">
+    <div class="case-catalog-name">ChatGPT Codex</div>
+    <div class="case-catalog-value">ChatGPT Codex: Высокая степень автономности, анализует существующие подходы проекта и пытается их применить. Максимально пытается довести изменения до рабочего состояния. Хорошо понимает контекст задачи. В сложных случаях может подсветить проблемные места: пробелы в требованиях, потенциальные проблемы с кодом.</div>
+  </div>
+  <div class="case-catalog-item">
+    <div class="case-catalog-name">Alfagen Copilot Qwen3 Coder 30b</div>
+    <div class="case-catalog-value">Alfagen Copilot Qwen3 Coder 30b : Быстрая модель, хорошо проводит аналитическую работу. Уверенно справляется с небольшими задачами, но требует детальной постановки задачи. Есть склонность к преждевременному завершению работы и отчете об успешном исполнении. Существенное ограничение - необходимость ручного подтверждения терминальных команд. Часто возникают ошибки связанные с вызовом различных инструментов, терминальные команды, работа с файлами. Переодически возникают проблемы со стабильностью.</div>
+  </div>
+  <div class="case-catalog-item">
+    <div class="case-catalog-name">Alfagen Copilot Qwen3 Coder Next</div>
+    <div class="case-catalog-value">Alfagen Copilot Qwen3 Coder Next примерно аналогично Qwen3 Coder 30b.</div>
+  </div>
+  <div class="case-catalog-item">
+    <div class="case-catalog-name">Kilo Qwen3 Coder Next</div>
+    <div class="case-catalog-value">Kilo Qwen3 Coder Next: Агент решает большинство проблем связанных с туллингом в Alfagen. Может работать автономно, но для достижения необходимого результата требуются корректировки.</div>
+  </div>
+  <div class="case-catalog-item">
+    <div class="case-catalog-name">Kilo GLM 5</div>
+    <div class="case-catalog-value">Kilo GLM 5 : Немного "умнее", чем Qwen3 Coder Next.</div>
+  </div>
+  <div class="case-catalog-item">
+    <div class="case-catalog-name">QA Automation Agent</div>
+    <div class="case-catalog-value">QA Automation Agent: неплохой агент для простых, спотовых задач. Может вносить небольшие правки в открытых файлах. Переодически возникают проблемы со стабильностью.</div>
+  </div>
+</div>
+
+---
+layout: center
+class: text-center final-thanks-slide
+---
+
+# Спасибо за внимание!
+
+<div class="final-source1">
+  Исходники: <a href="https://github.com/markul/demo-library-service" target="_blank">https://github.com/markul/demo-library-service</a>
+</div>
