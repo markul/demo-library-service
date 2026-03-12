@@ -109,6 +109,8 @@ flowchart TB;
     <p>app/test: Тесты </p>
     <div class="project-notes-title">Допольнительно</div>
     <p>Добавлен синтаксический анализатор, который проверяет кодировку файлов, должна быть UTF-8 BOM</p>
+    <p>Добавлен AGENTS.md - файл и описанием проекта для агентов</p>
+    <p>Добавлены скилы для работы с Jira/Confluence и скилл для изменения кодировки файлов</p>
   </div>
 </div>
 
@@ -139,7 +141,7 @@ flowchart TB;
   </div>
   <div class="case-catalog-item">
     <div class="case-catalog-name">6. Добавление логики для эндпоинта Status</div>
-    <div class="case-catalog-value">Показывает, умеет ли агент держать архитектурные правила, работать с тестами.</div>
+    <div class="case-catalog-value">Показывает, умеет ли агент следовать архитектурным правилам, работать с тестами.</div>
   </div>
   <div class="case-catalog-item">
     <div class="case-catalog-name">7. Добавление новой сущности ClientAddress и эндпоинта</div>
@@ -155,7 +157,7 @@ flowchart TB;
   </div>
   <div class="case-catalog-item">
     <div class="case-catalog-name">10. Анализ уязвимостей</div>
-    <div class="case-catalog-value">Показывает глубину инженерного мышления агента вне кодогенерации: поиск рисков, приоритизация и практичность предлагаемых исправлений.</div>
+    <div class="case-catalog-value">Показывает глубину инженерного мышления агента вне кодогенераци: поиск рисков, приоритизация и практичность предлагаемых исправлений.</div>
   </div>
 </div>
 
