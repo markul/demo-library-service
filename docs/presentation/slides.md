@@ -561,8 +561,8 @@ flowchart TB;
     </tr>
     <tr>
       <td>Kilo-Qwen3-Coder-Next</td>
-      <td class="status-negative">Отрицательно</td>
-      <td>агент смог получить данные из Jira и Confluence, но неверно понял требования.</td>
+      <td class="status-partial">Частично</td>
+      <td>агент создал план и выполнил реализацию, но не обновил документацию и unit-тесты.</td>
     </tr>
     <tr>
       <td>Kilo-GLM-5</td>
@@ -766,7 +766,7 @@ flowchart TB;
       <td class="status-success">Успешно</td>
       <td class="status-negative">Отрицательно</td>
       <td class="status-negative">Отрицательно</td>
-      <td class="status-negative">Отрицательно</td>
+      <td class="status-partial">Частично</td>
       <td class="status-partial">Частично</td>
       <td class="status-no-data">Нет данных</td>
     </tr>
