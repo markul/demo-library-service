@@ -16,7 +16,7 @@ layout: cover
 
 # Сравнение ИИ агентов
 
-**Автор:** Кульмухаметом М.М.
+**Автор:** Кульмухаметов М.М.
 
 **Команда:** УТК-2
 
@@ -78,24 +78,38 @@ flowchart TB;
 
 <h2 class="slide-title-center">Структура проекта</h2>
 
-<div class="project-tree">
-  <div class="tree-line tree-root">⌄ app</div>
-  <div class="tree-line tree-level-1">⌄ src</div>
-  <div class="tree-line tree-level-2">⌄ LibraryService.Api</div>
-  <div class="tree-line tree-level-3">› ApiDocs</div>
-  <div class="tree-line tree-level-3">› Controllers</div>
-  <div class="tree-line tree-level-3">› Properties</div>
-  <div class="tree-line tree-level-2">› LibraryService.Application</div>
-  <div class="tree-line tree-level-2">› LibraryService.Domain</div>
-  <div class="tree-line tree-level-2">⌄ LibraryService.Infrastructure</div>
-  <div class="tree-line tree-level-3">› Connected Services</div>
-  <div class="tree-line tree-level-3">⌄ Database</div>
-  <div class="tree-line tree-level-4">› Configurations</div>
-  <div class="tree-line tree-level-4">› ManualScripts</div>
-  <div class="tree-line tree-level-4">› Migrations</div>
-  <div class="tree-line tree-level-3">› Repositories</div>
-  <div class="tree-line tree-level-3">› Services</div>
-  <div class="tree-line tree-level-1">› test</div>
+<div class="project-structure-row">
+  <div class="project-tree">
+    <div class="tree-line tree-root">⌄ app</div>
+    <div class="tree-line tree-level-1">⌄ src</div>
+    <div class="tree-line tree-level-2">⌄ LibraryService.Api</div>
+    <div class="tree-line tree-level-3">› ApiDocs</div>
+    <div class="tree-line tree-level-3">› Controllers</div>
+    <div class="tree-line tree-level-3">› Properties</div>
+    <div class="tree-line tree-level-2">› LibraryService.Application</div>
+    <div class="tree-line tree-level-2">› LibraryService.Domain</div>
+    <div class="tree-line tree-level-2">⌄ LibraryService.Infrastructure</div>
+    <div class="tree-line tree-level-3">› Connected Services</div>
+    <div class="tree-line tree-level-3">⌄ Database</div>
+    <div class="tree-line tree-level-4">› Configurations</div>
+    <div class="tree-line tree-level-4">› ManualScripts</div>
+    <div class="tree-line tree-level-4">› Migrations</div>
+    <div class="tree-line tree-level-3">› Repositories</div>
+    <div class="tree-line tree-level-3">› Services</div>
+    <div class="tree-line tree-level-1">› test</div>
+  </div>
+
+  <div class="project-notes-card">
+    <div class="project-notes-title">Описание</div>
+    <p>Framework: .net Core 8.0</p>
+    <p>LibraryService.Api: контроллеры и документация.</p>
+    <p>LibraryService.Application: бизнес локига </p>
+    <p>LibraryService.Domain: а доменные сущности</p>
+    <p>LibraryService.Infrastructure: содержит интеграции, доступ к данным и миграции PostgreSQL. </p>
+    <p>app/test: Тесты </p>
+    <div class="project-notes-title">Допольнительно</div>
+    <p>Добавлен синтаксический анализатор, который проверяет кодировку файлов, должна быть UTF-8 BOM</p>
+  </div>
 </div>
 
 ---
@@ -105,19 +119,19 @@ flowchart TB;
 <div class="case-catalog">
   <div class="case-catalog-item">
     <div class="case-catalog-name">1. Структура проекта</div>
-    <div class="case-catalog-value">Показывает, насколько агент понимает архитектуру, границы слоев и может быстро построить корректную ментальную модель системы.</div>
+    <div class="case-catalog-value">Показывает, насколько агент понимает архитектуру, границы слоев и может быстро построить корректную модель системы.</div>
   </div>
   <div class="case-catalog-item">
     <div class="case-catalog-name">2. Сборка проекта</div>
-    <div class="case-catalog-value">Проверяет базовую самостоятельность агента: запустить инструменты, корректно интерпретировать результат и не ломать рабочее окружение.</div>
+    <div class="case-catalog-value">Проверяет базовую самостоятельность агента: запустить инструменты, корректно интерпретировать результат.</div>
   </div>
   <div class="case-catalog-item">
     <div class="case-catalog-name">3. Переименование метода</div>
-    <div class="case-catalog-value">Показывает аккуратность точечных refactoring-изменений, работу с зависимостями и дисциплину при валидации результата.</div>
+    <div class="case-catalog-value">Показывает аккуратность точечных изменений, работу с зависимостями и дисциплину при валидации результата.</div>
   </div>
   <div class="case-catalog-item">
     <div class="case-catalog-name">4. Реализация AAA в тестах</div>
-    <div class="case-catalog-value">Проверяет качество работы с тестовым кодом, понимание структуры тестов и склонность агента исправлять, а не удалять проверку.</div>
+    <div class="case-catalog-value">Проверяет качество работы с тестовым кодом, понимание структуры тестов.</div>
   </div>
   <div class="case-catalog-item">
   <div class="case-catalog-name">5. Добавление эндпоинта Status</div>
@@ -125,11 +139,11 @@ flowchart TB;
   </div>
   <div class="case-catalog-item">
     <div class="case-catalog-name">6. Добавление логики для эндпоинта Status</div>
-    <div class="case-catalog-value">Показывает, умеет ли агент держать архитектурные правила и выносить бизнес-логику в Application вместо контроллеров.</div>
+    <div class="case-catalog-value">Показывает, умеет ли агент держать архитектурные правила, работать с тестами.</div>
   </div>
   <div class="case-catalog-item">
     <div class="case-catalog-name">7. Добавление новой сущности ClientAddress и эндпоинта</div>
-    <div class="case-catalog-value">Проверяет работу на более широком vertical slice: доменная модель, persistence, API, миграции, тесты и связность изменений.</div>
+    <div class="case-catalog-value">Проверяет работу на более широком vertical slice: доменная модель, слой хранения данных, API, миграции, тесты и связность изменений.</div>
   </div>
   <div class="case-catalog-item">
     <div class="case-catalog-name">8. Работа над простой задачей из Jira</div>
@@ -141,7 +155,7 @@ flowchart TB;
   </div>
   <div class="case-catalog-item">
     <div class="case-catalog-name">10. Анализ уязвимостей</div>
-    <div class="case-catalog-value">Показывает глубину инженерного мышления агента вне code generation: поиск рисков, приоритизация и практичность предлагаемых исправлений.</div>
+    <div class="case-catalog-value">Показывает глубину инженерного мышления агента вне кодогенерации: поиск рисков, приоритизация и практичность предлагаемых исправлений.</div>
   </div>
 </div>
 
