@@ -115,6 +115,18 @@ public class SubscriptionRepository : ISubscriptionRepository
         return _dbContext.SubscriptionTypes.AnyAsync(x => x.Id == subscriptionTypeId, cancellationToken);
     }
 
+    public Task<SubscriptionType?> GetSubscriptionTypeByIdAsync(Guid subscriptionTypeId, CancellationToken cancellationToken)
+    {
+        return _dbContext.SubscriptionTypes
+            .AsNoTracking()
+            .FirstOrDefaultAsync(x => x.Id == subscriptionTypeId, cancellationToken);
+    }
+
+    public Task<bool> ClientExistsAsync(Guid clientId, CancellationToken cancellationToken)
+    {
+        return _dbContext.Clients.AnyAsync(x => x.Id == clientId, cancellationToken);
+    }
+
     private Task<Subscription?> LoadByIdAsync(Guid id, CancellationToken cancellationToken)
     {
         return _dbContext.Subscriptions

@@ -1,0 +1,47 @@
+@startuml
+title Subscription Checkout Process
+
+actor Client
+participant "Controller" as Controller
+participant "Handler" as Handler
+participant "Repository" as Repo
+participant "PaymentService" as Payment
+
+Client -> Controller: POST /api/subscriptions/checkout
+Controller -> Handler: Send(CheckoutSubscriptionCommand)
+Handler -> Repo: Check client exists
+Repo --> Handler: true/false
+Handler -> Repo: Check subscription type exists
+Repo --> Handler: true/false
+
+alt Invalid data
+    Handler --> Controller: null
+    Controller --> Client: 404 Not Found
+else Valid data
+    Handler -> Repo: Get subscription type
+    Repo --> Handler: SubscriptionType
+    
+    Handler -> Handler: Calculate price
+    
+    Handler -> Repo: Create subscription
+    Repo --> Handler: Subscription
+    
+    Handler -> Repo: Create payment (Processing)
+    Repo --> Handler: Payment
+    
+    Handler -> Payment: ProcessPayment()
+    Payment --> Handler: PaymentProcessingResult
+    
+    alt Payment successful
+        Handler -> Repo: Update subscription (isActive=true)
+        Handler -> Repo: Update payment (status=Paid)
+        Handler --> Controller: CheckoutResult (Paid)
+        Controller --> Client: 200 OK
+    else Payment failed
+        Handler -> Repo: Update payment (status=Failed)
+        Handler --> Controller: CheckoutResult (Failed)
+        Controller --> Client: 200 OK
+    end
+end
+
+@enduml

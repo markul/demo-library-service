@@ -40,6 +40,7 @@ public static class ServiceCollectionExtensions
         });
         services.AddScoped<IPaymentService, Services.PaymentService>();
         services.AddScoped<IEbookCatalogService, EbookCatalogService>();
+        services.AddScoped<ISubscriptionPaymentService, SubscriptionPaymentService>();
 
         return services;
     }
