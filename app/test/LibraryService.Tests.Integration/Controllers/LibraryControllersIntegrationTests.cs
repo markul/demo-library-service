@@ -46,7 +46,7 @@ public class LibraryControllersIntegrationTests : IClassFixture<LibraryApiFactor
     public async Task SearchEbooksByName_ShouldReturnMatchingItems()
     {
         var response = await _client.GetAsync("/api/ebooks/search?name=Hobbit");
-        var body = await response.Content.ReadFromJsonAsync<IReadOnlyCollection<EbookCatalogItemDto>>();
+        var body = await response.Content.ReadFromJsonAsync<IReadOnlyCollection<EbookSearchResultDto>>();
 
         response.StatusCode.Should().Be(HttpStatusCode.OK);
         body.Should().NotBeNull();

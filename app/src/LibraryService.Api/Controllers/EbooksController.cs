@@ -29,7 +29,7 @@ public class EbooksController(IMediator mediator) : ControllerBase
     }
 
     [HttpGet("search")]
-    public async Task<ActionResult<IReadOnlyCollection<EbookCatalogItemDto>>> SearchByName(
+    public async Task<ActionResult<IReadOnlyCollection<EbookSearchResultDto>>> SearchByName(
         [FromQuery] string? name,
         CancellationToken cancellationToken)
     {
