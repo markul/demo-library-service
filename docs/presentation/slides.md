@@ -301,7 +301,7 @@ flowchart TB;
     </tr>
     <tr>
       <td>Kilo-Qwen3-Coder-Next</td>
-      <td class="status-success">Успешно</td>
+      <td class="status-passed-partial">Успешно/Частично</td>
       <td>агент переименовал метод и проверил сборку; тесты не запускались.</td>
     </tr>
     <tr>
@@ -443,22 +443,22 @@ flowchart TB;
     <tr>
       <td>Codex</td>
       <td class="status-success">Успешно</td>
-      <td>логика перенесена в слой Application, документация и тесты обновлены, сборка и тесты проверены.</td>
+      <td>логика была добавлена, документация и тесты обновлены, сборка и тесты проверены.</td>
     </tr>
     <tr>
       <td>Qwen3-Coder-30b</td>
       <td class="status-partial">Частично</td>
-      <td>после исправления логика была перенесена, но тесты не были добавлены и потребовалось три попытки.</td>
+      <td>с корректировками логика была добавлена, но без тестов и потребовалось три попытки.</td>
     </tr>
     <tr>
       <td>Qwen3-Coder-Next</td>
       <td class="status-partial">Частично</td>
-      <td>существующий обработчик был обновлен, но тесты и документация не были доведены до конца.</td>
+      <td>существующий хендлер был доработан, но тесты и документация не были доведены до конца.</td>
     </tr>
     <tr>
       <td>Kilo-Qwen3-Coder-Next</td>
       <td class="status-partial">Частично</td>
-      <td>агент добавил логику и создал сервис вместо MediatR; API-документация и тесты не обновлены.</td>
+      <td>агент добавил логику и создал сервис; API-документация и тесты не обновлены.</td>
     </tr>
     <tr>
       <td>Kilo-GLM-5</td>
@@ -721,7 +721,7 @@ flowchart TB;
       <td class="status-success">Успешно</td>
       <td class="status-passed-partial">Успешно/Частично</td>
       <td class="status-partial">Частично</td>
-      <td class="status-success">Успешно</td>
+      <td class="status-passed-partial">Успешно/Частично</td>
       <td class="status-success">Успешно</td>
       <td class="status-partial-negative">Частично/Отрицательно</td>
     </tr>
@@ -820,7 +820,7 @@ class: text-center
   </div>
   <div class="case-catalog-item">
     <div class="case-catalog-name">QA Automation Agent</div>
-    <div class="case-catalog-value">QA Automation Agent: неплохой агент для простых, спотовых задач. Может вносить небольшие правки в открытых файлах. Переодически возникают проблемы со стабильностью.</div>
+    <div class="case-catalog-value">QA Automation Agent: неплохой агент для простых, спотовых задач. Может вносить небольшие правки в открытых файлах, но требует ручного подтверждения. Переодически возникают проблемы со стабильностью.</div>
   </div>
 </div>
 
