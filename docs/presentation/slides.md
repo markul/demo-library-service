@@ -603,13 +603,13 @@ flowchart TB;
     </tr>
     <tr>
       <td>Qwen3-Coder-30b</td>
-      <td class="status-no-data">Нет данных</td>
-      <td>Нет данных по этому кейсу.</td>
+      <td class="status-negative">Отрицательно</td>
+      <td class="long-comment">агенту не удалось получить задачу Jira.</td>
     </tr>
     <tr>
       <td>Qwen3-Coder-Next</td>
-      <td class="status-no-data">Нет данных</td>
-      <td>Нет данных по этому кейсу.</td>
+      <td class="status-negative">Отрицательно</td>
+      <td class="long-comment">агент получил задачу Jira и составил план с упоминанием идемпотентности и транзакций, но ссылки на связанные страницы пришлось запрашивать отдельно, а реализация в итоге не удалась после нескольких попыток.</td>
     </tr>
     <tr>
       <td>Kilo-Qwen3-Coder-Next</td>
@@ -773,8 +773,8 @@ flowchart TB;
     <tr>
       <td>Работа над сложной задачей из Jira</td>
       <td class="status-success">Успешно</td>
-      <td class="status-no-data">Нет данных</td>
-      <td class="status-no-data">Нет данных</td>
+      <td class="status-negative">Отрицательно</td>
+      <td class="status-negative">Отрицательно</td>
       <td class="status-partial-negative">Частично/Отрицательно</td>
       <td class="status-partial">Частично</td>
       <td class="status-no-data">Нет данных</td>
